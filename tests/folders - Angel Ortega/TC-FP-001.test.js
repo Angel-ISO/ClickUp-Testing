@@ -8,6 +8,7 @@ describe('TC-FP-001 - Verify that user can create a folder with valid name in ex
   let createdFolderId;
 
   beforeEach(() => {
+    console.log('im a hook of before each');
   });
 
   afterEach(async () => {
