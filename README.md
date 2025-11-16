@@ -72,6 +72,8 @@ This project is a comprehensive API testing suite for ClickUp, developed as the 
 
 ## Test Execution
 
+ensure that u have the .env file with the credentials of your clickup account
+
 ```bash
 npm test
 
@@ -79,6 +81,29 @@ npm run test:watch
 
 npm run test:coverage
 ```
+
+if u want to run the tests by a member of the team u can use the foolowing commands
+
+```bash
+npm test -- "tests/Folders - Angel Ortega"
+```
+
+```bash
+npm test -- "tests/Tags - David Cardona"
+```
+
+```bash
+npm test -- "tests/Task - Jose Hernandez" 
+```
+
+```bash
+npm test -- "tests/Comments - Sofia Beltran" 
+```
+
+```bash
+npm test -- "tests/List - Jose Fernandez" 
+```
+
 
 ## Definition of Done (DoD)
 
