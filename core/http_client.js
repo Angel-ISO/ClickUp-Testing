@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Result from './result.js';
+import result from './result.js';
 
-const createHttpClient = (baseURL, token) => {
+const create_http_client = (base_url, token) => {
   const client = axios.create({
-    baseURL,
+    baseURL: base_url,
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -17,9 +17,9 @@ const createHttpClient = (baseURL, token) => {
         url: endpoint,
         data,
       });
-      return Result.ok(response.data);
+      return result.ok(response.data);
     } catch (err) {
-      return Result.error(err.message || 'Request failed');
+      return result.error(err.message || 'Request failed');
     }
   };
 
@@ -31,4 +31,4 @@ const createHttpClient = (baseURL, token) => {
   };
 };
 
-export default createHttpClient;
+export default create_http_client;

@@ -1,25 +1,25 @@
-const Result = {
+const result = {
   ok: (value) => ({
     success: true,
     value,
-    isOk: () => true,
-    isError: () => false,
+    is_ok: () => true,
+    is_error: () => false,
   }),
 
-  error: (error) => ({
+  error: (error_msg) => ({
     success: false,
-    error,
-    isOk: () => false,
-    isError: () => true,
+    error: error_msg,
+    is_ok: () => false,
+    is_error: () => true,
   }),
 
-  map: (result, fn) => result.success ? Result.ok(fn(result.value)) : result,
+  map: (result_obj, fn) => result_obj.success ? result.ok(fn(result_obj.value)) : result_obj,
 
-  chain: (result, fn) => result.success ? fn(result.value) : result,
+  chain: (result_obj, fn) => result_obj.success ? fn(result_obj.value) : result_obj,
 
-  getOrElse: (result, defaultValue) => result.success ? result.value : defaultValue,
+  get_or_else: (result_obj, default_value) => result_obj.success ? result_obj.value : default_value,
 
-  fold: (result, onError, onSuccess) => result.success ? onSuccess(result.value) : onError(result.error),
+  fold: (result_obj, on_error, on_success) => result_obj.success ? on_success(result_obj.value) : on_error(result_obj.error),
 };
 
-export default Result;
+export default result;

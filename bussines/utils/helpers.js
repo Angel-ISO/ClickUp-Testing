@@ -1,26 +1,26 @@
-const formatDate = (date) => new Date(date).toISOString().split('T')[0];
+const format_date = (date) => new Date(date).toISOString().split('T')[0];
 
-const generateRandomId = () => Math.random().toString(36).substr(2, 9);
+const generate_random_id = () => Math.random().toString(36).substr(2, 9);
 
-const validateEmail = (email) => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+const validate_email = (email) => {
+  const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return email_regex.test(email);
 };
 
-const sanitizeString = (str) => str.replace(/[<>\"'&]/g, '');
+const sanitize_string = (str) => str.replace(/[<>\"'&]/g, '');
 
-const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
+const deep_clone = (obj) => JSON.parse(JSON.stringify(obj));
 
-const isEmpty = (obj) => obj === null || obj === undefined || obj === '';
+const is_empty = (obj) => obj === null || obj === undefined || obj === '';
 
-const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const capitalize_first = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 export {
-  formatDate,
-  generateRandomId,
-  validateEmail,
-  sanitizeString,
-  deepClone,
-  isEmpty,
-  capitalizeFirst,
+  format_date,
+  generate_random_id,
+  validate_email,
+  sanitize_string,
+  deep_clone,
+  is_empty,
+  capitalize_first,
 };
