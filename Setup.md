@@ -1,4 +1,4 @@
-# missing for now
+# setup process
 
 firts of all you need to create and new aplication, this will generate you a client, id and secret
 
