@@ -17,12 +17,22 @@ export default [
         beforeEach: "readonly",
         afterEach: "readonly",
         beforeAll: "readonly",
-        fail: "readonly" 
+        afterAll: "readonly",
+        fail: "readonly",
       },
     },
     rules: {
       "no-unused-vars": "warn",
-      "camelcase": ["error", { properties: "always", ignoreDestructuring: false }],
+      "id-match": [
+        "error",
+        "^[a-z]+(?:_[a-z]+)*$", 
+        {
+          properties: false,
+          classFields: false,
+          ignoreDestructuring: false,
+          onlyDeclarations: true
+        }
+      ],
     },
   },
 ];
