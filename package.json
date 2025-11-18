@@ -2,6 +2,7 @@
   "name": "clickup-testing",
   "version": "1.0.0",
   "description": "API Testing Project for ClickUp - Final Project for Software Quality Engineering Course",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest",
