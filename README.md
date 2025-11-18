@@ -64,6 +64,8 @@ This project is a comprehensive API testing suite for ClickUp, developed as the 
    # Edit .env with your actual ClickUp API credentials
    ```
 
+   if u need more information about the setup u can check the [setup.md](./Setup.md)
+
 4. **Run tests**
    ```bash
    npm test
