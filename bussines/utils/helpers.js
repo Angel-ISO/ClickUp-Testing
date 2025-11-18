@@ -7,7 +7,7 @@ const validate_email = (email) => {
   return email_regex.test(email);
 };
 
-const sanitize_string = (str) => str.replace(/[<>\"'&]/g, '');
+const sanitize_string = (str) => str.replace(/[<>"'&]/g, '');
 
 const deep_clone = (obj) => JSON.parse(JSON.stringify(obj));
 
