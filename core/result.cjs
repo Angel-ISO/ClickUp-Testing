@@ -2,15 +2,15 @@ const result = {
   ok: (value) => ({
     success: true,
     value,
-    is_ok: () => true,
-    is_error: () => false,
+    isOk: () => true,
+    isError: () => false,
   }),
 
   error: (error_msg) => ({
     success: false,
     error: error_msg,
-    is_ok: () => false,
-    is_error: () => true,
+    isOk: () => false,
+    isError: () => true,
   }),
 
   map: (result_obj, fn) => result_obj.success ? result.ok(fn(result_obj.value)) : result_obj,

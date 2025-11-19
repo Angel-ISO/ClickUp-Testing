@@ -14,6 +14,12 @@ const create_request_manager = () => {
     post: http_client.post,
     put: http_client.put,
     delete: http_client.delete,
+
+    // Method for custom authentication (security testing)
+    request_with_custom_auth: (method, endpoint, data, customToken) => {
+      const custom_client = create_http_client(base_url, customToken);
+      return custom_client[method](endpoint, data);
+    }
   };
 
   return instance;

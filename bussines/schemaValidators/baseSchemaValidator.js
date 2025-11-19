@@ -1,5 +1,5 @@
-const Ajv = require('ajv');
-const Logger = require('../../core/logger');
+import Ajv from 'ajv';
+import Logger from '../../core/logger.js';
 
 const ajv = new Ajv({
   allErrors: true,
@@ -24,4 +24,4 @@ class BaseSchemaValidator {
   }
 }
 
-module.exports = BaseSchemaValidator;
+export default BaseSchemaValidator;

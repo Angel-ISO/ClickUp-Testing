@@ -18,14 +18,8 @@ const folderResponseSchema = {
 };
 
 const foldersListResponseSchema = {
-  type: 'object',
-  required: ['folders'],
-  properties: {
-    folders: {
-      type: 'array',
-      items: folderResponseSchema
-    }
-  }
+  type: 'array',
+  items: folderResponseSchema
 };
 
 const createFolderRequestSchema = {
@@ -45,7 +39,7 @@ const errorResponseSchema = {
   }
 };
 
-export default {
+module.exports = {
   folderResponseSchema,
   foldersListResponseSchema,
   createFolderRequestSchema,

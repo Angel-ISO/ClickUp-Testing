@@ -6,20 +6,37 @@ const create_http_client = (base_url, token) => {
     baseURL: base_url,
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
     },
   });
 
   const request = async (method, endpoint, data = null) => {
     try {
-      const response = await client.request({
+      const config = {
         method,
         url: endpoint,
         data,
-      });
+        headers: {}
+      };
+
+      if (method === 'GET' || method === 'DELETE') {
+        config.headers['accept'] = 'application/json';
+      } else {
+        config.headers['Content-Type'] = 'application/json';
+      }
+
+      const response = await client.request(config);
       return result.ok(response.data);
     } catch (err) {
-      return result.error(err.message || 'Request failed');
+      // Preserve the full axios error structure for better error handling
+      const errorMessage = err.response?.data?.err || err.message || 'Request failed';
+      const errorResult = result.error(errorMessage);
+
+      // Attach the full axios error for tests that need status codes and response data
+      if (err.response) {
+        errorResult.axiosError = err;
+      }
+
+      return errorResult;
     }
   };
 
