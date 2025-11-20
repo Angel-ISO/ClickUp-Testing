@@ -54,7 +54,7 @@ const errorResponseSchema = {
   }
 };
 
-module.exports = {
+export default {
   taskResponseSchema,
   tasksListResponseSchema,
   createTaskRequestSchema,

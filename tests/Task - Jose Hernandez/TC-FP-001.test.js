@@ -1,8 +1,15 @@
-const axios = require('axios');
+import 'dotenv/config';
+import TasksApiService from '../../bussines/apiServices/tasksApiService.js';
+import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
+import ListsApiService from '../../bussines/apiServices/listsApiService.js';
+import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
+import taskSchemas from '../../bussines/schemaValidators/taskSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const baseURL = process.env.CLICKUP_BASE_URL;
-const token = process.env.CLICKUP_TOKEN;
-const spaceId = process.env.CLICKUP_SPACE_ID;
+
+const tasksService = new TasksApiService();
+const foldersService = new FoldersApiService();
+const listsService = new ListsApiService();
 
 describe('TC-FP-001 - Verify that a user can create a task with valid data', () => {
   let folderId;
@@ -10,75 +17,78 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
   let createdTaskId;
 
   beforeAll(async () => {
+    await setupClickUpEnvironment();
+    
     // Get Folder ID
-    const folderResponse = await axios.get(`${baseURL}/space/${spaceId}/folder`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    folderId = folderResponse.data.folders[0].id;
-
+    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await axios.get(`${baseURL}/folder/${folderId}/list`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    listId = listResponse.data.lists[0].id;
+    const listResponse = await listsService.get_lists(folderId);
+    listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     if (createdTaskId) {
-      try {
-        await axios.delete(`${baseURL}/task/${createdTaskId}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-      } catch (error) {
-        console.warn('Failed to cleanup task:', error.message);
-      }
+      console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
   });
 
   it('Create Task - Valid Data', async () => {
-    const requestBody = { name: "Task Test - Valid Data" };
+    const uniqueTaskName = `Task Test - Valid Data - ${Date.now()}`;
+    const taskData = { name: uniqueTaskName };
 
-    const response = await axios.post(`${baseURL}/list/${listId}/task`, requestBody, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
+    const createResponse = await tasksService.create_task(listId, taskData);
+    createdTaskId = createResponse.id;
 
-    expect(response.status).toBe(200);
+    console.log(`Task created: ${uniqueTaskName} (ID: ${createdTaskId})`);
 
-    // Valid data
-    expect(response.data).toHaveProperty('id');
-    expect(response.data).toHaveProperty('name', requestBody.name);
-    expect(response.data).toHaveProperty('status');
-    expect(response.data.status).toHaveProperty('status');
-    expect(response.data.status).toHaveProperty('color');
-    expect(response.data.status).toHaveProperty('type');
-    expect(response.data).toHaveProperty('creator');
-    expect(response.data.creator).toHaveProperty('id');
-    expect(response.data.creator).toHaveProperty('username');
-    expect(response.data.creator).toHaveProperty('email');
-    expect(response.data).toHaveProperty('date_created');
-    expect(response.data).toHaveProperty('url');
+    // Schema validation
+    const validation = BaseSchemaValidator.validate(
+      createResponse,
+      taskSchemas.taskResponseSchema,
+      'Task Response'
+    );
+    expect(validation.isValid).toBe(true);
 
-    createdTaskId = response.data.id;
+    // Data validation
+    expect(createResponse).toHaveProperty('id');
+    expect(createResponse).toHaveProperty('name', uniqueTaskName);
+    expect(createResponse).toHaveProperty('status');
+    expect(createResponse.status).toHaveProperty('status');
+    expect(createResponse.status).toHaveProperty('color');
+    expect(createResponse.status).toHaveProperty('type');
+    expect(createResponse).toHaveProperty('creator');
+    expect(createResponse.creator).toHaveProperty('id');
+    expect(createResponse.creator).toHaveProperty('username');
+    expect(createResponse.creator).toHaveProperty('email');
+    expect(createResponse).toHaveProperty('date_created');
+    expect(createResponse).toHaveProperty('url');
   });
 
   it('Get Task - Verify Creation', async () => {
-    const createResponse = await axios.post(`${baseURL}/list/${listId}/task`, { name: "Task Test - Verify" }, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
-    });
-    createdTaskId = createResponse.data.id;
+    const uniqueTaskName = `Task Test - Verify - ${Date.now()}`;
+    const taskData = { name: uniqueTaskName };
 
-    const response = await axios.get(`${baseURL}/task/${createdTaskId}`, {
-      headers: { 'Authorization': `Bearer ${token}`, 'accept': 'application/json' }
-    });
+    const createResponse = await tasksService.create_task(listId, taskData);
+    createdTaskId = createResponse.id;
 
-    expect(response.status).toBe(200);
-    expect(response.data).toHaveProperty('id', createdTaskId);
-    expect(response.data).toHaveProperty('name', "Task Test - Verify");
-    expect(response.data).toHaveProperty('status');
-    expect(response.data.status).toHaveProperty('status');
+    console.log(`Task created for verification: ${uniqueTaskName} (ID: ${createdTaskId})`);
+
+    const getResponse = await tasksService.get_task(createdTaskId);
+
+    // Schema validation
+    const validation = BaseSchemaValidator.validate(
+      getResponse,
+      taskSchemas.taskResponseSchema,
+      'Task Response'
+    );
+    expect(validation.isValid).toBe(true);
+
+    // Data validation
+    expect(getResponse).toHaveProperty('id', createdTaskId);
+    expect(getResponse).toHaveProperty('name', uniqueTaskName);
+    expect(getResponse).toHaveProperty('status');
+    expect(getResponse.status).toHaveProperty('status');
   });
 });
