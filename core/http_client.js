@@ -27,11 +27,9 @@ const create_http_client = (base_url, token) => {
       const response = await client.request(config);
       return result.ok(response.data);
     } catch (err) {
-      // Preserve the full axios error structure for better error handling
       const errorMessage = err.response?.data?.err || err.message || 'Request failed';
       const errorResult = result.error(errorMessage);
 
-      // Attach the full axios error for tests that need status codes and response data
       if (err.response) {
         errorResult.axiosError = err;
       }
