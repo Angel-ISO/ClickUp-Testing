@@ -2,15 +2,18 @@ import 'dotenv/config';
 import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const spaceId = process.env.CLICKUP_SPACE_ID;
 const foldersService = new FoldersApiService();
 
 describe('TC-FN-002 - Verify that system returns 400 error when folder name field is missing', () => {
+  beforeAll(async () => {
+    await setupClickUpEnvironment();
+  });
 
   it('Create Folder - Missing Name Field', async () => {
     try {
-      await foldersService.create_folder(spaceId, {});
+      await foldersService.create_folder(getSpaceId(), {});
       fail('Expected request to fail with 400');
     } catch (error) {
       expect(error.response.status).toBe(400);
@@ -31,7 +34,7 @@ describe('TC-FN-002 - Verify that system returns 400 error when folder name fiel
 
   it('Create Folder - Empty Body', async () => {
     try {
-      await foldersService.create_folder(spaceId, {});
+      await foldersService.create_folder(getSpaceId(), {});
       fail('Expected request to fail with 400');
     } catch (error) {
       expect(error.response.status).toBe(400);
@@ -50,7 +53,7 @@ describe('TC-FN-002 - Verify that system returns 400 error when folder name fiel
 
   it('Create Folder - Empty Name String', async () => {
     try {
-      await foldersService.create_folder(spaceId, { name: '' });
+      await foldersService.create_folder(getSpaceId(), { name: '' });
       fail('Expected request to fail with 400');
     } catch (error) {
       expect(error.response.status).toBe(400);

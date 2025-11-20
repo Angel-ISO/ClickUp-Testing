@@ -2,11 +2,14 @@ import 'dotenv/config';
 import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const spaceId = process.env.CLICKUP_SPACE_ID;
 const foldersService = new FoldersApiService();
 
 describe('TC-FP-001 - Verify that user can create a folder with valid name in existing space', () => {
+  beforeAll(async () => {
+    await setupClickUpEnvironment();
+  });
   let createdFolderId;
 
   afterEach(async () => {
@@ -25,7 +28,7 @@ describe('TC-FP-001 - Verify that user can create a folder with valid name in ex
     const uniqueFolderName = `Test Folder - ${Date.now()}`;
     const folderData = { name: uniqueFolderName };
 
-    const createResponse = await foldersService.create_folder(spaceId, folderData);
+    const createResponse = await foldersService.create_folder(getSpaceId(), folderData);
     createdFolderId = createResponse.id;
 
     console.log(`Folder created: ${uniqueFolderName} (ID: ${createdFolderId})`);
@@ -34,7 +37,7 @@ describe('TC-FP-001 - Verify that user can create a folder with valid name in ex
     expect(createResponse).toHaveProperty('name');
     expect(createResponse.name).toBe(uniqueFolderName);
 
-    const foldersResponse = await foldersService.get_folders(spaceId);
+    const foldersResponse = await foldersService.get_folders(getSpaceId());
 
     const validation = BaseSchemaValidator.validate(
       foldersResponse,

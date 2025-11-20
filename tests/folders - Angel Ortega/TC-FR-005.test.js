@@ -2,13 +2,17 @@ import 'dotenv/config';
 import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const spaceId = process.env.CLICKUP_SPACE_ID;
 const foldersService = new FoldersApiService();
 
 describe('TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior', () => {
     const createdFolderIds = [];
     let allowsDuplicates = null;
+
+    beforeAll(async () => {
+        await setupClickUpEnvironment();
+    });
 
     afterEach(async () => {
         for (const folderId of createdFolderIds) {
@@ -24,7 +28,7 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
     });
 
     it('Create Folder - First Instance', async () => {
-        const response = await foldersService.create_folder(spaceId, {
+        const response = await foldersService.create_folder(getSpaceId(), {
             name: 'Duplicate Test Folder'
         });
 
@@ -43,13 +47,13 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
     });
 
     it('Create Folder - Duplicate Name (Second Instance)', async () => {
-        const firstResponse = await foldersService.create_folder(spaceId, {
+        const firstResponse = await foldersService.create_folder(getSpaceId(), {
             name: 'Duplicate Test Folder'
         });
         createdFolderIds.push(firstResponse.id);
 
         try {
-            const secondResponse = await foldersService.create_folder(spaceId, {
+            const secondResponse = await foldersService.create_folder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
 
@@ -68,14 +72,14 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
     });
 
     it('Get Folders - Verify Consistency', async () => {
-        const firstResponse = await foldersService.create_folder(spaceId, {
+        const firstResponse = await foldersService.create_folder(getSpaceId(), {
             name: 'Duplicate Test Folder'
         });
         createdFolderIds.push(firstResponse.id);
 
         let secondCreated = false;
         try {
-            const secondResponse = await foldersService.create_folder(spaceId, {
+            const secondResponse = await foldersService.create_folder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
             createdFolderIds.push(secondResponse.id);
@@ -84,7 +88,7 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
             secondCreated = false;
         }
 
-        const foldersResponse = await foldersService.get_folders(spaceId);
+        const foldersResponse = await foldersService.get_folders(getSpaceId());
         expect(foldersResponse).toHaveProperty('folders');
         expect(Array.isArray(foldersResponse.folders)).toBe(true);
 
@@ -100,14 +104,14 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
     });
 
     it('Create Folder - Third Instance (Reliability Check)', async () => {
-        const firstResponse = await foldersService.create_folder(spaceId, {
+        const firstResponse = await foldersService.create_folder(getSpaceId(), {
             name: 'Duplicate Test Folder'
         });
         createdFolderIds.push(firstResponse.id);
 
         let secondSucceeded = false;
         try {
-            const secondResponse = await foldersService.create_folder(spaceId, {
+            const secondResponse = await foldersService.create_folder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
             createdFolderIds.push(secondResponse.id);
@@ -117,7 +121,7 @@ describe('TC-FR-005 - Verify that creating a folder with duplicate name produces
         }
 
         try {
-            const thirdResponse = await foldersService.create_folder(spaceId, {
+            const thirdResponse = await foldersService.create_folder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
 
