@@ -27,6 +27,16 @@ export default [
     rules: {
       "no-unused-vars": "warn",
       "no-useless-escape": "error",
+      "id-match": [
+        "error",
+        "^[a-z]+(?:_[a-z]+)*$",
+        {
+          properties: false,
+          classFields: false,
+          ignoreDestructuring: false,
+          onlyDeclarations: true
+        }
+      ],
     },
   },
   {

@@ -2,12 +2,16 @@ import 'dotenv/config';
 import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const spaceId = process.env.CLICKUP_SPACE_ID;
 const foldersService = new FoldersApiService();
 
 describe('TC-FF-004 - Validate that system properly handles special characters in folder name', () => {
     const createdFolderIds = [];
+
+    beforeAll(async () => {
+        await setupClickUpEnvironment();
+    });
 
     afterEach(async () => {
         for (const folderId of createdFolderIds) {
@@ -25,7 +29,7 @@ describe('TC-FF-004 - Validate that system properly handles special characters i
         const folderName = 'Test@#$%^&*()Folder';
 
         try {
-            const response = await foldersService.create_folder(spaceId, { name: folderName });
+            const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
 
             expect(response).toHaveProperty('id');
             expect(response).toHaveProperty('name');
@@ -57,7 +61,7 @@ describe('TC-FF-004 - Validate that system properly handles special characters i
         const folderName = 'Test Folder 🚀📁✨';
 
         try {
-            const response = await foldersService.create_folder(spaceId, { name: folderName });
+            const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
 
             expect(response).toHaveProperty('id');
             expect(response).toHaveProperty('name');
@@ -89,7 +93,7 @@ describe('TC-FF-004 - Validate that system properly handles special characters i
         const folderName = 'Carpeta Tëst 测试 フォルダ';
 
         try {
-            const response = await foldersService.create_folder(spaceId, { name: folderName });
+            const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
 
             expect(response).toHaveProperty('id');
             expect(response).toHaveProperty('name');
