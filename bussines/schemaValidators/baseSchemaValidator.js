@@ -11,11 +11,12 @@ class BaseSchemaValidator {
     const validate = ajv.compile(schema);
     const isValid = validate(data);
 
-    if (!isValid) {
-      Logger.error(`${schemaName} validation failed:`, validate.errors);
-    } else {
-      Logger.info(`${schemaName} validation passed`);
-    }
+    const testPath =
+      typeof expect !== 'undefined' && expect.getState
+        ? expect.getState().testPath || ''
+        : '';
+
+    Logger.validation(schemaName, isValid, validate.errors, testPath);
 
     return {
       isValid,

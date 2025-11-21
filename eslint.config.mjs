@@ -4,7 +4,7 @@ export default [
   js.configs.recommended,
   {
     files: ["**/*.js"],
-    ignores: ["tests/**", "node_modules/**"],
+    ignores: ["node_modules/**"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
@@ -30,7 +30,7 @@ export default [
     },
   },
   {
-    files: ["tests/**/*.js"],
+    files: ["tests/**/*.js", "jest.setup.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
