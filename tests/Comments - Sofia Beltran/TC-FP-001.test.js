@@ -3,6 +3,8 @@ const { afterAll } = require("jest-circus");
 const Ajv = require("ajv");
 require("dotenv").config();
 
+import Logger from '../../core/logger.js';
+
 const ajv = new Ajv();
 const baseURL = process.env.CLICKUP_BASE_URL;
 const token = process.env.CLICKUP_TOKEN;
@@ -60,6 +62,7 @@ describe("ClickUp Comments API - Test001", () => {
   let commentId;
 
   afterAll(() => {
+    Logger.info('Cleaning up: Deleting test comment', { commentId });
     return axios.delete(
       `${baseURL}/comment/${commentId}`,
       { headers }
@@ -72,6 +75,8 @@ describe("ClickUp Comments API - Test001", () => {
       notify_all: true,
     };
 
+    Logger.info('Creating comment on task', { taskId, commentText: body.comment_text });
+
     const response = await axios.post(
       `${baseURL}/task/${taskId}/comment`,
       body,
@@ -79,28 +84,46 @@ describe("ClickUp Comments API - Test001", () => {
     );
 
     expect([200, 201]).toContain(response.status);
+    Logger.info('Comment created successfully', { status: response.status });
 
     commentId = response.data.id;
     expect(commentId).toBeDefined();
+    Logger.info('Comment ID captured', { commentId });
   });
 
   test("Should validate comment list schema and check comment existence", async () => {
+    Logger.info('Waiting 500ms before fetching comments');
     await new Promise(res => setTimeout(res, 500));
 
+    Logger.info('Fetching comments list', { taskId });
     const response = await axios.get(
       `${baseURL}/task/${taskId}/comment`,
       { headers }
     );
 
+    Logger.info('Comments retrieved', { 
+      status: response.status,
+      commentCount: response.data.comments?.length 
+    });
+
     const validate = ajv.compile(commentListSchema);
     const valid = validate(response.data);
+
+    Logger.validation('commentListSchema', valid, validate.errors);
 
     if (!valid) {
       console.error("Schema errors:", validate.errors);
     }
 
     expect(valid).toBe(true);
+    
     const exists = response.data.comments.some(c => c.id == commentId);
     expect(exists).toBe(true);
+    
+    Logger.info('Comment existence verified', { 
+      commentId, 
+      exists,
+      totalComments: response.data.comments.length 
+    });
   });
 });
