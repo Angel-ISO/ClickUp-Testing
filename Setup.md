@@ -44,7 +44,3 @@ if u dont want to use the curl u can go into [clickup website](https://developer
 
 
 after that u can get the token, just copy it.
-
-about the space id u cant get it from the spaces section, as the following image shows:
-
-![alt text](./media/steps/4.png)
