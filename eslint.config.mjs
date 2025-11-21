@@ -4,9 +4,46 @@ export default [
   js.configs.recommended,
   {
     files: ["**/*.js"],
+    ignores: ["node_modules/**"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: "commonjs",
+      sourceType: "module",
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        Buffer: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        global: "readonly",
+        require: "readonly",
+        module: "readonly",
+        exports: "readonly",
+      },
+    },
+    rules: {
+      "no-unused-vars": "warn",
+      "no-useless-escape": "error",
+      "id-match": [
+        "error",
+        "^[a-z]+(?:_[a-z]+)*$",
+        {
+          properties: false,
+          classFields: false,
+          ignoreDestructuring: false,
+          onlyDeclarations: true
+        }
+      ],
+    },
+  },
+  {
+    files: ["tests/**/*.js", "jest.setup.js"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: "module",
       globals: {
         process: "readonly",
         console: "readonly",
@@ -19,20 +56,17 @@ export default [
         beforeAll: "readonly",
         afterAll: "readonly",
         fail: "readonly",
+        setTimeout: "readonly",
+        Buffer: "readonly",
+        require: "readonly",
+        module: "readonly",
+        exports: "readonly",
       },
     },
     rules: {
       "no-unused-vars": "warn",
-      "id-match": [
-        "error",
-        "^[a-z]+(?:_[a-z]+)*$", 
-        {
-          properties: false,
-          classFields: false,
-          ignoreDestructuring: false,
-          onlyDeclarations: true
-        }
-      ],
+      "no-undef": "off", 
+      "no-empty": "off", 
     },
   },
 ];

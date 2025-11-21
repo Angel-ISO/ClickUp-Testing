@@ -44,6 +44,33 @@ This project is a comprehensive API testing suite for ClickUp, developed as the 
 - **Jest**: Testing framework for unit and integration tests
 - **Axios**: HTTP client for API requests
 - **Dotenv**: Environment variable management
+- **AJV**: JSON Schema validation
+- **ESLint**: Code linting and formatting
+
+##  Architecture
+
+The project follows a **3-layer clean architecture**:
+
+### Core Layer
+- `http_client.js`: HTTP client with Result Monad for functional error handling
+- `request_manager.js`: Singleton request manager
+- `result.js`: Functional error handling (no exceptions)
+
+### Business Logic Layer
+- `apiServices/`: Specific API services (Tasks, Folders, Comments, etc.)
+- `schemaValidators/`: JSON Schema validation with AJV
+- `utils/`: Functional helper utilities
+
+### Tests Layer
+- `setup.test.js`: Automatic environment configuration
+- Test suites using the architecture services
+
+### Key Features
+-  **Functional Programming**: Result Monad, no try-catch in business logic
+-  **ES6 Modules**: Modern JavaScript with import/export
+-  **Schema Validation**: Automatic response validation
+-  **Snake Case**: Consistent naming convention
+-  **Automatic Setup**: No manual configuration needed
 
 ## Setup Instructions
 
@@ -61,8 +88,24 @@ This project is a comprehensive API testing suite for ClickUp, developed as the 
 3. **Configure environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env with your actual ClickUp API credentials
+   # Edit .env with your ClickUp API token (SPACE_ID is obtained automatically!)
    ```
+
+   ** New: Automatic Space ID Detection**
+   The project now automatically detects your ClickUp Space ID from your API token. No need to manually configure `CLICKUP_SPACE_ID` anymore!
+
+   ```bash
+   # .env - Only these two are needed:
+   CLICKUP_BASE_URL=https://api.clickup.com/api/v2
+   CLICKUP_TOKEN=your_clickup_api_token_here
+   ```
+
+   The system will:
+   1. Get your team/workspace ID from `/team`
+   2. Get available spaces from `/team/{team_id}/space`
+   3. Use the first available space automatically
+
+   if u need more information about the setup u can check the [setup.md](./Setup.md)
 
 4. **Run tests**
    ```bash
@@ -116,12 +159,13 @@ npm test -- "tests/List - Jose Fernandez"
 
 ## Team Conventions
 
-- **Naming**: camelCase for variables/functions, PascalCase for classes
+- **Naming**: snake_case for variables/functions, PascalCase for classes
 - **File Structure**: Tests stored under `/tests/{module}`
 - **Comments**: Each test includes brief description and expected result
 - **Commits**: Use format `feat: add test for folder creation` or `fix: update tag validation`
 - **Linting**: ESLint for code style enforcement
 - **Test Naming**: `TC-{TYPE}-{NUMBER} - {Description}`
+- **Architecture**: 3-layer clean architecture with functional programming
 
 ## Hooks Implementation
 

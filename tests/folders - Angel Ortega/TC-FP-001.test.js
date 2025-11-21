@@ -1,24 +1,22 @@
-const axios = require('axios');
+import 'dotenv/config';
+import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
+import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
+import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const baseURL = process.env.CLICKUP_BASE_URL;
-const token = process.env.CLICKUP_TOKEN;
-const spaceId = process.env.CLICKUP_SPACE_ID;
+const foldersService = new FoldersApiService();
 
 describe('TC-FP-001 - Verify that user can create a folder with valid name in existing space', () => {
-  let createdFolderId;
-
-  beforeEach(() => {
-    console.log('im a hook of before each');
+  beforeAll(async () => {
+    await setupClickUpEnvironment();
   });
+  let createdFolderId;
 
   afterEach(async () => {
     if (createdFolderId) {
       try {
-        await axios.delete(`${baseURL}/folder/${createdFolderId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
+        await foldersService.delete_folder(createdFolderId);
+        console.log(`Folder deleted: ${createdFolderId}`);
       } catch (error) {
         console.warn('Cleanup failed:', error.message);
       }
@@ -26,61 +24,35 @@ describe('TC-FP-001 - Verify that user can create a folder with valid name in ex
     }
   });
 
-  it('Create Folder - Valid Name', async () => {
-    const response = await axios.post(`${baseURL}/space/${spaceId}/folder`, {
-      name: 'Test Folder - Valid Name'
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
+  it('Create and verify folder', async () => {
+    const uniqueFolderName = `Test Folder - ${Date.now()}`;
+    const folderData = { name: uniqueFolderName };
 
-    expect(response.status).toBe(200);
-    expect(response.data).toHaveProperty('id');
-    expect(response.data).toHaveProperty('name');
-    expect(response.data.name).toBe('Test Folder - Valid Name');
+    const createResponse = await foldersService.create_folder(getSpaceId(), folderData);
+    createdFolderId = createResponse.id;
 
-    expect(response.data).toHaveProperty('orderindex');
-    expect(response.data).toHaveProperty('override_statuses');
-    expect(response.data).toHaveProperty('hidden');
-    expect(response.data).toHaveProperty('space');
-    expect(response.data).toHaveProperty('task_count');
-    expect(response.data).toHaveProperty('archived');
-    expect(response.data).toHaveProperty('statuses');
-    expect(response.data).toHaveProperty('deleted');
-    expect(response.data).toHaveProperty('lists');
-    expect(response.data).toHaveProperty('permission_level');
+    console.log(`Folder created: ${uniqueFolderName} (ID: ${createdFolderId})`);
 
-    createdFolderId = response.data.id;
-  });
+    expect(createResponse).toHaveProperty('id');
+    expect(createResponse).toHaveProperty('name');
+    expect(createResponse.name).toBe(uniqueFolderName);
 
-  it('Get Folders - Verify Creation', async () => {
-    const createResponse = await axios.post(`${baseURL}/space/${spaceId}/folder`, {
-      name: 'Test Folder - Valid Name'
-    }, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    createdFolderId = createResponse.data.id;
+    const foldersResponse = await foldersService.get_folders(getSpaceId());
 
-    const response = await axios.get(`${baseURL}/space/${spaceId}/folder`, {
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'accept': 'application/json'
-      }
-    });
+    const validation = BaseSchemaValidator.validate(
+      foldersResponse,
+      folderSchemas.foldersListResponseSchema,
+      'Folders List Response'
+    );
+    expect(validation.isValid).toBe(true);
 
-    expect(response.status).toBe(200);
-    expect(response.data).toHaveProperty('folders');
-    expect(Array.isArray(response.data.folders)).toBe(true);
-    expect(response.data.folders.length).toBeGreaterThan(0);
+    expect(foldersResponse).toHaveProperty('folders');
+    expect(Array.isArray(foldersResponse.folders)).toBe(true);
+    expect(foldersResponse.folders.length).toBeGreaterThan(0);
 
-    const folder = response.data.folders.find(f => f.name === 'Test Folder - Valid Name');
+    const folder = foldersResponse.folders.find(f => f.id === createdFolderId);
     expect(folder).toBeDefined();
-    expect(folder).toHaveProperty('id');
-    expect(folder.name).toBe('Test Folder - Valid Name');
+    expect(folder.name).toBe(uniqueFolderName);
+    expect(folder.id).toBe(createdFolderId);
   });
 });
