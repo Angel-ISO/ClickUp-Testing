@@ -6,12 +6,11 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import taskSchemas from '../../bussines/schemaValidators/taskSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-
 const tasksService = new TasksApiService();
 const foldersService = new FoldersApiService();
 const listsService = new ListsApiService();
 
-describe('TC-FP-001 - Verify that a user can create a task with valid data', () => {
+describe('TC-FN-002–Verify that a user cannot create a task with invalid data', () => {
   let folderId;
   let listId;
   let createdTaskId;
@@ -65,6 +64,110 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
     expect(createResponse.creator).toHaveProperty('email');
     expect(createResponse).toHaveProperty('date_created');
     expect(createResponse).toHaveProperty('url');
+  });
+
+  it('Create Task - Invalid Data (Empty Name)', async () => {
+    const taskData = { name: "" };
+
+    try {
+      await tasksService.create_task(listId, taskData);
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.response?.status).toBe(400);
+      
+      const errorResponse = error.response?.data;
+      
+      // Schema validation usando el schema existente
+      const validation = BaseSchemaValidator.validate(
+        errorResponse,
+        taskSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
+      expect(errorResponse).toHaveProperty("err");
+      expect(errorResponse).toHaveProperty("ECODE");
+      expect(errorResponse.err).toBe("Task name invalid");
+      expect(errorResponse.ECODE).toBe("INPUT_005");
+    }
+  });
+
+  it('Create Task - Invalid Data (Null Name)', async () => {
+    const taskData = { name: null };
+
+    try {
+      await tasksService.create_task(listId, taskData);
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.response?.status).toBe(400);
+      
+      const errorResponse = error.response?.data;
+      
+      // Schema validation
+      const validation = BaseSchemaValidator.validate(
+        errorResponse,
+        taskSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
+
+      expect(errorResponse).toHaveProperty("err");
+      expect(errorResponse).toHaveProperty("ECODE");
+      expect(errorResponse.err).toBe("Task name invalid");
+      expect(errorResponse.ECODE).toBe("INPUT_005");
+    }
+  });
+
+  it('Create Task - Invalid Data (Missing Name)', async () => {
+    const taskData = {};
+
+    try {
+      await tasksService.create_task(listId, taskData);
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.response?.status).toBe(400);
+      
+      const errorResponse = error.response?.data;
+      
+      // Schema validation
+      const validation = BaseSchemaValidator.validate(
+        errorResponse,
+        taskSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
+
+      expect(errorResponse).toHaveProperty("err");
+      expect(errorResponse).toHaveProperty("ECODE");
+      expect(errorResponse.err).toBe("Task name invalid");
+      expect(errorResponse.ECODE).toBe("INPUT_005");
+    }
+  });
+
+  it('Create Task - Invalid Data (Very Long Name)', async () => {
+    const taskData = { name: "a".repeat(1000) };
+
+    try {
+      const response = await tasksService.create_task(listId, taskData);
+      console.log('Task created with long name:', response.id);
+      createdTaskId = response.id;
+      expect(response).toHaveProperty('id');
+      expect(response).toHaveProperty('name', taskData.name);
+    } catch (error) {
+      expect(error.response?.status).toBe(400);
+      
+      const errorResponse = error.response?.data;
+      
+      // Schema validation
+      const validation = BaseSchemaValidator.validate(
+        errorResponse,
+        taskSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
+
+      expect(errorResponse).toHaveProperty("err");
+      expect(errorResponse).toHaveProperty("ECODE");
+    }
   });
 
   it('Get Task - Verify Creation', async () => {
