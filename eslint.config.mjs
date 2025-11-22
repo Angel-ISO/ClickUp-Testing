@@ -29,7 +29,7 @@ export default [
       "no-useless-escape": "error",
       "id-match": [
         "error",
-        "^[a-z]+(?:_[a-z]+)*$",
+        "^[a-zA-Z][a-zA-Z0-9]*$",
         {
           properties: false,
           classFields: false,
