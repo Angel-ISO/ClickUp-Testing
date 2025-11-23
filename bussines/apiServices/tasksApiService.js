@@ -21,11 +21,11 @@ class TasksApiService extends BaseApiService {
   }
 
 
-  async delete_delete(task_id) {
+  async delete_task(task_id) {
     return this.make_request('DELETE', `/task/${task_id}`);
   }
 
-  async merge_task(task_id, task_data){
+  async merge_tasks(task_id, task_data){
     return this.make_request('POST', `/task/${task_id}/merge`, task_data);
   }
 }
