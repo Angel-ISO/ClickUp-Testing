@@ -2,7 +2,7 @@ import Logger from '../../core/logger.js';
 import schemas from '../../bussines/schemaValidators/commentSchemas.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import commentsService from '../../bussines/apiServices/commentsApiService.js';
-import waitForComment from '../../bussines/utils/waitForComment.js'
+import {waitForComment} from '../../bussines/utils/waitForComment.js'
 require("dotenv").config();
 
 describe("ClickUp Comments API - Test001", () => {
