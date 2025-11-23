@@ -1,6 +1,6 @@
 export default {
   testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', "<rootDir>/tests/Comments - Sofia Beltran/setupComments.js"],
   transform: {
     '^.+\\.js$': 'babel-jest'
   },

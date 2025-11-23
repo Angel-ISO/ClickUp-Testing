@@ -1,36 +1,41 @@
 import create_request_manager from '../core/request_manager.js';
 
 let globalSpaceId = null;
+let globalTeamId = null;
 
 const setupClickUpEnvironment = async () => {
-  if (globalSpaceId) return globalSpaceId;
+  if (globalSpaceId && globalTeamId) {
+    return { spaceId: globalSpaceId, teamId: globalTeamId };
+  }
 
   try {
     const requestManager = create_request_manager();
-
+    
     console.log('Obteniendo getting teams');
     const teamsResult = await requestManager.get('/team');
-
+    
     if (!teamsResult.success) {
       throw new Error(`Error getting teams: ${teamsResult.error}`);
     }
 
     const teamsResponse = teamsResult.value;
+    
     if (!teamsResponse.teams || teamsResponse.teams.length === 0) {
       throw new Error('Not teams found');
     }
 
-    const teamId = teamsResponse.teams[0].id;
-    console.log(`Team get: ${teamId}`);
+    globalTeamId = teamsResponse.teams[0].id;
+    console.log(`Team get: ${globalTeamId}`);
 
     console.log('get spaces...');
-    const spacesResult = await requestManager.get(`/team/${teamId}/space`);
-
+    const spacesResult = await requestManager.get(`/team/${globalTeamId}/space`);
+    
     if (!spacesResult.success) {
       throw new Error(`Error getting spaces: ${spacesResult.error}`);
     }
 
     const spacesResponse = spacesResult.value;
+    
     if (!spacesResponse.spaces || spacesResponse.spaces.length === 0) {
       throw new Error('Not spaces found');
     }
@@ -38,7 +43,7 @@ const setupClickUpEnvironment = async () => {
     globalSpaceId = spacesResponse.spaces[0].id;
     console.log(`Space get: ${globalSpaceId}`);
 
-    return globalSpaceId;
+    return { spaceId: globalSpaceId, teamId: globalTeamId };
   } catch (error) {
     console.error('Error:', error.message);
     throw error;
@@ -52,4 +57,11 @@ const getSpaceId = () => {
   return globalSpaceId;
 };
 
-export { setupClickUpEnvironment, getSpaceId };
+const getTeamId = () => {
+  if (!globalTeamId) {
+    throw new Error('Team ID not initialized. Run setupClickUpEnvironment() first.');
+  }
+  return globalTeamId;
+};
+
+export { setupClickUpEnvironment, getSpaceId, getTeamId };
