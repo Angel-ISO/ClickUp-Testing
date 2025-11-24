@@ -1,4 +1,5 @@
 import create_request_manager from '../core/request_manager.js';
+import Logger from '../core/logger.js';
 
 let globalSpaceId = null;
 let globalTeamId = null;
@@ -11,7 +12,7 @@ const setupClickUpEnvironment = async () => {
   try {
     const requestManager = create_request_manager();
     
-    console.log('Obteniendo getting teams');
+    Logger.info('Obteniendo getting teams');
     const teamsResult = await requestManager.get('/team');
     
     if (!teamsResult.success) {
@@ -25,9 +26,9 @@ const setupClickUpEnvironment = async () => {
     }
 
     globalTeamId = teamsResponse.teams[0].id;
-    console.log(`Team get: ${globalTeamId}`);
+    Logger.info(`Team get: ${globalTeamId}`);
 
-    console.log('get spaces...');
+    Logger.info('get spaces...');
     const spacesResult = await requestManager.get(`/team/${globalTeamId}/space`);
     
     if (!spacesResult.success) {
@@ -41,11 +42,11 @@ const setupClickUpEnvironment = async () => {
     }
 
     globalSpaceId = spacesResponse.spaces[0].id;
-    console.log(`Space get: ${globalSpaceId}`);
+    Logger.info(`Space get: ${globalSpaceId}`);
 
     return { spaceId: globalSpaceId, teamId: globalTeamId };
   } catch (error) {
-    console.error('Error:', error.message);
+    Logger.error('Error:', error.message);
     throw error;
   }
 };

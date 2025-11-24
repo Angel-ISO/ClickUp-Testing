@@ -8,7 +8,7 @@ import { setupClickUpEnvironment } from '../setup.test.js';
 const tagsService = new TagsApiService();
 
 describe('TC-FP-004 - Verify error handling with invalid Space ID', () => {
-  const INVALID_SPACE_ID = '999999999';
+  const INVALID_SPACE_ID = 'ab193081hcbag';
 
   beforeAll(async () => {
     await setupClickUpEnvironment();

@@ -25,10 +25,6 @@ class TagsApiService extends BaseApiService {
   async remove_tag_from_task(task_id, tag_name) {
     return this.make_request('DELETE', `/task/${task_id}/tag/${encodeURIComponent(tag_name)}`);
   }
-
-   async get_tasks_by_space(space_id) {
-    return this.make_request('GET', `/space/${space_id}/task`);
-  }
 }
 
 export default TagsApiService;

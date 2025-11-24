@@ -28,6 +28,10 @@ class TasksApiService extends BaseApiService {
   async merge_tasks(task_id, task_data){
     return this.make_request('POST', `/task/${task_id}/merge`, task_data);
   }
+
+   async get_tasks_by_space(space_id) {
+    return this.make_request('GET', `/space/${space_id}/task`);
+  }
 }
 
 export default TasksApiService;
