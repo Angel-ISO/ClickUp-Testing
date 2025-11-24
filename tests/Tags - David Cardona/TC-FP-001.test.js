@@ -1,147 +1,181 @@
-const axios = require('axios');
-const { expectValidSchema } = require('./schemaValidator.js');
-const {
-  emptyBodyResponseSchema,
-  getTagsResponseSchema
-} = require('./tagSchemas.js');
+import 'dotenv/config';
+import TagsApiService from '../../bussines/apiServices/tagsApiService.js';
+import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
+import tagSchemas from '../../bussines/schemaValidators/tagSchemas.js';
+import Logger from '../../core/logger.js';
+import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 
-const baseURL = process.env.CLICKUP_BASE_URL;
-const token = process.env.CLICKUP_TOKEN;
-const spaceId = process.env.CLICKUP_SPACE_ID;
-
-const validTagData = {
-    tag: {
-      name: 'David',
-      tag_fg: '#FFFFFF',
-      tag_bg: '#0000FF'
-    }
-  }; 
+const tagsService = new TagsApiService();
 
 describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
-  let createdTagName;
+  const createdTagNames = [];
+
+  beforeAll(async () => {
+    await setupClickUpEnvironment();
+  });
 
   afterEach(async () => {
-    if (createdTagName) {
+    for (const tagName of createdTagNames) {
       try {
-        await api.delete(`${baseURL}/space/${spaceId}/tag/${encodeURIComponent(createdTagName)}`, {
-          headers: {
-            'Authorization': token
-          }
-        });
-        console.log(`Cleanup: Tag "${createdTagName}" deleted successfully`);
+        await tagsService.delete_tag(getSpaceId(), tagName);
+        Logger.info('Tag cleaned up successfully', { tagName });
       } catch (error) {
-        console.warn(`Cleanup failed for tag "${createdTagName}":`, error.message);
+        Logger.warn('Cleanup failed for tag', { 
+          tagName, 
+          error: error.message 
+        });
       }
-      createdTagName = null;
     }
+    createdTagNames.length = 0;
   });
 
   it('Create Tag - Valid Data', async () => {
-    const response = await axios.post(`${baseURL}/space/${spaceId}/tag`, validTagData, {
-      headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json'
+    const tagData = {
+      tag: {
+        name: 'David',
+        tag_fg: '#FFFFFF',
+        tag_bg: '#0000FF'
       }
+    };
+
+    Logger.info('Creating tag with valid data', { 
+      tagName: tagData.tag.name,
+      spaceId: getSpaceId()
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data).toBeDefined();
-    expect(typeof response.data).toBe('object');
-    expect(response.data).toEqual({});
-    expect(Object.keys(response.data).length).toBe(0);
+    const response = await tagsService.create_tag(getSpaceId(), tagData);
 
-    expectValidSchema(
-      response.data,
-      emptyBodyResponseSchema,
-      expect,
+    expect(response).toBeDefined();
+    expect(typeof response).toBe('object');
+    expect(response).toEqual({});
+    expect(Object.keys(response).length).toBe(0);
+
+    const validation = BaseSchemaValidator.validate(
+      response,
+      tagSchemas.emptyBodyResponseSchema,
       'Create Tag Response'
     );
+    expect(validation.isValid).toBe(true);
 
-    createdTagName = validTagData.tag.name;
+    if (!validation.isValid) {
+      Logger.error('Schema validation failed', { errors: validation.errors });
+    }
+
+    Logger.info('Tag created successfully', { tagName: tagData.tag.name });
+    createdTagNames.push(tagData.tag.name);
   });
 
   it('Get Tags - Verify Creation', async () => {
-    await axios.post(`${baseURL}/space/${spaceId}/tag`, validTagData, {
-      headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json'
+    const tagData = {
+      tag: {
+        name: 'David',
+        tag_fg: '#FFFFFF',
+        tag_bg: '#0000FF'
       }
-    });
-    createdTagName = validTagData.tag.name;
+    };
 
-    const response = await axios.get(`${baseURL}/space/${spaceId}/tag`, {
-      headers: {
-        'Authorization': token,
-        'accept': 'application/json'
-      }
+    Logger.info('Creating tag for verification test', { 
+      tagName: tagData.tag.name 
     });
 
-    expect(response.status).toBe(200);
-    expect(response.data).toHaveProperty('tags');
-    expect(Array.isArray(response.data.tags)).toBe(true);
+    await tagsService.create_tag(getSpaceId(), tagData);
+    createdTagNames.push(tagData.tag.name);
 
-    expectValidSchema(
-      response.data,
-      getTagsResponseSchema,
-      expect,
+    Logger.info('Retrieving all tags to verify creation', { 
+      spaceId: getSpaceId() 
+    });
+
+    const response = await tagsService.get_tags(getSpaceId());
+
+    expect(response).toHaveProperty('tags');
+    expect(Array.isArray(response.tags)).toBe(true);
+
+    const validation = BaseSchemaValidator.validate(
+      response,
+      tagSchemas.tagsListResponseSchema,
       'Get Tags Response'
     );
+    expect(validation.isValid).toBe(true);
 
-    const normalizedTagName = createdTagName.toLowerCase().trim();
-    const tag = response.data.tags.find(
+    if (!validation.isValid) {
+      Logger.error('Schema validation failed', { errors: validation.errors });
+    }
+
+    const normalizedTagName = tagData.tag.name.toLowerCase().trim();
+    const tag = response.tags.find(
       t => t.name.toLowerCase().trim() === normalizedTagName
     );
+
     expect(tag).toBeDefined();
     expect(tag).toHaveProperty('name');
     expect(tag).toHaveProperty('tag_fg');
     expect(tag).toHaveProperty('tag_bg');
     expect(tag).toHaveProperty('creator');
     expect(tag).toHaveProperty('project_id');
+
+    Logger.info('Tag verified in tags list', { 
+      tagName: tag.name,
+      tagCount: response.tags.length
+    });
   });
 
   it('Delete Tag - Verify Deletion', async () => {
-    await axios.post(`${baseURL}/space/${spaceId}/tag`, validTagData, {
-      headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json'
+    const tagData = {
+      tag: {
+        name: 'David',
+        tag_fg: '#FFFFFF',
+        tag_bg: '#0000FF'
       }
-    });
-    createdTagName = validTagData.tag.name;
+    };
 
-    const deleteResponse = await axios.delete(
-      `${baseURL}/space/${spaceId}/tag/${encodeURIComponent(createdTagName)}`,
-      {
-        headers: {
-          'Authorization': token
-        }
-      }
+    Logger.info('Creating tag for deletion test', { 
+      tagName: tagData.tag.name 
+    });
+
+    await tagsService.create_tag(getSpaceId(), tagData);
+    createdTagNames.push(tagData.tag.name);
+
+    Logger.info('Deleting tag', { tagName: tagData.tag.name });
+
+    const deleteResponse = await tagsService.delete_tag(
+      getSpaceId(), 
+      tagData.tag.name
     );
 
-    expect(deleteResponse.status).toBe(200);
-    expect(deleteResponse.data).toBeDefined();
-    expect(typeof deleteResponse.data).toBe('object');
-    expect(deleteResponse.data).toEqual({});
+    expect(deleteResponse).toBeDefined();
+    expect(typeof deleteResponse).toBe('object');
+    expect(deleteResponse).toEqual({});
 
-    expectValidSchema(
-      deleteResponse.data,
-      emptyBodyResponseSchema,
-      expect,
+    const validation = BaseSchemaValidator.validate(
+      deleteResponse,
+      tagSchemas.emptyBodyResponseSchema,
       'Delete Tag Response'
     );
+    expect(validation.isValid).toBe(true);
 
-    const getResponse = await axios.get(`${baseURL}/space/${spaceId}/tag`, {
-      headers: {
-        'Authorization': token,
-        'accept': 'application/json'
-      }
-    });
+    if (!validation.isValid) {
+      Logger.error('Schema validation failed', { errors: validation.errors });
+    }
 
-    const normalizedTagName = createdTagName.toLowerCase().trim();
-    const tagExists = getResponse.data.tags.some(
+    Logger.info('Verifying tag was deleted', { tagName: tagData.tag.name });
+
+    const getResponse = await tagsService.get_tags(getSpaceId());
+
+    const normalizedTagName = tagData.tag.name.toLowerCase().trim();
+    const tagExists = getResponse.tags.some(
       t => t.name.toLowerCase().trim() === normalizedTagName
     );
+
     expect(tagExists).toBe(false);
 
-    createdTagName = null;
+    Logger.info('Tag deletion verified', { 
+      tagName: tagData.tag.name,
+      tagExists 
+    });
+
+    const index = createdTagNames.indexOf(tagData.tag.name);
+    if (index > -1) {
+      createdTagNames.splice(index, 1);
+    }
   });
 });
