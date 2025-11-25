@@ -1,5 +1,13 @@
 export default {
   testEnvironment: 'node',
+    reporters: [
+    "default",
+    [ "jest-junit", {
+        outputDirectory: "reports/junit",
+        outputName: "junit.xml"
+      }
+    ]
+  ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js', "<rootDir>/tests/Comments - Sofia Beltran/setupComments.js"],
   transform: {
     '^.+\\.js$': 'babel-jest'
