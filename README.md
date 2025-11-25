@@ -157,6 +157,129 @@ npm test -- "tests/List - Jose Fernandez"
 - **Documentation**: Changes documented in code and README
 - **Integration**: Builds successfully without breaking functionality
 
+
+
+
+
+##  Tag-Based Test Filtering
+
+The project implements a comprehensive tag system that allows you to run specific subsets of tests based on categories and features.
+
+### Quick Start
+
+```bash
+npm run test:smoke
+
+npm run test:smoke:folders
+
+npm run test:negativos
+
+npm run test:funcionalidad:folders
+```
+
+### Available Tags
+
+- **`@smoke`**: Critical tests that must pass (each feature should have at least one)
+- **`@funcionalidad:name`**: Groups tests by feature (folders, tasks, lists, tags, comments)
+- **`@negativos`**: All negative test cases (error scenarios)
+
+### All Available Commands
+
+```bash
+npm run test:smoke                    # All smoke tests
+npm run test:smoke:folders            # Smoke tests for folders
+npm run test:smoke:tasks              # Smoke tests for tasks
+npm run test:smoke:lists              # Smoke tests for lists
+npm run test:smoke:tags               # Smoke tests for tags
+npm run test:smoke:comments           # Smoke tests for comments
+
+npm run test:negativos                # All negative tests
+npm run test:negativos:folders        # Negative tests for folders
+npm run test:negativos:tasks          # Negative tests for tasks
+npm run test:negativos:lists          # Negative tests for lists
+npm run test:negativos:tags           # Negative tests for tags
+npm run test:negativos:comments       # Negative tests for comments
+
+npm run test:funcionalidad:folders    # All tests for folders
+npm run test:funcionalidad:tasks      # All tests for tasks
+npm run test:funcionalidad:lists      # All tests for lists
+npm run test:funcionalidad:tags       # All tests for tags
+npm run test:funcionalidad:comments   # All tests for comments
+```
+
+### How to Add Tags to Your Tests
+
+```javascript
+import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+
+taggedDescribe(
+  buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
+  'TC-FP-001 - Create folder with valid name',
+  () => {
+    it('should create folder successfully', async () => {
+    });
+  }
+);
+
+taggedDescribe(
+  buildTags({ funcionalidad: FUNCIONALIDADES.FOLDERS, negative: true }),
+  'TC-FN-002 - Missing folder name validation',
+  () => {
+    it('should return 400 error', async () => {
+    });
+  }
+);
+```
+
+**For detailed documentation**, see [COMMANDS.md](./COMMANDS.md)
+
+
+
+## Team Conventions
+
+- **Naming**: snake_case for variables/functions, PascalCase for classes
+- **File Structure**: Tests stored under `/tests/{module}`
+- **Comments**: Each test includes brief description and expected result
+- **Commits**: Use format `feat: add test for folder creation` or `fix: update tag validation`
+- **Linting**: ESLint for code style enforcement
+- **Test Naming**: `TC-{TYPE}-{NUMBER} - {Description}`
+- **Architecture**: 3-layer clean architecture with functional programming
+
+## Hooks Implementation
+
+The project implements Jest hooks for proper test lifecycle management:
+
+- `beforeEach()`: Setup test prerequisites if that us needed
+- `afterEach()`: Cleanup test artifacts (e.g., delete created folders)
+
+This ensures tests are isolated and don't interfere with each other.
+
+## Contributing
+
+1. Follow the established naming conventions
+2. Implement appropriate hooks for setup/teardown
+3. Add comprehensive assertions and error handling
+4. Update documentation as needed
+5. Ensure all tests pass before submitting
+
+## License
+
+MIT License - see LICENSE file for details.
+
+```bash
+npm test -- "tests/List - Jose Fernandez" 
+```
+
+
+## Definition of Done (DoD)
+
+- **Code Quality**: Code follows team conventions and passes linting
+- **Functionality**: Meets acceptance criteria and passes all tests
+- **Testing**: Includes updated test cases with successful execution
+- **Peer Review**: Code reviewed and approved by teammates
+- **Documentation**: Changes documented in code and README
+- **Integration**: Builds successfully without breaking functionality
+
 ## Team Conventions
 
 - **Naming**: snake_case for variables/functions, PascalCase for classes
