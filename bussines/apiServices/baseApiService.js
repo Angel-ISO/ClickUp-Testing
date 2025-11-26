@@ -11,7 +11,6 @@ class BaseApiService {
     if (result.is_ok()) {
       return result.value;
     } else {
-      // If there's an axios error attached, throw it to preserve status and response data
       if (result.axiosError) {
         throw result.axiosError;
       }
@@ -19,7 +18,6 @@ class BaseApiService {
     }
   }
 
-  // Method to make requests with custom authentication (for security testing)
   async make_request_with_custom_auth(method, endpoint, data = null, customToken = null) {
     const result = await this.request_manager.request_with_custom_auth(method.toLowerCase(), endpoint, data, customToken);
 
@@ -31,6 +29,14 @@ class BaseApiService {
       }
       throw new Error(result.error);
     }
+  }
+
+  async make_request_result(method, endpoint, data = null) {
+    return await this.request_manager[method.toLowerCase()](endpoint, data);
+  }
+
+  async make_request_with_custom_auth_result(method, endpoint, data = null, customToken = null) {
+    return await this.request_manager.request_with_custom_auth(method.toLowerCase(), endpoint, data, customToken);
   }
 }
 
