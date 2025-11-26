@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, Ci-Integration ]
+  pull_request:
+    branches: [ main, Ci-Integration ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    env:
+      CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
+      CLICKUP_BASE_URL: ${{ secrets.CLICKUP_BASE_URL }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run lint
+    - run: npm run test
