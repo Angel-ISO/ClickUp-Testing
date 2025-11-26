@@ -1,162 +1,162 @@
-# Comandos de Testing
+# Testing Commands
 
-Este documento explica cómo usar el sistema de tags para ejecutar tests de manera selectiva.
+This document explains how to use the tag system to run tests selectively.
 
-##  Tabla de Contenidos
+## Table of Contents
 
-- [¿Qué son los Tags?](#qué-son-los-tags)
-- [Categorías de Tests](#categorías-de-tests)
-- [Tags de Ejecución](#tags-de-ejecución)
-- [Comandos Disponibles](#comandos-disponibles)
-- [Ejemplos de Uso](#ejemplos-de-uso)
-- [Cómo Agregar Tags a tus Tests](#cómo-agregar-tags-a-tus-tests)
+- [What are Tags?](#what-are-tags)
+- [Test Categories](#test-categories)
+- [Execution Tags](#execution-tags)
+- [Available Commands](#available-commands)
+- [Usage Examples](#usage-examples)
+- [How to Add Tags to your Tests](#how-to-add-tags-to-your-tests)
 
-## ¿Qué son los Tags?
+## What are Tags?
 
-Los **tags** son etiquetas que se agregan a los tests para poder filtrarlos y ejecutar solo grupos específicos. Esto es útil para:
+**Tags** are labels added to tests to filter and run only specific groups. This is useful for:
 
--  Ejecutar solo tests críticos (smoke tests) antes de hacer deploy
--  Ejecutar solo tests de una funcionalidad específica mientras desarrollas
--  Ejecutar solo tests negativos para validar manejo de errores
--  Ahorrar tiempo ejecutando subconjuntos relevantes de tests
+- Running only critical tests (smoke tests) before deployment
+- Running only tests for a specific functionality while developing
+- Running only negative tests to validate error handling
+- Saving time by running relevant test subsets
 
-## Categorías de Tests
+## Test Categories
 
-Cada test case tiene una categoría que indica su tipo:
+Each test case has a category indicating its type:
 
-| Categoría | Código | Descripción | Ejemplo |
-|-----------|--------|-------------|---------|
-| **Functional Positive** | `FP` | Tests de camino feliz con inputs válidos | TC-FP-001 |
-| **Functional Negative** | `FN` | Tests con inputs inválidos y errores | TC-FN-002 |
-| **Performance** | `P` | Tests de rendimiento y tiempos de respuesta | TC-P-001 |
-| **Security** | `S` | Tests de seguridad y autenticación | TC-S-003 |
-| **Fuzz** | `FF` | Tests con inputs aleatorios o inesperados | TC-FF-004 |
-| **Reliability** | `FR` | Tests de consistencia y estabilidad | TC-FR-005 |
+| Category | Code | Description | Example |
+|----------|------|-------------|---------|
+| **Functional Positive** | `FP` | Happy path tests with valid inputs | TC-FP-001 |
+| **Functional Negative** | `FN` | Tests with invalid inputs and errors | TC-FN-002 |
+| **Performance** | `P` | Performance and response time tests | TC-P-001 |
+| **Security** | `S` | Security and authentication tests | TC-S-003 |
+| **Fuzz** | `FF` | Tests with random or unexpected inputs | TC-FF-004 |
+| **Reliability** | `FR` | Consistency and stability tests | TC-FR-005 |
 
-## Tags de Ejecución
+## Execution Tags
 
-Los tags de ejecución se agregan a los tests para filtrarlos:
+Execution tags are added to tests for filtering:
 
 ### `@smoke`
-Tests **críticos** que deben pasar siempre. Cada funcionalidad debe tener al menos un smoke test.
+**Critical** tests that must always pass. Each functionality should have at least one smoke test.
 
-**Cuándo usar:**
-- Test principal de crear un recurso
-- Test de login/autenticación
-- Tests que validan funcionalidad core
+**When to use:**
+- Main test for creating a resource
+- Login/authentication test
+- Tests that validate core functionality
 
-### `@funcionalidad:nombre`
-Agrupa tests por módulo o feature.
+### `@funcionalidad:name`
+Groups tests by module or feature.
 
-**Funcionalidades disponibles:**
-- `@funcionalidad:folders` - Tests de carpetas
-- `@funcionalidad:tasks` - Tests de tareas
-- `@funcionalidad:lists` - Tests de listas
-- `@funcionalidad:tags` - Tests de etiquetas
-- `@funcionalidad:comments` - Tests de comentarios
+**Available functionalities:**
+- `@funcionalidad:folders` - Folder tests
+- `@funcionalidad:tasks` - Task tests
+- `@funcionalidad:lists` - List tests
+- `@funcionalidad:tags` - Tag tests
+- `@funcionalidad:comments` - Comment tests
 
 ### `@negativos`
-Todos los tests de casos negativos (errores, validaciones).
+All negative test cases (errors, validations).
 
-**Cuándo usar:**
-- Tests que esperan códigos de error (400, 401, 403, 404, etc.)
-- Tests de validación de campos requeridos
-- Tests de permisos insuficientes
+**When to use:**
+- Tests expecting error codes (400, 401, 403, 404, etc.)
+- Required field validation tests
+- Insufficient permissions tests
 
-## Comandos Disponibles
+## Available Commands
 
 ### Smoke Tests
 
-Ejecutar **todos** los smoke tests:
+Run **all** smoke tests:
 ```bash
 npm run test:smoke
 ```
 
-Ejecutar smoke tests de una funcionalidad específica:
+Run smoke tests for a specific functionality:
 ```bash
-npm run test:smoke:folders      # Solo smoke de folders
-npm run test:smoke:tasks         # Solo smoke de tasks
-npm run test:smoke:lists         # Solo smoke de lists
-npm run test:smoke:tags          # Solo smoke de tags
-npm run test:smoke:comments      # Solo smoke de comments
+npm run test:smoke:folders      # Only folder smoke tests
+npm run test:smoke:tasks         # Only task smoke tests
+npm run test:smoke:lists         # Only list smoke tests
+npm run test:smoke:tags          # Only tag smoke tests
+npm run test:smoke:comments      # Only comment smoke tests
 ```
 
-###  Tests Negativos
+### Negative Tests
 
-Ejecutar **todos** los tests negativos:
+Run **all** negative tests:
 ```bash
 npm run test:negativos
 ```
 
-Ejecutar tests negativos de una funcionalidad específica:
+Run negative tests for a specific functionality:
 ```bash
-npm run test:negativos:folders   # Solo negativos de folders
-npm run test:negativos:tasks     # Solo negativos de tasks
-npm run test:negativos:lists     # Solo negativos de lists
-npm run test:negativos:tags      # Solo negativos de tags
-npm run test:negativos:comments  # Solo negativos de comments
+npm run test:negativos:folders   # Only folder negative tests
+npm run test:negativos:tasks     # Only task negative tests
+npm run test:negativos:lists     # Only list negative tests
+npm run test:negativos:tags      # Only tag negative tests
+npm run test:negativos:comments  # Only comment negative tests
 ```
 
-###  Tests por Funcionalidad
+### Tests by Functionality
 
-Ejecutar **todos** los tests de una funcionalidad:
+Run **all** tests for a functionality:
 ```bash
-npm run test:funcionalidad:folders    # Todos los tests de folders
-npm run test:funcionalidad:tasks      # Todos los tests de tasks
-npm run test:funcionalidad:lists      # Todos los tests de lists
-npm run test:funcionalidad:tags       # Todos los tests de tags
-npm run test:funcionalidad:comments   # Todos los tests de comments
+npm run test:funcionalidad:folders    # All folder tests
+npm run test:funcionalidad:tasks      # All task tests
+npm run test:funcionalidad:lists      # All list tests
+npm run test:funcionalidad:tags       # All tag tests
+npm run test:funcionalidad:comments   # All comment tests
 ```
 
-###  Otros Comandos de Testing
+### Other Testing Commands
 
 ```bash
-npm test                  # Ejecutar todos los tests
-npm run test:watch        # Ejecutar tests en modo watch
-npm run test:coverage     # Ejecutar tests con reporte de cobertura
+npm test                  # Run all tests
+npm run test:watch        # Run tests in watch mode
+npm run test:coverage     # Run tests with coverage report
 ```
 
-## Ejemplos de Uso
+## Usage Examples
 
-### Ejemplo 1: Desarrollo de Feature
-Estás trabajando en la funcionalidad de folders y quieres ejecutar solo esos tests:
+### Example 1: Feature Development
+You're working on the folders functionality and want to run only those tests:
 
 ```bash
 npm run test:funcionalidad:folders
 ```
 
-### Ejemplo 2: Pre-Deploy Check
-Antes de hacer deploy, ejecutas los smoke tests para asegurar que lo crítico funciona:
+### Example 2: Pre-Deploy Check
+Before deployment, run smoke tests to ensure critical functionality works:
 
 ```bash
 npm run test:smoke
 ```
 
-### Ejemplo 3: Validar Manejo de Errores
-Quieres verificar que todos los casos negativos de tasks funcionan correctamente:
+### Example 3: Validate Error Handling
+You want to verify that all negative task cases work correctly:
 
 ```bash
 npm run test:negativos:tasks
 ```
 
-### Ejemplo 4: Quick Check de una Feature
-Solo quieres ejecutar los tests críticos de comments:
+### Example 4: Quick Check of a Feature
+You only want to run the critical comment tests:
 
 ```bash
 npm run test:smoke:comments
 ```
 
-## Cómo Agregar Tags a tus Tests
+## How to Add Tags to your Tests
 
-### Paso 1: Importar los Helpers
+### Step 1: Import the Helpers
 
 ```javascript
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 ```
 
-### Paso 2: Usar `taggedDescribe` en lugar de `describe`
+### Step 2: Use `taggedDescribe` instead of `describe`
 
-**Test Positivo con Smoke:**
+**Positive Test with Smoke:**
 ```javascript
 taggedDescribe(
   buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
@@ -169,7 +169,7 @@ taggedDescribe(
 );
 ```
 
-**Test Negativo:**
+**Negative Test:**
 ```javascript
 taggedDescribe(
   buildTags({ funcionalidad: FUNCIONALIDADES.FOLDERS, negative: true }),
@@ -182,7 +182,7 @@ taggedDescribe(
 );
 ```
 
-**Test de Seguridad Smoke:**
+**Security Smoke Test:**
 ```javascript
 taggedDescribe(
   buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
@@ -195,35 +195,35 @@ taggedDescribe(
 );
 ```
 
-### Paso 3: Ejecutar tus Tests Filtrados
+### Step 3: Run your Filtered Tests
 
 ```bash
-# Ejecutar solo el smoke test que acabas de crear
+# Run only the smoke test you just created
 npm run test:smoke:folders
 
-# Ejecutar todos los tests de folders
+# Run all folder tests
 npm run test:funcionalidad:folders
 
-# Ejecutar solo los negativos
+# Run only the negative ones
 npm run test:negativos:folders
 ```
 
-## Reglas de Etiquetado
+## Tagging Rules
 
-1. **Cada funcionalidad debe tener al menos un test `@smoke`**
-2. **Todos los tests `FN` deben tener el tag `@negativos`**
-3. **Todos los tests deben tener un tag `@funcionalidad:nombre`**
-4. **Los tests críticos (happy path principal) deben ser `@smoke`**
+1. **Each functionality must have at least one `@smoke` test**
+2. **All `FN` tests must have the `@negativos` tag**
+3. **All tests must have a `@funcionalidad:name` tag**
+4. **Critical tests (main happy path) should be `@smoke`**
 
 ## Tips
 
-- **En CI/CD**: Puedes ejecutar solo `npm run test:smoke` en pull requests para feedback rápido
-- **Durante desarrollo**: Usa `npm run test:funcionalidad:X` para enfocarte en lo que estás desarrollando
-- **Antes de release**: Ejecuta `npm test` para correr todos los tests
-- **Debugging**: Usa `npm run test:watch` junto con los filtros para desarrollo iterativo
+- **In CI/CD**: You can run only `npm run test:smoke` in pull requests for quick feedback
+- **During development**: Use `npm run test:funcionalidad:X` to focus on what you're developing
+- **Before release**: Run `npm test` to run all tests
+- **Debugging**: Use `npm run test:watch` with filters for iterative development
 
-## Más Información
+## More Information
 
-Para más detalles sobre la implementación, consulta:
-- `bussines/utils/tags.js` - Definición de tags y helpers
-- `TC-FP-001.test.js` - Ejemplo de test con tags implementados
+For more details about the implementation, check:
+- `bussines/utils/tags.js` - Tag definitions and helpers
+- `TC-FP-001.test.js` - Example of implemented tagged test
