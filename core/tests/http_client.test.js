@@ -1,7 +1,7 @@
 import create_http_client from '../http_client.js';
 import result from '../result.js';
 
-describe('HTTP Client - Basic', () => {
+describe('HTTP Client', () => {
   const baseUrl = 'https://api.example.com';
   const token = 'test-token-123';
 
