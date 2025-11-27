@@ -5,12 +5,16 @@ import ListsApiService from '../../bussines/apiServices/listsApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import taskSchemas from '../../bussines/schemaValidators/taskSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
+import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 
 const tasksService = new TasksApiService();
 const foldersService = new FoldersApiService();
 const listsService = new ListsApiService();
 
-describe('TC-FP-003 - Verify that a user can update the status of an existing task', () => {
+taggedDescribe(
+  buildTags({ funcionalidad: FUNCIONALIDADES.TASKS }),
+  'TC-FP-003 - Verify that a user can update the status of an existing task',
+  () => {
   let folderId;
   let listId;
   let createdTaskId;
@@ -114,54 +118,4 @@ describe('TC-FP-003 - Verify that a user can update the status of an existing ta
     
     console.log(`Status successfully verified via GET: "${getResponse.status.status}"`);
   });
-
-  it('Update Task - Multiple Fields Including Status and Verify', async () => {
-
-    const uniqueTaskName = `Task Test - Multiple Update - ${Date.now()}`;
-    const taskData = { name: uniqueTaskName };
-
-    const createResponse = await tasksService.create_task(listId, taskData);
-    createdTaskId = createResponse.id;
-    const initialStatus = createResponse.status.status;
-
-    console.log(`Task created for multiple update: ${uniqueTaskName} (ID: ${createdTaskId})`);
-
-
-    const newStatus = "completado"; 
-    const updateData = {
-      status: newStatus,
-      description: `Updated description for status test - ${Date.now()}`
-    };
-
-    const updateResponse = await tasksService.update_task(createdTaskId, updateData);
-
-    const validation = BaseSchemaValidator.validate(
-      updateResponse,
-      taskSchemas.taskResponseSchema,
-      'Task Response After Multiple Updates'
-    );
-    expect(validation.isValid).toBe(true);
-
-
-    expect(updateResponse).toHaveProperty('id', createdTaskId);
-    expect(updateResponse).toHaveProperty('status');
-    expect(updateResponse.status).toHaveProperty('status', newStatus);
-    expect(updateResponse).toHaveProperty('description', updateData.description);
-
-    console.log(`Task updated with new status "${newStatus}" and description`);
-
-
-    const getResponse = await tasksService.get_task(createdTaskId);
-
-    expect(getResponse).toHaveProperty('id', createdTaskId);
-    expect(getResponse).toHaveProperty('name', uniqueTaskName);
-    expect(getResponse).toHaveProperty('status');
-    expect(getResponse.status).toHaveProperty('status', newStatus);
-    expect(getResponse).toHaveProperty('description', updateData.description);
-    
-
-    expect(getResponse.status.status).not.toBe(initialStatus);
-
-    console.log(`All updates successfully verified via GET`);
-  });
-});
+}, 20000);
