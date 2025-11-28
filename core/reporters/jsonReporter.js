@@ -34,12 +34,12 @@ class JSONReporter {
         numPassedTests: results.numPassedTests,
         numFailedTests: results.numFailedTests,
         numPendingTests: results.numPendingTests,
-        passPercentage: results.numTotalTests > 0 ?
-         ((results.numPassedTests / results.numTotalTests) * 100).toFixed(2)
-         : "0.00",
+        passPercentage: results.numTotalTests > 0
+          ? ((results.numPassedTests / results.numTotalTests) * 100).toFixed(2)
+          : "0.00",
         failPercentage: results.numTotalTests > 0
-        ? ((results.numFailedTests / results.numTotalTests) * 100).toFixed(2)
-        : "0.00",
+          ? ((results.numFailedTests / results.numTotalTests) * 100).toFixed(2)
+          : "0.00",
         numTotalTestSuites: results.numTotalTestSuites,
         numPassedTestSuites: results.numPassedTestSuites,
         numFailedTestSuites: results.numFailedTestSuites,
@@ -67,7 +67,12 @@ class JSONReporter {
       }
     };
 
-    fs.writeFileSync(outputPath, JSON.stringify(jsonResults, null, 2));
+    try {
+      fs.writeFileSync(outputPath, JSON.stringify(jsonResults, null, 2));
+      console.log(`JSON report generated: ${outputPath}`);
+    } catch (error) {
+      console.error(`Failed to write JSON report to ${outputPath}:`, error.message);
+    }
   }
 }
 

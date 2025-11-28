@@ -12,7 +12,7 @@ export default {
         filename: "ClickUp HTML Report.html",
         pageTitle: "ClickUp Testing - Test Report",
         expand: true,
-        openReport: false,
+        openReport: true,
         hideIcon: false,
         includeFailureMsg: true,
         includeSuiteFailure: true,
@@ -28,10 +28,6 @@ export default {
           {
             title: "Environment",
             value: process.env.NODE_ENV || "test"
-          },
-          {
-            title: "Test Run Date",
-            value: new Date().toLocaleString()
           }
         ]
       }
