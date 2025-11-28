@@ -43,4 +43,4 @@ if u dont want to use the curl u can go into [clickup website](https://developer
 ![alt text](./media/steps/3.png)
 
 
-after that u can get the token, just copy it.
+after that u can get the token, just copy it..

@@ -4,6 +4,7 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import result from '../../core/result.js';
 
 const foldersService = new FoldersApiService();
 
@@ -20,12 +21,12 @@ taggedDescribe(
 
         afterEach(async () => {
             for (const folderId of createdFolderIds) {
-                try {
-                    await foldersService.delete_folder(folderId);
-                    console.log(`Cleaned up folder: ${folderId}`);
-                } catch (error) {
-                    console.warn(`Cleanup failed for ${folderId}:`, error.message);
-                }
+                const deleteResult = await foldersService.delete_folder_result(folderId);
+                result.fold(
+                    deleteResult,
+                    (error) => console.warn(`Cleanup failed for ${folderId}:`, error),
+                    (value) => console.log(`Cleaned up folder: ${folderId}`)
+                );
             }
             createdFolderIds.length = 0;
             allowsDuplicates = null;
@@ -56,20 +57,21 @@ taggedDescribe(
             });
             createdFolderIds.push(firstResponse.id);
 
-            try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
-                    name: 'Duplicate Test Folder'
-                });
-
+            const secondResult = await foldersService.create_folder_result(getSpaceId(), {
+                name: 'Duplicate Test Folder'
+            });
+            if (secondResult.is_ok()) {
                 allowsDuplicates = true;
+                const secondResponse = secondResult.value;
                 expect(secondResponse).toHaveProperty('id');
                 expect(secondResponse).toHaveProperty('name');
                 expect(secondResponse.name).toBe('Duplicate Test Folder');
                 expect(secondResponse.id).not.toBe(firstResponse.id);
 
                 createdFolderIds.push(secondResponse.id);
-            } catch (error) {
+            } else {
                 allowsDuplicates = false;
+                const error = secondResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
             }
@@ -82,13 +84,13 @@ taggedDescribe(
             createdFolderIds.push(firstResponse.id);
 
             let secondCreated = false;
-            try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
-                    name: 'Duplicate Test Folder'
-                });
-                createdFolderIds.push(secondResponse.id);
+            const secondResult = await foldersService.create_folder_result(getSpaceId(), {
+                name: 'Duplicate Test Folder'
+            });
+            if (secondResult.is_ok()) {
+                createdFolderIds.push(secondResult.value.id);
                 secondCreated = true;
-            } catch (error) {
+            } else {
                 secondCreated = false;
             }
 
@@ -114,25 +116,25 @@ taggedDescribe(
             createdFolderIds.push(firstResponse.id);
 
             let secondSucceeded = false;
-            try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
-                    name: 'Duplicate Test Folder'
-                });
-                createdFolderIds.push(secondResponse.id);
+            const secondResult = await foldersService.create_folder_result(getSpaceId(), {
+                name: 'Duplicate Test Folder'
+            });
+            if (secondResult.is_ok()) {
+                createdFolderIds.push(secondResult.value.id);
                 secondSucceeded = true;
-            } catch (error) {
+            } else {
                 secondSucceeded = false;
             }
 
-            try {
-                const thirdResponse = await foldersService.create_folder(getSpaceId(), {
-                    name: 'Duplicate Test Folder'
-                });
-
+            const thirdResult = await foldersService.create_folder_result(getSpaceId(), {
+                name: 'Duplicate Test Folder'
+            });
+            if (thirdResult.is_ok()) {
                 expect(secondSucceeded).toBe(true);
-                createdFolderIds.push(thirdResponse.id);
-            } catch (error) {
+                createdFolderIds.push(thirdResult.value.id);
+            } else {
                 expect(secondSucceeded).toBe(false);
+                const error = thirdResult.axiosError;
                 expect(error.response.status).toBe(400);
             }
         });

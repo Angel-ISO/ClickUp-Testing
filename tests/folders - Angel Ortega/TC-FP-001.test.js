@@ -4,6 +4,7 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import result from '../../core/result.js';
 
 const foldersService = new FoldersApiService();
 
@@ -18,12 +19,12 @@ taggedDescribe(
 
     afterEach(async () => {
       if (createdFolderId) {
-        try {
-          await foldersService.delete_folder(createdFolderId);
-          console.log(`Folder deleted: ${createdFolderId}`);
-        } catch (error) {
-          console.warn('Cleanup failed:', error.message);
-        }
+        const deleteResult = await foldersService.delete_folder_result(createdFolderId);
+        result.fold(
+          deleteResult,
+          (error) => console.warn('Cleanup failed:', error),
+          (value) => console.log(`Folder deleted: ${createdFolderId}`)
+        );
         createdFolderId = null;
       }
     });

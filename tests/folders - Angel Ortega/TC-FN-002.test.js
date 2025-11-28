@@ -4,6 +4,7 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import result from '../../core/result.js';
 
 const foldersService = new FoldersApiService();
 
@@ -16,62 +17,56 @@ taggedDescribe(
     });
 
     it('Create Folder - Missing Name Field', async () => {
-      try {
-        await foldersService.create_folder(getSpaceId(), {});
-        fail('Expected request to fail with 400');
-      } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('err');
-        expect(error.response.data.err).toBeTruthy();
-        expect(error.response.data.err.toLowerCase()).toContain('name');
+      const createResult = await foldersService.create_folder_result(getSpaceId(), {});
+      expect(createResult.is_error()).toBe(true);
+      const error = createResult.axiosError;
+      expect(error.response.status).toBe(400);
+      expect(error.response.data).toHaveProperty('err');
+      expect(error.response.data.err).toBeTruthy();
+      expect(error.response.data.err.toLowerCase()).toContain('name');
 
-        const validation = BaseSchemaValidator.validate(
-          error.response.data,
-          folderSchemas.errorResponseSchema,
-          'Error Response'
-        );
-        expect(validation.isValid).toBe(true);
+      const validation = BaseSchemaValidator.validate(
+        error.response.data,
+        folderSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
 
-        expect(error.response.data).not.toHaveProperty('id');
-      }
+      expect(error.response.data).not.toHaveProperty('id');
     });
 
     it('Create Folder - Empty Body', async () => {
-      try {
-        await foldersService.create_folder(getSpaceId(), {});
-        fail('Expected request to fail with 400');
-      } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('err');
+      const createResult = await foldersService.create_folder_result(getSpaceId(), {});
+      expect(createResult.is_error()).toBe(true);
+      const error = createResult.axiosError;
+      expect(error.response.status).toBe(400);
+      expect(error.response.data).toHaveProperty('err');
 
-        const validation = BaseSchemaValidator.validate(
-          error.response.data,
-          folderSchemas.errorResponseSchema,
-          'Error Response'
-        );
-        expect(validation.isValid).toBe(true);
+      const validation = BaseSchemaValidator.validate(
+        error.response.data,
+        folderSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
 
-        expect(error.response.data).not.toHaveProperty('id');
-      }
+      expect(error.response.data).not.toHaveProperty('id');
     });
 
     it('Create Folder - Empty Name String', async () => {
-      try {
-        await foldersService.create_folder(getSpaceId(), { name: '' });
-        fail('Expected request to fail with 400');
-      } catch (error) {
-        expect(error.response.status).toBe(400);
-        expect(error.response.data).toHaveProperty('err');
+      const createResult = await foldersService.create_folder_result(getSpaceId(), { name: '' });
+      expect(createResult.is_error()).toBe(true);
+      const error = createResult.axiosError;
+      expect(error.response.status).toBe(400);
+      expect(error.response.data).toHaveProperty('err');
 
-        const validation = BaseSchemaValidator.validate(
-          error.response.data,
-          folderSchemas.errorResponseSchema,
-          'Error Response'
-        );
-        expect(validation.isValid).toBe(true);
+      const validation = BaseSchemaValidator.validate(
+        error.response.data,
+        folderSchemas.errorResponseSchema,
+        'Error Response'
+      );
+      expect(validation.isValid).toBe(true);
 
-        expect(error.response.data).not.toHaveProperty('id');
-      }
+      expect(error.response.data).not.toHaveProperty('id');
     });
   }
 );
