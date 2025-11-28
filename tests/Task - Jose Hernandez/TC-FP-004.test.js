@@ -19,17 +19,17 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
     await setupClickUpEnvironment();
     
     // Get Folder ID
-    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    const foldersResponse = await foldersService.getFolders(getSpaceId());
     folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await listsService.get_lists(folderId);
+    const listResponse = await listsService.getLists(folderId);
     listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     for (const taskId of createdTaskIds) {
       try {
-        await tasksService.delete_task(taskId);
+        await tasksService.deleteTask(taskId);
         console.log(`Task deleted: ${taskId}`);
       } catch (error) {
         console.log(`Error deleting task ${taskId}:`, error.message);
@@ -52,7 +52,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: task1Name,
       description: task1Description
     };
-    const task1Response = await tasksService.create_task(listId, task1Data);
+    const task1Response = await tasksService.createTask(listId, task1Data);
     const mainTaskId = task1Response.id;
     createdTaskIds.push(mainTaskId);
 
@@ -63,7 +63,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: task2Name,
       description: task2Description
     };
-    const task2Response = await tasksService.create_task(listId, task2Data);
+    const task2Response = await tasksService.createTask(listId, task2Data);
     const task2Id = task2Response.id;
 
     console.log(`Second task created: ${task2Name} (ID: ${task2Id})`);
@@ -73,7 +73,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: task3Name,
       description: task3Description
     };
-    const task3Response = await tasksService.create_task(listId, task3Data);
+    const task3Response = await tasksService.createTask(listId, task3Data);
     const task3Id = task3Response.id;
 
     console.log(`Third task created: ${task3Name} (ID: ${task3Id})`);
@@ -84,13 +84,13 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
     };
 
 
-    const mergeResponse = await tasksService.merge_tasks(mainTaskId, mergeData);
+    const mergeResponse = await tasksService.mergeTasks(mainTaskId, mergeData);
     console.log('Merge response:', mergeResponse);
 
     console.log(`Tasks merged successfully: ${task2Id} and ${task3Id} into ${mainTaskId}`);
 
    
-    const getResponse = await tasksService.get_task(mainTaskId);
+    const getResponse = await tasksService.getTask(mainTaskId);
 
 
     const validation = BaseSchemaValidator.validate(
@@ -127,7 +127,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: mainTaskName,
       description: mainTaskDescription
     };
-    const mainTaskResponse = await tasksService.create_task(listId, mainTaskData);
+    const mainTaskResponse = await tasksService.createTask(listId, mainTaskData);
     const mainTaskId = mainTaskResponse.id;
     createdTaskIds.push(mainTaskId);
 
@@ -135,7 +135,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: sourceTaskName,
       description: sourceTaskDescription
     };
-    const sourceTaskResponse = await tasksService.create_task(listId, sourceTaskData);
+    const sourceTaskResponse = await tasksService.createTask(listId, sourceTaskData);
     const sourceTaskId = sourceTaskResponse.id;
 
     console.log(`Tasks created for delete test`);
@@ -145,10 +145,10 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       source_task_ids: [sourceTaskId]
     };
 
-    const mergeResponse = await tasksService.merge_tasks(mainTaskId, mergeData);
+    const mergeResponse = await tasksService.mergeTasks(mainTaskId, mergeData);
 
     try {
-      await tasksService.get_task(sourceTaskId);
+      await tasksService.getTask(sourceTaskId);
 
       throw new Error(`Source task ${sourceTaskId} should have been deleted but still exists`);
     } catch (error) {
@@ -157,7 +157,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
     }
 
 
-    const getResponse = await tasksService.get_task(mainTaskId);
+    const getResponse = await tasksService.getTask(mainTaskId);
     const expectedDescription = `${mainTaskDescription}\n\n${sourceTaskDescription}`;
     expect(getResponse).toHaveProperty('description', expectedDescription);
 
@@ -177,7 +177,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: mainTaskName,
       description: mainTaskDescription
     };
-    const mainTaskResponse = await tasksService.create_task(listId, mainTaskData);
+    const mainTaskResponse = await tasksService.createTask(listId, mainTaskData);
     const mainTaskId = mainTaskResponse.id;
     createdTaskIds.push(mainTaskId);
 
@@ -185,7 +185,7 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       name: sourceTaskName,
       description: sourceTaskDescription
     };
-    const sourceTaskResponse = await tasksService.create_task(listId, sourceTaskData);
+    const sourceTaskResponse = await tasksService.createTask(listId, sourceTaskData);
     const sourceTaskId = sourceTaskResponse.id;
 
     console.log(`Tasks created for single merge test`);
@@ -195,9 +195,9 @@ describe('TC-FP-004 - Verify that two or more related tasks can be merged into a
       source_task_ids: [sourceTaskId]
     };
 
-    const mergeResponse = await tasksService.merge_tasks(mainTaskId, mergeData);
+    const mergeResponse = await tasksService.mergeTasks(mainTaskId, mergeData);
 
-    const getResponse = await tasksService.get_task(mainTaskId);
+    const getResponse = await tasksService.getTask(mainTaskId);
 
     const validation = BaseSchemaValidator.validate(
       getResponse,

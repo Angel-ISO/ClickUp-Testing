@@ -17,7 +17,7 @@ taggedDescribe(
 
     it('Create Folder - Missing Name Field', async () => {
       try {
-        await foldersService.create_folder(getSpaceId(), {});
+        await foldersService.createFolder(getSpaceId(), {});
         fail('Expected request to fail with 400');
       } catch (error) {
         expect(error.response.status).toBe(400);
@@ -38,7 +38,7 @@ taggedDescribe(
 
     it('Create Folder - Empty Body', async () => {
       try {
-        await foldersService.create_folder(getSpaceId(), {});
+        await foldersService.createFolder(getSpaceId(), {});
         fail('Expected request to fail with 400');
       } catch (error) {
         expect(error.response.status).toBe(400);
@@ -57,7 +57,7 @@ taggedDescribe(
 
     it('Create Folder - Empty Name String', async () => {
       try {
-        await foldersService.create_folder(getSpaceId(), { name: '' });
+        await foldersService.createFolder(getSpaceId(), { name: '' });
         fail('Expected request to fail with 400');
       } catch (error) {
         expect(error.response.status).toBe(400);

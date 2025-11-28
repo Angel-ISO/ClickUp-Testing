@@ -19,7 +19,7 @@ taggedDescribe(
     afterEach(async () => {
       if (createdFolderId) {
         try {
-          await foldersService.delete_folder(createdFolderId);
+          await foldersService.deleteFolder(createdFolderId);
           console.log(`Folder deleted: ${createdFolderId}`);
         } catch (error) {
           console.warn('Cleanup failed:', error.message);
@@ -32,7 +32,7 @@ taggedDescribe(
       const uniqueFolderName = `Test Folder - ${Date.now()}`;
       const folderData = { name: uniqueFolderName };
 
-      const createResponse = await foldersService.create_folder(getSpaceId(), folderData);
+      const createResponse = await foldersService.createFolder(getSpaceId(), folderData);
       createdFolderId = createResponse.id;
 
       console.log(`Folder created: ${uniqueFolderName} (ID: ${createdFolderId})`);
@@ -41,7 +41,7 @@ taggedDescribe(
       expect(createResponse).toHaveProperty('name');
       expect(createResponse.name).toBe(uniqueFolderName);
 
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
 
       const validation = BaseSchemaValidator.validate(
         foldersResponse,

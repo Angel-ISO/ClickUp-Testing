@@ -20,16 +20,16 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
     await setupClickUpEnvironment();
     
     // Get Folder ID
-    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    const foldersResponse = await foldersService.getFolders(getSpaceId());
     folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await listsService.get_lists(folderId);
+    const listResponse = await listsService.getLists(folderId);
     listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     if (createdTaskId) {
-      await tasksService.delete_task(createdTaskId);
+      await tasksService.deleteTask(createdTaskId);
       console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
@@ -43,7 +43,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
       priority: 2 // High priority
     };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     originalTaskData = createResponse;
 
@@ -75,7 +75,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
       priority: 1 
     };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     const originalStatus = createResponse.status.status;
 
@@ -84,7 +84,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
     const newDescription = `Updated description - ${Date.now()}`;
     const updateData = { description: newDescription };
 
-    const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+    const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
     const updateValidation = BaseSchemaValidator.validate(
       updateResponse,
@@ -101,7 +101,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
     expect(updateResponse.priority).toHaveProperty('id', taskData.priority.toString());
 
     console.log(`Description successfully updated to: "${newDescription}"`);
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
     const getValidation = BaseSchemaValidator.validate(
       getResponse,
@@ -130,7 +130,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
       priority: 1
     };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     const originalName = createResponse.name;
 
@@ -144,7 +144,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
       priority: newPriority
     };
 
-    const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+    const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
     const updateValidation = BaseSchemaValidator.validate(
       updateResponse,
@@ -165,7 +165,7 @@ describe('TC-FN-005 - Verify that a user can update specific task fields without
     console.log(`Multiple fields updated - Description: "${newDescription}", Priority: ${newPriority}`);
 
     // Verify via GET request
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
     // Final verification
     expect(getResponse).toHaveProperty('id', createdTaskId);

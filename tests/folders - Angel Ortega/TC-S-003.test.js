@@ -17,7 +17,7 @@ taggedDescribe(
 
         it('Create Folder - No Auth Token', async () => {
             try {
-                await foldersService.create_folder_with_custom_auth(getSpaceId(), {
+                await foldersService.createFolderWithCustomAuth(getSpaceId(), {
                     name: 'Test Folder'
                 }, null);
                 fail('Expected request to fail with 401');
@@ -43,7 +43,7 @@ taggedDescribe(
 
         it('Create Folder - Invalid Token', async () => {
             try {
-                await foldersService.create_folder_with_custom_auth(getSpaceId(), {
+                await foldersService.createFolderWithCustomAuth(getSpaceId(), {
                     name: 'Test Folder'
                 }, 'Bearer invalid_token_12345_this_is_not_real');
                 fail('Expected request to fail with 401');
@@ -62,7 +62,7 @@ taggedDescribe(
 
         it('Get Folders - No Auth Token', async () => {
             try {
-                await foldersService.get_folders_with_custom_auth(getSpaceId(), null);
+                await foldersService.getFoldersWithCustomAuth(getSpaceId(), null);
                 fail('Expected request to fail with 401');
             } catch (error) {
                 expect(error.response.status).toBe(401);
@@ -79,7 +79,7 @@ taggedDescribe(
 
         it('Update Folder - No Auth Token', async () => {
             try {
-                await foldersService.update_folder_with_custom_auth('901314763847', {
+                await foldersService.updateFolderWithCustomAuth('901314763847', {
                     name: 'Updated Name'
                 }, null);
                 fail('Expected request to fail with 401');

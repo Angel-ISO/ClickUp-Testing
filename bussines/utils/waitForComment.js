@@ -10,7 +10,7 @@ export async function waitForComment({
   const start = Date.now();
 
   while (Date.now() - start < timeout) {
-    const response = await service.get_comments(taskId);
+    const response = await service.getComments(taskId);
     const comment = response?.comments?.find(c => c.id == commentId);
 
     if (shouldExist) {
@@ -51,7 +51,7 @@ export async function waitForReply({
 
   while (Date.now() - start < timeout) {
     try {
-      const response = await service.get_comments_reply(parentCommentId);
+      const response = await service.getCommentsReply(parentCommentId);
       const reply = response?.comments?.find(c => c.id == replyId);
 
       if (shouldExist) {
@@ -87,7 +87,7 @@ export async function waitForChatComment({
   
   while (Date.now() - start < timeout) {
     try {
-      const response = await service.get_comments_chatView(viewId);
+      const response = await service.getCommentsChatView(viewId);
       const comment = response?.comments?.find(c => c.id == commentId);
       
       if (shouldExist && comment) return comment;

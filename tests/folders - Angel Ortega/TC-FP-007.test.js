@@ -20,7 +20,7 @@ taggedDescribe(
         afterEach(async () => {
             if (createdFolderId) {
                 try {
-                    await foldersService.delete_folder(createdFolderId);
+                    await foldersService.deleteFolder(createdFolderId);
                     console.log(`Folder deleted: ${createdFolderId}`);
                 } catch (error) {
                     console.warn('Cleanup failed:', error.message);
@@ -33,14 +33,14 @@ taggedDescribe(
             const originalName = `Original Folder - ${Date.now()}`;
             const updatedName = `Updated Folder - ${Date.now()}`;
 
-            const createResponse = await foldersService.create_folder(getSpaceId(), {
+            const createResponse = await foldersService.createFolder(getSpaceId(), {
                 name: originalName
             });
             createdFolderId = createResponse.id;
 
             console.log(`Folder created: ${originalName} (ID: ${createdFolderId})`);
 
-            const updateResponse = await foldersService.update_folder(createdFolderId, {
+            const updateResponse = await foldersService.updateFolder(createdFolderId, {
                 name: updatedName
             });
 

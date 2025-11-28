@@ -22,7 +22,7 @@ describe("ClickUp Comments API - Test001", () => {
   afterAll(async () => {
     if (commentId) {
       Logger.info('Cleaning up: Deleting test comment', { commentId });
-      await commentsService.delete_comments(commentId)
+      await commentsService.deleteComments(commentId)
       Logger.info('Comment deleted successfully', { commentId });
     }
   });
@@ -38,7 +38,7 @@ describe("ClickUp Comments API - Test001", () => {
       commentText: body.comment_text
     });
 
-    const createdComment = await commentsService.create_comments(
+    const createdComment = await commentsService.createComments(
       testResources.taskId,
       body
     );
@@ -59,7 +59,7 @@ describe("ClickUp Comments API - Test001", () => {
     });
 
     Logger.info('Fetching comments list', { taskId: testResources.taskId });
-    const commentsResponse = await commentsService.get_comments(
+    const commentsResponse = await commentsService.getComments(
       testResources.taskId
     );
 

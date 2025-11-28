@@ -24,20 +24,20 @@ taggedDescribe(
         it('Delete Folder - Valid Folder ID', async () => {
             const uniqueFolderName = `Delete Test Folder - ${Date.now()}`;
 
-            const createResponse = await foldersService.create_folder(getSpaceId(), {
+            const createResponse = await foldersService.createFolder(getSpaceId(), {
                 name: uniqueFolderName
             });
             createdFolderId = createResponse.id;
 
             console.log(`Folder created for deletion test: ${uniqueFolderName} (ID: ${createdFolderId})`);
 
-            const deleteResponse = await foldersService.delete_folder(createdFolderId);
+            const deleteResponse = await foldersService.deleteFolder(createdFolderId);
 
             expect(deleteResponse).toBeDefined();
 
             console.log(`Folder deleted successfully: ${createdFolderId}`);
 
-            const foldersResponse = await foldersService.get_folders(getSpaceId());
+            const foldersResponse = await foldersService.getFolders(getSpaceId());
 
             const validation = BaseSchemaValidator.validate(
                 foldersResponse,

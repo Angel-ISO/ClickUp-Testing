@@ -18,7 +18,7 @@ describe("ClickUp Comments API - Test004", () => {
       notify_all: false,
     };
 
-    const response = await commentsService.create_comments(
+    const response = await commentsService.createComments(
       testResources.taskId,
       body
     );
@@ -30,7 +30,7 @@ describe("ClickUp Comments API - Test004", () => {
   afterAll(async () => {
     if (commentId) {
       Logger.info('Cleaning up parent comment', { commentId });
-      await commentsService.delete_comments(commentId);
+      await commentsService.deleteComments(commentId);
     }
   });
 
@@ -40,7 +40,7 @@ describe("ClickUp Comments API - Test004", () => {
       notify_all: false,
     };
 
-    const reply = await commentsService.create_comments_reply(commentId, body);
+    const reply = await commentsService.createCommentsReply(commentId, body);
 
     replyId = reply.id;
 
@@ -67,7 +67,7 @@ describe("ClickUp Comments API - Test004", () => {
       expectedText: "reply comment text for testing"
     });
 
-    const response = await commentsService.get_comments_reply(commentId);
+    const response = await commentsService.getCommentsReply(commentId);
     const validation = BaseSchemaValidator.validate(
       response,
       schemas.getThreadSchema,

@@ -16,7 +16,7 @@ describe("ClickUp Comments API - Test002", () => {
             notify_all: false,
         };
 
-        const response = await commentsService.create_comments(
+        const response = await commentsService.createComments(
             testResources.taskId,
             body
         );
@@ -28,7 +28,7 @@ describe("ClickUp Comments API - Test002", () => {
     afterAll(async () => {
         if (commentId) {
             Logger.info('Cleaning up: Deleting test comment', { commentId });
-            await commentsService.delete_comments(commentId)
+            await commentsService.deleteComments(commentId)
             Logger.info('Comment deleted successfully', { commentId });
         }
     });
@@ -40,7 +40,7 @@ describe("ClickUp Comments API - Test002", () => {
         };
 
         Logger.info('Updating comment', { commentId, updateData });
-        const updateResponse = await commentsService.update_comments(
+        const updateResponse = await commentsService.updateComments(
             commentId,
             updateData
         );
@@ -56,7 +56,7 @@ describe("ClickUp Comments API - Test002", () => {
             commentId,
             expectedText: "Updated comment text for testing"
         });
-        const commentsResponse = await commentsService.get_comments(
+        const commentsResponse = await commentsService.getComments(
             testResources.taskId
         );
 

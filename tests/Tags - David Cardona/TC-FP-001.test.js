@@ -17,7 +17,7 @@ describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
   afterEach(async () => {
     for (const tagName of createdTagNames) {
       try {
-        await tagsService.delete_tag(getSpaceId(), tagName);
+        await tagsService.deleteTag(getSpaceId(), tagName);
         Logger.info('Tag cleaned up successfully', { tagName });
       } catch (error) {
         Logger.warn('Cleanup failed for tag', { 
@@ -43,7 +43,7 @@ describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
       spaceId: getSpaceId()
     });
 
-    const response = await tagsService.create_tag(getSpaceId(), tagData);
+    const response = await tagsService.createTag(getSpaceId(), tagData);
 
     expect(response).toBeDefined();
     expect(typeof response).toBe('object');
@@ -78,14 +78,14 @@ describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
       tagName: tagData.tag.name 
     });
 
-    await tagsService.create_tag(getSpaceId(), tagData);
+    await tagsService.createTag(getSpaceId(), tagData);
     createdTagNames.push(tagData.tag.name);
 
     Logger.info('Retrieving all tags to verify creation', { 
       spaceId: getSpaceId() 
     });
 
-    const response = await tagsService.get_tags(getSpaceId());
+    const response = await tagsService.getTags(getSpaceId());
 
     expect(response).toHaveProperty('tags');
     expect(Array.isArray(response.tags)).toBe(true);
@@ -132,12 +132,12 @@ describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
       tagName: tagData.tag.name 
     });
 
-    await tagsService.create_tag(getSpaceId(), tagData);
+    await tagsService.createTag(getSpaceId(), tagData);
     createdTagNames.push(tagData.tag.name);
 
     Logger.info('Deleting tag', { tagName: tagData.tag.name });
 
-    const deleteResponse = await tagsService.delete_tag(
+    const deleteResponse = await tagsService.deleteTag(
       getSpaceId(), 
       tagData.tag.name
     );
@@ -159,7 +159,7 @@ describe('TC-FP-001 - Verify successful creation of a new Space Tag', () => {
 
     Logger.info('Verifying tag was deleted', { tagName: tagData.tag.name });
 
-    const getResponse = await tagsService.get_tags(getSpaceId());
+    const getResponse = await tagsService.getTags(getSpaceId());
 
     const normalizedTagName = tagData.tag.name.toLowerCase().trim();
     const tagExists = getResponse.tags.some(

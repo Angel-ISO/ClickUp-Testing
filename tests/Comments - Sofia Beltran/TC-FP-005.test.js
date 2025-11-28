@@ -22,7 +22,7 @@ describe("ClickUp Comments API - Test005", () => {
     if (chatCommentId) {
       try {
         Logger.info('Cleaning up chat comment', { chatCommentId });
-        await commentsService.delete_comments(chatCommentId);
+        await commentsService.deleteComments(chatCommentId);
       } catch (error) {
         Logger.warn('Failed to clean up chat comment', { 
           chatCommentId, 
@@ -38,7 +38,7 @@ describe("ClickUp Comments API - Test005", () => {
       notify_all: false
     };
 
-    const response = await commentsService.create_comments_chatView(viewId, body);
+    const response = await commentsService.createCommentsChatView(viewId, body);
     expect(response).toBeDefined();
     chatCommentId = response.id || response.data?.id;
     Logger.info('Chat comment created successfully', { 
@@ -66,7 +66,7 @@ describe("ClickUp Comments API - Test005", () => {
       shouldExist: true,
     });
 
-    const commentsResponse = await commentsService.get_comments_chatView(viewId);
+    const commentsResponse = await commentsService.getCommentsChatView(viewId);
     
     const validation = BaseSchemaValidator.validate(
       commentsResponse,

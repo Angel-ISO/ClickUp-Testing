@@ -1,14 +1,14 @@
-import create_request_manager from '../../core/request_manager.js';
+import createRequestManager from '../../core/requestManager.js';
 
 class BaseApiService {
   constructor() {
-    this.request_manager = create_request_manager();
+    this.requestManager = createRequestManager();
   }
 
-  async make_request(method, endpoint, data = null) {
-    const result = await this.request_manager[method.toLowerCase()](endpoint, data);
+  async makeRequest(method, endpoint, data = null) {
+    const result = await this.requestManager[method.toLowerCase()](endpoint, data);
 
-    if (result.is_ok()) {
+    if (result.isOk()) {
       return result.value;
     } else {
       // If there's an axios error attached, throw it to preserve status and response data
@@ -20,10 +20,10 @@ class BaseApiService {
   }
 
   // Method to make requests with custom authentication (for security testing)
-  async make_request_with_custom_auth(method, endpoint, data = null, customToken = null) {
-    const result = await this.request_manager.request_with_custom_auth(method.toLowerCase(), endpoint, data, customToken);
+  async makeRequestWithCustomAuth(method, endpoint, data = null, customToken = null) {
+    const result = await this.requestManager.requestWithCustomAuth(method.toLowerCase(), endpoint, data, customToken);
 
-    if (result.is_ok()) {
+    if (result.isOk()) {
       return result.value;
     } else {
       if (result.axiosError) {

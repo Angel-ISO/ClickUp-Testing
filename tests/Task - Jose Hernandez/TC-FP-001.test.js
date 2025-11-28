@@ -20,16 +20,16 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
     await setupClickUpEnvironment();
     
     // Get Folder ID
-    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    const foldersResponse = await foldersService.getFolders(getSpaceId());
     folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await listsService.get_lists(folderId);
+    const listResponse = await listsService.getLists(folderId);
     listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     if (createdTaskId) {
-      await tasksService.delete_task(createdTaskId);
+      await tasksService.deleteTask(createdTaskId);
       console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
@@ -39,7 +39,7 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
     const uniqueTaskName = `Task Test - Valid Data - ${Date.now()}`;
     const taskData = { name: uniqueTaskName };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
 
     console.log(`Task created: ${uniqueTaskName} (ID: ${createdTaskId})`);
@@ -71,12 +71,12 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
     const uniqueTaskName = `Task Test - Verify - ${Date.now()}`;
     const taskData = { name: uniqueTaskName };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
 
     console.log(`Task created for verification: ${uniqueTaskName} (ID: ${createdTaskId})`);
 
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
     // Schema validation
     const validation = BaseSchemaValidator.validate(

@@ -28,7 +28,7 @@ describe('TC-FN-004 - Verify error handling when tag name is missing', () => {
     let errorResponse;
 
     try {
-      await tagsService.create_tag(getSpaceId(), invalidTagData);
+      await tagsService.createTag(getSpaceId(), invalidTagData);
       expect(true).toBe(false);
     } catch (error) {
       errorResponse = error.response;
@@ -68,7 +68,7 @@ describe('TC-FN-004 - Verify error handling when tag name is missing', () => {
       spaceId: getSpaceId() 
     });
     
-    const response = await tagsService.get_tags(getSpaceId());
+    const response = await tagsService.getTags(getSpaceId());
 
     expect(response).toHaveProperty('tags');
     expect(Array.isArray(response.tags)).toBe(true);

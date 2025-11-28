@@ -20,7 +20,7 @@ taggedDescribe(
         afterEach(async () => {
             for (const folderId of createdFolderIds) {
                 try {
-                    await foldersService.delete_folder(folderId);
+                    await foldersService.deleteFolder(folderId);
                     console.log(`Cleaned up folder: ${folderId}`);
                 } catch (error) {
                     console.warn(`Cleanup failed for ${folderId}:`, error.message);
@@ -33,7 +33,7 @@ taggedDescribe(
             const folderName = 'Test@#$%^&*()Folder';
 
             try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
+                const response = await foldersService.createFolder(getSpaceId(), { name: folderName });
 
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
@@ -65,7 +65,7 @@ taggedDescribe(
             const folderName = 'Test Folder 🚀📁✨';
 
             try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
+                const response = await foldersService.createFolder(getSpaceId(), { name: folderName });
 
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
@@ -97,7 +97,7 @@ taggedDescribe(
             const folderName = 'Carpeta Tëst 测试 フォルダ';
 
             try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
+                const response = await foldersService.createFolder(getSpaceId(), { name: folderName });
 
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');

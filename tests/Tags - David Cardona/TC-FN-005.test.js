@@ -8,7 +8,7 @@ import { setupClickUpEnvironment } from '../setup.test.js';
 const tagsService = new TagsApiService();
 
 describe('TC-FP-004 - Verify error handling with invalid Space ID', () => {
-  const INVALID_SPACE_ID = 'ab193081hcbag';
+  const INVALIDSPACEID = 'ab193081hcbag';
 
   beforeAll(async () => {
     await setupClickUpEnvironment();
@@ -24,7 +24,7 @@ describe('TC-FP-004 - Verify error handling with invalid Space ID', () => {
     };
 
     Logger.info('create tag with invalid space ID', { 
-      invalidSpaceId: INVALID_SPACE_ID,
+      invalidSpaceId: INVALIDSPACEID,
       tagName: tagData.tag.name
     });
 
@@ -32,7 +32,7 @@ describe('TC-FP-004 - Verify error handling with invalid Space ID', () => {
     let statusCode;
 
     try {
-      await tagsService.create_tag(INVALID_SPACE_ID, tagData);
+      await tagsService.createTag(INVALIDSPACEID, tagData);
       throw new Error('Expected request to fail but it succeeded');
     } catch (error) {
       statusCode = error.response?.status;

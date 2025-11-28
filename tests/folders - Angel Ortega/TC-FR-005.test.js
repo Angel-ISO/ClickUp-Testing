@@ -21,7 +21,7 @@ taggedDescribe(
         afterEach(async () => {
             for (const folderId of createdFolderIds) {
                 try {
-                    await foldersService.delete_folder(folderId);
+                    await foldersService.deleteFolder(folderId);
                     console.log(`Cleaned up folder: ${folderId}`);
                 } catch (error) {
                     console.warn(`Cleanup failed for ${folderId}:`, error.message);
@@ -32,7 +32,7 @@ taggedDescribe(
         });
 
         it('Create Folder - First Instance', async () => {
-            const response = await foldersService.create_folder(getSpaceId(), {
+            const response = await foldersService.createFolder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
 
@@ -51,13 +51,13 @@ taggedDescribe(
         });
 
         it('Create Folder - Duplicate Name (Second Instance)', async () => {
-            const firstResponse = await foldersService.create_folder(getSpaceId(), {
+            const firstResponse = await foldersService.createFolder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
             createdFolderIds.push(firstResponse.id);
 
             try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
+                const secondResponse = await foldersService.createFolder(getSpaceId(), {
                     name: 'Duplicate Test Folder'
                 });
 
@@ -76,14 +76,14 @@ taggedDescribe(
         });
 
         it('Get Folders - Verify Consistency', async () => {
-            const firstResponse = await foldersService.create_folder(getSpaceId(), {
+            const firstResponse = await foldersService.createFolder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
             createdFolderIds.push(firstResponse.id);
 
             let secondCreated = false;
             try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
+                const secondResponse = await foldersService.createFolder(getSpaceId(), {
                     name: 'Duplicate Test Folder'
                 });
                 createdFolderIds.push(secondResponse.id);
@@ -92,7 +92,7 @@ taggedDescribe(
                 secondCreated = false;
             }
 
-            const foldersResponse = await foldersService.get_folders(getSpaceId());
+            const foldersResponse = await foldersService.getFolders(getSpaceId());
             expect(foldersResponse).toHaveProperty('folders');
             expect(Array.isArray(foldersResponse.folders)).toBe(true);
 
@@ -108,14 +108,14 @@ taggedDescribe(
         });
 
         it('Create Folder - Third Instance (Reliability Check)', async () => {
-            const firstResponse = await foldersService.create_folder(getSpaceId(), {
+            const firstResponse = await foldersService.createFolder(getSpaceId(), {
                 name: 'Duplicate Test Folder'
             });
             createdFolderIds.push(firstResponse.id);
 
             let secondSucceeded = false;
             try {
-                const secondResponse = await foldersService.create_folder(getSpaceId(), {
+                const secondResponse = await foldersService.createFolder(getSpaceId(), {
                     name: 'Duplicate Test Folder'
                 });
                 createdFolderIds.push(secondResponse.id);
@@ -125,7 +125,7 @@ taggedDescribe(
             }
 
             try {
-                const thirdResponse = await foldersService.create_folder(getSpaceId(), {
+                const thirdResponse = await foldersService.createFolder(getSpaceId(), {
                     name: 'Duplicate Test Folder'
                 });
 

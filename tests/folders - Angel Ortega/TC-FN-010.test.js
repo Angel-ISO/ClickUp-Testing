@@ -18,7 +18,7 @@ taggedDescribe(
         });
 
         beforeEach(async () => {
-            const createResponse = await foldersService.create_folder(getSpaceId(), {
+            const createResponse = await foldersService.createFolder(getSpaceId(), {
                 name: `Test Folder - ${Date.now()}`
             });
             createdFolderId = createResponse.id;
@@ -28,7 +28,7 @@ taggedDescribe(
         afterEach(async () => {
             if (createdFolderId) {
                 try {
-                    await foldersService.delete_folder(createdFolderId);
+                    await foldersService.deleteFolder(createdFolderId);
                     console.log(`Folder deleted: ${createdFolderId}`);
                 } catch (error) {
                     console.warn('Cleanup failed:', error.message);
@@ -39,7 +39,7 @@ taggedDescribe(
 
         it('Update Folder - Missing Name Field', async () => {
             try {
-                const response = await foldersService.update_folder(createdFolderId, {});
+                const response = await foldersService.updateFolder(createdFolderId, {});
 
                 expect(response).toHaveProperty('id');
                 expect(response.id).toBe(createdFolderId);
@@ -63,7 +63,7 @@ taggedDescribe(
             const invalidFolderId = 'invalid-id-format';
 
             try {
-                await foldersService.update_folder(invalidFolderId, {
+                await foldersService.updateFolder(invalidFolderId, {
                     name: 'Updated Name'
                 });
                 fail('Expected request to fail with invalid folder ID');
@@ -86,7 +86,7 @@ taggedDescribe(
             const longName = 'A'.repeat(1000);
 
             try {
-                const response = await foldersService.update_folder(createdFolderId, {
+                const response = await foldersService.updateFolder(createdFolderId, {
                     name: longName
                 });
 

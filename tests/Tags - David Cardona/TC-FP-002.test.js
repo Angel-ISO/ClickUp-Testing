@@ -18,7 +18,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
   afterEach(async () => {
     for (const tagName of createdTagNames) {
       try {
-        await tagsService.delete_tag(getSpaceId(), tagName);
+        await tagsService.deleteTag(getSpaceId(), tagName);
         Logger.info('Tag cleaned up successfully', { tagName });
       } catch (error) {
         Logger.warn('Cleanup failed for tag', { 
@@ -45,7 +45,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       spaceId: getSpaceId()
     });
 
-    const response = await tagsService.create_tag(getSpaceId(), tagData);
+    const response = await tagsService.createTag(getSpaceId(), tagData);
 
     expect(response).toBeDefined();
     expect(typeof response).toBe('object');
@@ -82,7 +82,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       }
     };
 
-    await tagsService.create_tag(getSpaceId(), tagData);
+    await tagsService.createTag(getSpaceId(), tagData);
     originalTagName = tagData.tag.name;
     createdTagNames.push(tagData.tag.name);
 
@@ -90,7 +90,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       spaceId: getSpaceId() 
     });
 
-    const response = await tagsService.get_tags(getSpaceId());
+    const response = await tagsService.getTags(getSpaceId());
 
     expect(response).toHaveProperty('tags');
     expect(Array.isArray(response.tags)).toBe(true);
@@ -132,7 +132,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       }
     };
 
-    await tagsService.create_tag(getSpaceId(), initialTagData);
+    await tagsService.createTag(getSpaceId(), initialTagData);
     originalTagName = initialTagData.tag.name;
     createdTagNames.push(initialTagData.tag.name);
 
@@ -152,7 +152,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       newBg: updatedTagData.tag.tag_bg
     });
 
-    const response = await tagsService.update_tag(
+    const response = await tagsService.updateTag(
       getSpaceId(), 
       originalTagName, 
       updatedTagData
@@ -188,7 +188,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       }
     };
 
-    await tagsService.create_tag(getSpaceId(), initialTagData);
+    await tagsService.createTag(getSpaceId(), initialTagData);
     originalTagName = initialTagData.tag.name;
     createdTagNames.push(initialTagData.tag.name);
 
@@ -200,7 +200,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       }
     };
 
-    await tagsService.update_tag(
+    await tagsService.updateTag(
       getSpaceId(), 
       originalTagName, 
       updatedTagData
@@ -211,7 +211,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       tagName: updatedTagData.tag.name
     });
 
-    const response = await tagsService.get_tags(getSpaceId());
+    const response = await tagsService.getTags(getSpaceId());
 
     expect(response).toHaveProperty('tags');
     expect(Array.isArray(response.tags)).toBe(true);
@@ -256,7 +256,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       }
     };
 
-    await tagsService.create_tag(getSpaceId(), tagData);
+    await tagsService.createTag(getSpaceId(), tagData);
     originalTagName = tagData.tag.name;
     createdTagNames.push(tagData.tag.name);
 
@@ -264,7 +264,7 @@ describe('TC-FP-002 - Verify successful update of an existing Space Tag', () => 
       tagName: tagData.tag.name 
     });
 
-    const deleteResponse = await tagsService.delete_tag(
+    const deleteResponse = await tagsService.deleteTag(
       getSpaceId(), 
       tagData.tag.name
     );

@@ -1,18 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class JSONReporter {
   constructor(globalConfig, options) {
-    this._globalConfig = globalConfig;
-    this._options = options || {};
+    this.globalConfig = globalConfig;
+    this.options = options || {};
   }
 
   onRunComplete(contexts, results) {
-    const outputPath = this._options.outputPath || 'reports/json/ClickUp-Testing.json';
+    const outputPath = this.options.outputPath || 'reports/json/ClickUp-Testing.json';
     const duration = Date.now() - results.startTime;
 
     const dir = path.dirname(outputPath);

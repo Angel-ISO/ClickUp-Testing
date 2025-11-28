@@ -2,35 +2,35 @@ import BaseApiService from './baseApiService.js';
 
 class TasksApiService extends BaseApiService {
 
-  async get_tasks(list_id) {
-    return this.make_request('GET', `/list/${list_id}/task`);
+  async getTasks(listId) {
+    return this.makeRequest('GET', `/list/${listId}/task`);
   }
 
 
-  async create_task(list_id, task_data) {
-    return this.make_request('POST', `/list/${list_id}/task`, task_data);
+  async createTask(listId, taskData) {
+    return this.makeRequest('POST', `/list/${listId}/task`, taskData);
   }
 
-  async get_task(task_id) {
-    return this.make_request('GET', `/task/${task_id}`);
-  }
-
-
-  async update_task(task_id, task_data) {
-    return this.make_request('PUT', `/task/${task_id}`, task_data);
+  async getTask(taskId) {
+    return this.makeRequest('GET', `/task/${taskId}`);
   }
 
 
-  async delete_task(task_id) {
-    return this.make_request('DELETE', `/task/${task_id}`);
+  async updateTask(taskId, taskData) {
+    return this.makeRequest('PUT', `/task/${taskId}`, taskData);
   }
 
-  async merge_tasks(task_id, task_data){
-    return this.make_request('POST', `/task/${task_id}/merge`, task_data);
+
+  async deleteTask(taskId) {
+    return this.makeRequest('DELETE', `/task/${taskId}`);
   }
 
-   async get_tasks_by_space(space_id) {
-    return this.make_request('GET', `/space/${space_id}/task`);
+  async mergeTasks(taskId, taskData){
+    return this.makeRequest('POST', `/task/${taskId}/merge`, taskData);
+  }
+
+   async getTasksBySpace(spaceId) {
+    return this.makeRequest('GET', `/space/${spaceId}/task`);
   }
 }
 

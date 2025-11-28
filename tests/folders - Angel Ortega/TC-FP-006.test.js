@@ -20,7 +20,7 @@ taggedDescribe(
         afterEach(async () => {
             if (createdFolderId) {
                 try {
-                    await foldersService.delete_folder(createdFolderId);
+                    await foldersService.deleteFolder(createdFolderId);
                     console.log(`Folder deleted: ${createdFolderId}`);
                 } catch (error) {
                     console.warn('Cleanup failed:', error.message);
@@ -31,14 +31,14 @@ taggedDescribe(
 
         it('Get Folder by ID - Valid Folder', async () => {
             const uniqueFolderName = `Get Test Folder - ${Date.now()}`;
-            const createResponse = await foldersService.create_folder(getSpaceId(), {
+            const createResponse = await foldersService.createFolder(getSpaceId(), {
                 name: uniqueFolderName
             });
             createdFolderId = createResponse.id;
 
             console.log(`Folder created for retrieval test: ${uniqueFolderName} (ID: ${createdFolderId})`);
 
-            const getResponse = await foldersService.get_folder(createdFolderId);
+            const getResponse = await foldersService.getFolder(createdFolderId);
 
             expect(getResponse).toHaveProperty('id');
             expect(getResponse).toHaveProperty('name');

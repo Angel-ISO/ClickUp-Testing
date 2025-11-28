@@ -19,7 +19,7 @@ taggedDescribe(
             const nonExistentFolderId = '999999999999999';
 
             try {
-                await foldersService.get_folder(nonExistentFolderId);
+                await foldersService.getFolder(nonExistentFolderId);
                 fail('Expected request to fail with 404');
             } catch (error) {
                 expect(error.response.status).toBe(401);
@@ -43,7 +43,7 @@ taggedDescribe(
             const nonExistentFolderId = '999999999999999';
 
             try {
-                await foldersService.update_folder(nonExistentFolderId, {
+                await foldersService.updateFolder(nonExistentFolderId, {
                     name: 'Updated Name'
                 });
                 fail('Expected request to fail with 404');
@@ -66,7 +66,7 @@ taggedDescribe(
             const nonExistentFolderId = '999999999999999';
 
             try {
-                await foldersService.delete_folder(nonExistentFolderId);
+                await foldersService.deleteFolder(nonExistentFolderId);
                 fail('Expected request to fail with 404');
             } catch (error) {
                 expect(error.response.status).toBe(401);

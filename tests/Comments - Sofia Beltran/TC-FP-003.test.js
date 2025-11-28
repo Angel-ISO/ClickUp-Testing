@@ -16,7 +16,7 @@ describe("ClickUp Comments API - Test003", () => {
             notify_all: false,
         };
 
-        const response = await commentsService.create_comments(
+        const response = await commentsService.createComments(
             testResources.taskId,
             body
         );
@@ -28,7 +28,7 @@ describe("ClickUp Comments API - Test003", () => {
     test("Should delete comment correctly", async () => {
         Logger.info('Deleting comment', { commentId });
 
-        const deleteResponse = await commentsService.delete_comments(commentId);
+        const deleteResponse = await commentsService.deleteComments(commentId);
         expect(deleteResponse).toBeDefined();
 
         Logger.info('Comment deleted successfully', { commentId });
@@ -42,7 +42,7 @@ describe("ClickUp Comments API - Test003", () => {
             shouldExist: false,
         });
 
-        const commentsResponse = await commentsService.get_comments(
+        const commentsResponse = await commentsService.getComments(
             testResources.taskId
         );
 
