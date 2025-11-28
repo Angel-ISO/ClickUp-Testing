@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="62" failures="0" errors="0" time="77.728">
+  <testsuite name="ClickUp Comments API - Test004" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="34.719" tests="2">
+    <testcase classname="ClickUp Comments API - Test004 Should create a thread reply comment correctly" name="ClickUp Comments API - Test004 Should create a thread reply comment correctly" time="0.67">
+    </testcase>
+    <testcase classname="ClickUp Comments API - Test004 Should validate replies list schema and confirm reply exists" name="ClickUp Comments API - Test004 Should validate replies list schema and confirm reply exists" time="0.828">
+    </testcase>
+  </testsuite>
+  <testsuite name="ClickUp Comments API - Test002" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="35.559" tests="2">
+    <testcase classname="ClickUp Comments API - Test002 Should update comment correctly" name="ClickUp Comments API - Test002 Should update comment correctly" time="0.457">
+    </testcase>
+    <testcase classname="ClickUp Comments API - Test002 Should validate comment (Update) list schema and check comment existence" name="ClickUp Comments API - Test002 Should validate comment (Update) list schema and check comment existence" time="1.517">
+    </testcase>
+  </testsuite>
+  <testsuite name="ClickUp Comments API - Test005" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="35.906" tests="2">
+    <testcase classname="ClickUp Comments API - Test005 Should create a chat view comment and validate schema" name="ClickUp Comments API - Test005 Should create a chat view comment and validate schema" time="0.949">
+    </testcase>
+    <testcase classname="ClickUp Comments API - Test005 Should return valid schema and contain the comment" name="ClickUp Comments API - Test005 Should return valid schema and contain the comment" time="1.682">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="36.671" tests="3">
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Special Characters" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Special Characters" time="1.854">
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Emojis" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Emojis" time="1.117">
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Unicode Characters" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Unicode Characters" time="1.742">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="39.672" tests="3">
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Create Task with Multiple Fields for Partial Update Test" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Create Task with Multiple Fields for Partial Update Test" time="1.824">
+    </testcase>
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Only Description Field" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Only Description Field" time="2.436">
+    </testcase>
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Multiple Specific Fields" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Multiple Specific Fields" time="2.541">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="40.454" tests="4">
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - First Instance" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - First Instance" time="2.805">
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Duplicate Name (Second Instance)" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Duplicate Name (Second Instance)" time="1.651">
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Get Folders - Verify Consistency" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Get Folders - Verify Consistency" time="2.361">
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Third Instance (Reliability Check)" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Third Instance (Reliability Check)" time="1.764">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-001 - Verify that a user can create a task with valid data" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:35" time="8.904" tests="2">
+    <testcase classname="TC-FP-001 - Verify that a user can create a task with valid data Create Task - Valid Data" name="TC-FP-001 - Verify that a user can create a task with valid data Create Task - Valid Data" time="1.469">
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify that a user can create a task with valid data Get Task - Verify Creation" name="TC-FP-001 - Verify that a user can create a task with valid data Get Task - Verify Creation" time="2.193">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="45.803" tests="3">
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Combine Three Tasks into One" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Combine Three Tasks into One" time="4.468">
+    </testcase>
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Verify Source Tasks Are Deleted" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Verify Source Tasks Are Deleted" time="4.065">
+    </testcase>
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Single Source Task Combination" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Single Source Task Combination" time="3.431">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-003 - Verify that a user can update the status of an existing task" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:33" time="12.227" tests="3">
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Create Task - Initial Status" name="TC-FP-003 - Verify that a user can update the status of an existing task Create Task - Initial Status" time="1.36">
+    </testcase>
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Update Task Status and Verify - Valid Status Change" name="TC-FP-003 - Verify that a user can update the status of an existing task Update Task Status and Verify - Valid Status Change" time="2.633">
+    </testcase>
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Update Task - Multiple Fields Including Status and Verify" name="TC-FP-003 - Verify that a user can update the status of an existing task Update Task - Multiple Fields Including Status and Verify" time="3.383">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:34" time="12.7" tests="3">
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Missing Name Field" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Missing Name Field" time="2.417">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Invalid Folder ID Format" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Invalid Folder ID Format" time="2.289">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Extremely Long Name" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Extremely Long Name" time="1.863">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-002–Verify that a user cannot create a task with invalid data" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:34" time="13.457" tests="6">
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Valid Data" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Valid Data" time="2.474">
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Empty Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Empty Name)" time="0.921">
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Null Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Null Name)" time="0.484">
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Missing Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Missing Name)" time="0.46">
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Very Long Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Very Long Name)" time="1.134">
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Get Task - Verify Creation" name="TC-FN-002–Verify that a user cannot create a task with invalid data Get Task - Verify Creation" time="1.765">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:48" time="15.457" tests="3">
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Get Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Get Folder - Non-existent Folder ID" time="0.413">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Update Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Update Folder - Non-existent Folder ID" time="0.3">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Delete Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Delete Folder - Non-existent Folder ID" time="0.235">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:47" time="15.87" tests="4">
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - No Auth Token" time="0.341">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - Invalid Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - Invalid Token" time="0.158">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Get Folders - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Get Folders - No Auth Token" time="0.164">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Update Folder - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Update Folder - No Auth Token" time="0.162">
+    </testcase>
+  </testsuite>
+  <testsuite name="ClickUp Comments API - Test003" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:46" time="19.125" tests="2">
+    <testcase classname="ClickUp Comments API - Test003 Should delete comment correctly" name="ClickUp Comments API - Test003 Should delete comment correctly" time="0.487">
+    </testcase>
+    <testcase classname="ClickUp Comments API - Test003 Should validate comment (Delete) list schema and check comment absence" name="ClickUp Comments API - Test003 Should validate comment (Delete) list schema and check comment absence" time="1.775">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:39" time="25.972" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully Update Folder - Valid Name Change" name="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully Update Folder - Valid Name Change" time="1.592">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:44" time="20.989" tests="1">
+    <testcase classname="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space Create and verify folder" name="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space Create and verify folder" time="3.044">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-001 - Verify successful creation of a new Space Tag" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:44" time="20.734" tests="3">
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Create Tag - Valid Data" name="TC-FP-001 - Verify successful creation of a new Space Tag Create Tag - Valid Data" time="1.124">
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Get Tags - Verify Creation" name="TC-FP-001 - Verify successful creation of a new Space Tag Get Tags - Verify Creation" time="0.775">
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Delete Tag - Verify Deletion" name="TC-FP-001 - Verify successful creation of a new Space Tag Delete Tag - Verify Deletion" time="0.765">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-002 - Verify successful update of an existing Space Tag" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:38:38" time="28.875" tests="5">
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Create Tag - Initial Tag for Update Test" name="TC-FP-002 - Verify successful update of an existing Space Tag Create Tag - Initial Tag for Update Test" time="1.122">
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Initial Tag Creation" name="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Initial Tag Creation" time="0.839">
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Update Tag - Change Tag Colors" name="TC-FP-002 - Verify successful update of an existing Space Tag Update Tag - Change Tag Colors" time="0.948">
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Tag Update" name="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Tag Update" time="1.187">
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Delete Tag - Cleanup After Update Test" name="TC-FP-002 - Verify successful update of an existing Space Tag Delete Tag - Cleanup After Update Test" time="0.565">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-004 - Verify error handling with invalid Space ID" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="6.848" tests="1">
+    <testcase classname="TC-FP-004 - Verify error handling with invalid Space ID Create Tag with Invalid Space ID - Should Return 400 Error" name="TC-FP-004 - Verify error handling with invalid Space ID Create Tag with Invalid Space ID - Should Return 400 Error" time="0.37">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="7.234" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID Get Folder by ID - Valid Folder" name="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID Get Folder by ID - Valid Folder" time="1.943">
+    </testcase>
+  </testsuite>
+  <testsuite name="ClickUp Comments API - Test001" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="7.615" tests="2">
+    <testcase classname="ClickUp Comments API - Test001 Should create a comment" name="ClickUp Comments API - Test001 Should create a comment" time="0.481">
+    </testcase>
+    <testcase classname="ClickUp Comments API - Test001 Should validate comment list schema and check comment existence" name="ClickUp Comments API - Test001 Should validate comment list schema and check comment existence" time="1.146">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-004 - Verify error handling when tag name is missing" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="7.496" tests="2">
+    <testcase classname="TC-FN-004 - Verify error handling when tag name is missing POST - Missing Name should return error 400" name="TC-FN-004 - Verify error handling when tag name is missing POST - Missing Name should return error 400" time="0.541">
+    </testcase>
+    <testcase classname="TC-FN-004 - Verify error handling when tag name is missing GET - Verify tag with missing name was NOT created" name="TC-FN-004 - Verify error handling when tag name is missing GET - Verify tag with missing name was NOT created" time="0.295">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="7.931" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully Delete Folder - Valid Folder ID" name="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully Delete Folder - Valid Folder ID" time="1.931">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:39:05" time="7.812" tests="3">
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Missing Name Field" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Missing Name Field" time="0.434">
+    </testcase>
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" time="0.319">
+    </testcase>
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" time="0.231">
+    </testcase>
+  </testsuite>
+</testsuites>
