@@ -1,4 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
+<testsuites name="jest tests" tests="66" failures="0" errors="0" time="15.911">
+  <testsuite name="TC-FP-002 - Verify successful update of an existing Space Tag" errors="0" failures="0" skipped="5" timestamp="2025-11-29T19:21:58" time="1.47" tests="5">
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Create Tag - Initial Tag for Update Test" name="TC-FP-002 - Verify successful update of an existing Space Tag Create Tag - Initial Tag for Update Test" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Initial Tag Creation" name="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Initial Tag Creation" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Update Tag - Change Tag Colors" name="TC-FP-002 - Verify successful update of an existing Space Tag Update Tag - Change Tag Colors" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Tag Update" name="TC-FP-002 - Verify successful update of an existing Space Tag Get Tags - Verify Tag Update" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-002 - Verify successful update of an existing Space Tag Delete Tag - Cleanup After Update Test" name="TC-FP-002 - Verify successful update of an existing Space Tag Delete Tag - Cleanup After Update Test" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-004 - Verify error handling when tag name is missing" errors="0" failures="0" skipped="2" timestamp="2025-11-29T19:21:58" time="1.461" tests="2">
+    <testcase classname="TC-FN-004 - Verify error handling when tag name is missing POST - Missing Name should return error 400" name="TC-FN-004 - Verify error handling when tag name is missing POST - Missing Name should return error 400" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-004 - Verify error handling when tag name is missing GET - Verify tag with missing name was NOT created" name="TC-FN-004 - Verify error handling when tag name is missing GET - Verify tag with missing name was NOT created" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-001 - Verify successful creation of a new Space Tag" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:21:58" time="1.485" tests="3">
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Create Tag - Valid Data" name="TC-FP-001 - Verify successful creation of a new Space Tag Create Tag - Valid Data" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Get Tags - Verify Creation" name="TC-FP-001 - Verify successful creation of a new Space Tag Get Tags - Verify Creation" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify successful creation of a new Space Tag Delete Tag - Verify Deletion" name="TC-FP-001 - Verify successful creation of a new Space Tag Delete Tag - Verify Deletion" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-004 - Verify error handling with invalid Space ID" errors="0" failures="0" skipped="1" timestamp="2025-11-29T19:21:58" time="1.519" tests="1">
+    <testcase classname="TC-FP-004 - Verify error handling with invalid Space ID Create Tag with Invalid Space ID - Should Return 400 Error" name="TC-FP-004 - Verify error handling with invalid Space ID Create Tag with Invalid Space ID - Should Return 400 Error" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:comments ClickUp Comments API - Test007 (Large Comment Stress)" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:59" time="6.717" tests="1">
+    <testcase classname="@funcionalidad:comments ClickUp Comments API - Test007 (Large Comment Stress) Should create and retrieve a very large comment" name="@funcionalidad:comments ClickUp Comments API - Test007 (Large Comment Stress) Should create and retrieve a very large comment" time="1.422">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:comments ClickUp Comments API - Test004" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:58" time="8.398" tests="2">
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test004 Should create a thread reply comment correctly" name="@smoke @funcionalidad:comments ClickUp Comments API - Test004 Should create a thread reply comment correctly" time="0.446">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test004 Should validate replies list schema and confirm reply exists" name="@smoke @funcionalidad:comments ClickUp Comments API - Test004 Should validate replies list schema and confirm reply exists" time="0.984">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:comments ClickUp Comments API - Test005" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:59" time="7.568" tests="2">
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test005 Should create a chat view comment and validate schema" name="@smoke @funcionalidad:comments ClickUp Comments API - Test005 Should create a chat view comment and validate schema" time="1.342">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test005 Should return valid schema and contain the comment" name="@smoke @funcionalidad:comments ClickUp Comments API - Test005 Should return valid schema and contain the comment" time="1.024">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:comments ClickUp Comments API - Test Case 1: Unicode &amp; Emojis" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:59" time="7.641" tests="2">
+    <testcase classname="@funcionalidad:comments ClickUp Comments API - Test Case 1: Unicode &amp; Emojis Should create a comment with emojis and Unicode complex" name="@funcionalidad:comments ClickUp Comments API - Test Case 1: Unicode &amp; Emojis Should create a comment with emojis and Unicode complex" time="0.749">
+    </testcase>
+    <testcase classname="@funcionalidad:comments ClickUp Comments API - Test Case 1: Unicode &amp; Emojis Should validate comment list schema and verify comment existence" name="@funcionalidad:comments ClickUp Comments API - Test Case 1: Unicode &amp; Emojis Should validate comment list schema and verify comment existence" time="0.406">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.131" tests="3">
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Create Task with Multiple Fields for Partial Update Test" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Create Task with Multiple Fields for Partial Update Test" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Only Description Field" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Only Description Field" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Multiple Specific Fields" name="TC-FN-005 - Verify that a user can update specific task fields without affecting other data Partial Update - Update Multiple Specific Fields" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.133" tests="3">
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Combine Three Tasks into One" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Combine Three Tasks into One" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Verify Source Tasks Are Deleted" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Verify Source Tasks Are Deleted" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Single Source Task Combination" name="TC-FP-004 - Verify that two or more related tasks can be merged into a single task Merge Tasks - Single Source Task Combination" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:comments @negativos ClickUp Comments API - Test008 (Partial Update)" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:59" time="7.839" tests="1">
+    <testcase classname="@funcionalidad:comments @negativos ClickUp Comments API - Test008 (Partial Update) Should update only the comment_text field using a partial body" name="@funcionalidad:comments @negativos ClickUp Comments API - Test008 (Partial Update) Should update only the comment_text field using a partial body" time="2.09">
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-003 - Verify that a user can update the status of an existing task" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.133" tests="3">
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Create Task - Initial Status" name="TC-FP-003 - Verify that a user can update the status of an existing task Create Task - Initial Status" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Update Task Status and Verify - Valid Status Change" name="TC-FP-003 - Verify that a user can update the status of an existing task Update Task Status and Verify - Valid Status Change" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-003 - Verify that a user can update the status of an existing task Update Task - Multiple Fields Including Status and Verify" name="TC-FP-003 - Verify that a user can update the status of an existing task Update Task - Multiple Fields Including Status and Verify" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FN-002–Verify that a user cannot create a task with invalid data" errors="0" failures="0" skipped="6" timestamp="2025-11-29T19:22:07" time="0.13" tests="6">
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Valid Data" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Valid Data" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Empty Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Empty Name)" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Null Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Null Name)" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Missing Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Missing Name)" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Very Long Name)" name="TC-FN-002–Verify that a user cannot create a task with invalid data Create Task - Invalid Data (Very Long Name)" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FN-002–Verify that a user cannot create a task with invalid data Get Task - Verify Creation" name="TC-FN-002–Verify that a user cannot create a task with invalid data Get Task - Verify Creation" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token" errors="0" failures="0" skipped="4" timestamp="2025-11-29T19:22:07" time="0.112" tests="4">
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - No Auth Token" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - Invalid Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Create Folder - Invalid Token" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Get Folders - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Get Folders - No Auth Token" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Update Folder - No Auth Token" name="@smoke @funcionalidad:folders TC-S-003 - Verify that folder creation endpoint requires valid authentication token Update Folder - No Auth Token" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="TC-FP-001 - Verify that a user can create a task with valid data" errors="0" failures="0" skipped="2" timestamp="2025-11-29T19:22:07" time="0.127" tests="2">
+    <testcase classname="TC-FP-001 - Verify that a user can create a task with valid data Create Task - Valid Data" name="TC-FP-001 - Verify that a user can create a task with valid data Create Task - Valid Data" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="TC-FP-001 - Verify that a user can create a task with valid data Get Task - Verify Creation" name="TC-FP-001 - Verify that a user can create a task with valid data Get Task - Verify Creation" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior" errors="0" failures="0" skipped="4" timestamp="2025-11-29T19:22:07" time="0.097" tests="4">
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - First Instance" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - First Instance" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Duplicate Name (Second Instance)" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Duplicate Name (Second Instance)" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Get Folders - Verify Consistency" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Get Folders - Verify Consistency" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Third Instance (Reliability Check)" name="@funcionalidad:folders TC-FR-005 - Verify that creating a folder with duplicate name produces consistent behavior Create Folder - Third Instance (Reliability Check)" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully" errors="0" failures="0" skipped="1" timestamp="2025-11-29T19:22:07" time="0.089" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully Delete Folder - Valid Folder ID" name="@smoke @funcionalidad:folders TC-FP-008 - Verify that user can delete a folder successfully Delete Folder - Valid Folder ID" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully" errors="0" failures="0" skipped="1" timestamp="2025-11-29T19:22:07" time="0.12" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully Update Folder - Valid Name Change" name="@smoke @funcionalidad:folders TC-FP-007 - Verify that user can update folder name successfully Update Folder - Valid Name Change" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID" errors="0" failures="0" skipped="1" timestamp="2025-11-29T19:22:07" time="0.107" tests="1">
+    <testcase classname="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID Get Folder by ID - Valid Folder" name="@smoke @funcionalidad:folders TC-FP-006 - Verify that user can retrieve a specific folder by ID Get Folder by ID - Valid Folder" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space" errors="0" failures="0" skipped="1" timestamp="2025-11-29T19:22:07" time="0.15" tests="1">
+    <testcase classname="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space Create and verify folder" name="@funcionalidad:folders TC-FP-001 - Verify that user can create a folder with valid name in existing space Create and verify folder" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.125" tests="3">
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Missing Name Field" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Missing Name Field" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Invalid Folder ID Format" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Invalid Folder ID Format" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Extremely Long Name" name="@smoke @funcionalidad:folders @negativos TC-FN-010 - Verify that system handles invalid folder update data appropriately Update Folder - Extremely Long Name" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.116" tests="3">
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Get Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Get Folder - Non-existent Folder ID" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Update Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Update Folder - Non-existent Folder ID" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Delete Folder - Non-existent Folder ID" name="@smoke @funcionalidad:folders @negativos TC-FN-009 - Verify that system returns error when trying to get non-existent folder Delete Folder - Non-existent Folder ID" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.084" tests="3">
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Missing Name Field" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Missing Name Field" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name" errors="0" failures="0" skipped="3" timestamp="2025-11-29T19:22:07" time="0.127" tests="3">
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Special Characters" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Special Characters" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Emojis" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Emojis" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Unicode Characters" name="@funcionalidad:folders TC-FF-004 - Validate that system properly handles special characters in folder name Create Folder - Unicode Characters" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:comments ClickUp Comments API - Test002" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:58" time="10.016" tests="2">
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test002 Should update comment correctly" name="@smoke @funcionalidad:comments ClickUp Comments API - Test002 Should update comment correctly" time="0.65">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test002 Should validate comment (Update) list schema and check comment existence" name="@smoke @funcionalidad:comments ClickUp Comments API - Test002 Should validate comment (Update) list schema and check comment existence" time="0.971">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:comments @negativos ClickUp Comments API - Test009 (Duplicate Comment Creation / Idempotency)" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:21:58" time="10.443" tests="1">
+    <testcase classname="@funcionalidad:comments @negativos ClickUp Comments API - Test009 (Duplicate Comment Creation / Idempotency) Should create two identical comments but with different IDs" name="@funcionalidad:comments @negativos ClickUp Comments API - Test009 (Duplicate Comment Creation / Idempotency) Should create two identical comments but with different IDs" time="2.414">
+    </testcase>
+  </testsuite>
+  <testsuite name="@funcionalidad:comments @negativos ClickUp Comments API - Test009" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:22:06" time="6.219" tests="1">
+    <testcase classname="@funcionalidad:comments @negativos ClickUp Comments API - Test009 Should create comment with markdown/html formatting" name="@funcionalidad:comments @negativos ClickUp Comments API - Test009 Should create comment with markdown/html formatting" time="1.409">
+    </testcase>
+  </testsuite>
+  <testsuite name="@smoke @funcionalidad:comments ClickUp Comments API - Test001" errors="0" failures="0" skipped="0" timestamp="2025-11-29T19:22:06" time="7.21" tests="2">
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test001 Should create a comment" name="@smoke @funcionalidad:comments ClickUp Comments API - Test001 Should create a comment" time="0.407">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:comments ClickUp Comments API - Test001 Should validate comment list schema and check comment existence" name="@smoke @funcionalidad:comments ClickUp Comments API - Test001 Should validate comment list schema and check comment existence" time="0.833">
+=======
 <testsuites name="jest tests" tests="62" failures="0" errors="0" time="77.728">
   <testsuite name="ClickUp Comments API - Test004" errors="0" failures="0" skipped="0" timestamp="2025-11-26T05:37:58" time="34.719" tests="2">
     <testcase classname="ClickUp Comments API - Test004 Should create a thread reply comment correctly" name="ClickUp Comments API - Test004 Should create a thread reply comment correctly" time="0.67">
@@ -170,6 +411,7 @@
     <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Body" time="0.319">
     </testcase>
     <testcase classname="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" name="@funcionalidad:folders @negativos TC-FN-002 - Verify that system returns 400 error when folder name field is missing Create Folder - Empty Name String" time="0.231">
+>>>>>>> origin
     </testcase>
   </testsuite>
 </testsuites>

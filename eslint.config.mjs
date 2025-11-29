@@ -29,7 +29,7 @@ export default [
       "no-useless-escape": "error",
       "id-match": [
         "error",
-        "^[a-zA-Z][a-zA-Z0-9]*$",
+        "^([a-z][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]*|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$",
         {
           properties: false,
           classFields: false,
@@ -66,7 +66,17 @@ export default [
     rules: {
       "no-unused-vars": "warn",
       "no-undef": "off", 
-      "no-empty": "off", 
+      "no-empty": "off",
+      "id-match": [
+        "error",
+        "^([a-z][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]*|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$",
+        {
+          properties: false,
+          classFields: false,
+          ignoreDestructuring: false,
+          onlyDeclarations: true
+        }
+      ],
     },
   },
 ];

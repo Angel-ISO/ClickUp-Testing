@@ -249,7 +249,6 @@ const getThreadSchema = {
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
 const postChatCommentSchema = deepClone(postThreadSchema);
 
-// ajusta la operación a los valores esperados para chat (c/u/d)
 if (postChatCommentSchema.properties && postChatCommentSchema.properties.version) {
   postChatCommentSchema.properties.version.properties = {
     ...postChatCommentSchema.properties.version.properties,

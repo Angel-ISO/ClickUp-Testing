@@ -9,6 +9,13 @@ class ListsApiService extends BaseApiService {
   async create_list_in_space(space_id, list_data) {
     return this.make_request('POST', `/space/${space_id}/list`, list_data);
   }
+
+  async delete_list(list_id){
+    return this.make_request('DELETE', `/list/${list_id}`);
+  }
+
 }
 
-export default ListsApiService;
+export default new ListsApiService();
+
+export { ListsApiService };

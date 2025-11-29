@@ -1,11 +1,14 @@
 import Logger from '../../core/logger.js';
 import schemas from '../../bussines/schemaValidators/commentSchemas.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
-import commentsService from '../../bussines/apiServices/commentsApiService.js';
+import commentService from '../../bussines/apiServices/commentsApiService.js';
 import { waitForReply } from '../../bussines/utils/waitForComment.js';
-require("dotenv").config();
+import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import 'dotenv/config';
 
-describe("ClickUp Comments API - Test004", () => {
+taggedDescribe(
+  buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.COMMENTS }),
+  "ClickUp Comments API - Test004", () => {
   let commentId;
   let replyId;
   let testResources;
@@ -18,7 +21,7 @@ describe("ClickUp Comments API - Test004", () => {
       notify_all: false,
     };
 
-    const response = await commentsService.create_comments(
+    const response = await commentService.create_comments(
       testResources.taskId,
       body
     );
@@ -30,17 +33,17 @@ describe("ClickUp Comments API - Test004", () => {
   afterAll(async () => {
     if (commentId) {
       Logger.info('Cleaning up parent comment', { commentId });
-      await commentsService.delete_comments(commentId);
+      await commentService.delete_comments(commentId);
     }
   });
 
-  test("Should create a thread reply comment correctly", async () => {
+  it("Should create a thread reply comment correctly", async () => {
     const body = {
       comment_text: "reply comment text for testing",
       notify_all: false,
     };
 
-    const reply = await commentsService.create_comments_reply(commentId, body);
+    const reply = await commentService.create_comments_reply(commentId, body);
 
     replyId = reply.id;
 
@@ -59,15 +62,15 @@ describe("ClickUp Comments API - Test004", () => {
   });
 
 
-  test("Should validate replies list schema and confirm reply exists", async () => {
+  it("Should validate replies list schema and confirm reply exists", async () => {
     await waitForReply({
-      service: commentsService,
+      service: commentService,
       parentCommentId: commentId,
       replyId: replyId,
       expectedText: "reply comment text for testing"
     });
 
-    const response = await commentsService.get_comments_reply(commentId);
+    const response = await commentService.get_comments_reply(commentId);
     const validation = BaseSchemaValidator.validate(
       response,
       schemas.getThreadSchema,

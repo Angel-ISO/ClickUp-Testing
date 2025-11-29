@@ -25,6 +25,7 @@ const create_http_client = (base_url, token) => {
       }
 
       const response = await client.request(config);
+
       return result.ok(response.data);
     } catch (err) {
       const errorMessage = err.response?.data?.err || err.message || 'Request failed';
