@@ -4,6 +4,7 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import result from '../../core/result.js';
 
 
 taggedDescribe(
@@ -26,24 +27,25 @@ taggedDescribe(
 
         afterEach(async () => {
             if (createdFolderId) {
-                try {
-                    await foldersService.delete_folder(createdFolderId);
-                    console.log(`Folder deleted: ${createdFolderId}`);
-                } catch (error) {
-                    console.warn('Cleanup failed:', error.message);
-                }
+                const deleteResult = await foldersService.delete_folder_result(createdFolderId);
+                result.fold(
+                    deleteResult,
+                    (error) => console.warn('Cleanup failed:', error),
+                    (value) => console.log(`Folder deleted: ${createdFolderId}`)
+                );
                 createdFolderId = null;
             }
         });
 
         it('Update Folder - Missing Name Field', async () => {
-            try {
-                const response = await foldersService.update_folder(createdFolderId, {});
-
+            const updateResult = await foldersService.update_folder_result(createdFolderId, {});
+            if (updateResult.is_ok()) {
+                const response = updateResult.value;
                 expect(response).toHaveProperty('id');
                 expect(response.id).toBe(createdFolderId);
                 console.log('API allows update with empty body (no changes made)');
-            } catch (error) {
+            } else {
+                const error = updateResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
 
@@ -61,38 +63,37 @@ taggedDescribe(
         it('Update Folder - Invalid Folder ID Format', async () => {
             const invalidFolderId = 'invalid-id-format';
 
-            try {
-                await foldersService.update_folder(invalidFolderId, {
-                    name: 'Updated Name'
-                });
-                fail('Expected request to fail with invalid folder ID');
-            } catch (error) {
-                expect(error.response.status).toBe(400);
-                expect(error.response.data).toHaveProperty('err');
+            const updateResult = await foldersService.update_folder_result(invalidFolderId, {
+                name: 'Updated Name'
+            });
+            expect(updateResult.is_error()).toBe(true);
+            const error = updateResult.axiosError;
+            expect(error.response.status).toBe(400);
+            expect(error.response.data).toHaveProperty('err');
 
-                const validation = BaseSchemaValidator.validate(
-                    error.response.data,
-                    folderSchemas.errorResponseSchema,
-                    'Error Response'
-                );
-                expect(validation.isValid).toBe(true);
+            const validation = BaseSchemaValidator.validate(
+                error.response.data,
+                folderSchemas.errorResponseSchema,
+                'Error Response'
+            );
+            expect(validation.isValid).toBe(true);
 
-                console.log('Correctly rejected invalid folder ID format');
-            }
+            console.log('Correctly rejected invalid folder ID format');
         });
 
         it('Update Folder - Extremely Long Name', async () => {
             const longName = 'A'.repeat(1000);
 
-            try {
-                const response = await foldersService.update_folder(createdFolderId, {
-                    name: longName
-                });
-
+            const updateResult = await foldersService.update_folder_result(createdFolderId, {
+                name: longName
+            });
+            if (updateResult.is_ok()) {
+                const response = updateResult.value;
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
                 console.log(`API allows long names (${response.name.length} chars)`);
-            } catch (error) {
+            } else {
+                const error = updateResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
 

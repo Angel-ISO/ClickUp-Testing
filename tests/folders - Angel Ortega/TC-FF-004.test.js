@@ -4,6 +4,7 @@ import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValid
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import result from '../../core/result.js';
 
 taggedDescribe(
     buildTags({ funcionalidad: FUNCIONALIDADES.FOLDERS }),
@@ -17,12 +18,12 @@ taggedDescribe(
 
         afterEach(async () => {
             for (const folderId of createdFolderIds) {
-                try {
-                    await foldersService.delete_folder(folderId);
-                    console.log(`Cleaned up folder: ${folderId}`);
-                } catch (error) {
-                    console.warn(`Cleanup failed for ${folderId}:`, error.message);
-                }
+                const deleteResult = await foldersService.delete_folder_result(folderId);
+                result.fold(
+                    deleteResult,
+                    (error) => console.warn(`Cleanup failed for ${folderId}:`, error),
+                    (value) => console.log(`Cleaned up folder: ${folderId}`)
+                );
             }
             createdFolderIds.length = 0;
         });
@@ -30,9 +31,9 @@ taggedDescribe(
         it('Create Folder - Special Characters', async () => {
             const folderName = 'Test@#$%^&*()Folder';
 
-            try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
-
+            const createResult = await foldersService.create_folder_result(getSpaceId(), { name: folderName });
+            if (createResult.is_ok()) {
+                const response = createResult.value;
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
                 expect(response.name).toContain('@');
@@ -46,7 +47,8 @@ taggedDescribe(
                 expect(validation.isValid).toBe(true);
 
                 createdFolderIds.push(response.id);
-            } catch (error) {
+            } else {
+                const error = createResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
 
@@ -62,9 +64,9 @@ taggedDescribe(
         it('Create Folder - Emojis', async () => {
             const folderName = 'Test Folder 🚀📁✨';
 
-            try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
-
+            const createResult = await foldersService.create_folder_result(getSpaceId(), { name: folderName });
+            if (createResult.is_ok()) {
+                const response = createResult.value;
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
                 expect(response.name).toContain('🚀');
@@ -78,7 +80,8 @@ taggedDescribe(
                 expect(validation.isValid).toBe(true);
 
                 createdFolderIds.push(response.id);
-            } catch (error) {
+            } else {
+                const error = createResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
 
@@ -94,9 +97,9 @@ taggedDescribe(
         it('Create Folder - Unicode Characters', async () => {
             const folderName = 'Carpeta Tëst 测试 フォルダ';
 
-            try {
-                const response = await foldersService.create_folder(getSpaceId(), { name: folderName });
-
+            const createResult = await foldersService.create_folder_result(getSpaceId(), { name: folderName });
+            if (createResult.is_ok()) {
+                const response = createResult.value;
                 expect(response).toHaveProperty('id');
                 expect(response).toHaveProperty('name');
                 expect(response.name).toContain('测');
@@ -110,7 +113,8 @@ taggedDescribe(
                 expect(validation.isValid).toBe(true);
 
                 createdFolderIds.push(response.id);
-            } catch (error) {
+            } else {
+                const error = createResult.axiosError;
                 expect(error.response.status).toBe(400);
                 expect(error.response.data).toHaveProperty('err');
 

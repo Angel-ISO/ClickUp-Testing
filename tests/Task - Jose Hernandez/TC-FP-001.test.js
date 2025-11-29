@@ -5,8 +5,12 @@ import tasksService from "../../bussines/apiServices/tasksApiService.js";
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import taskSchemas from '../../bussines/schemaValidators/taskSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
+import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 
-describe('TC-FP-001 - Verify that a user can create a task with valid data', () => {
+taggedDescribe(
+  buildTags({ funcionalidad: FUNCIONALIDADES.TASKS }),
+  'TC-FP-001 - Verify that a user can create a task with valid data',
+  () => {
   let folderId;
   let listId;
   let createdTaskId;
@@ -87,4 +91,4 @@ describe('TC-FP-001 - Verify that a user can create a task with valid data', () 
     expect(getResponse).toHaveProperty('status');
     expect(getResponse.status).toHaveProperty('status');
   });
-});
+}, 20000);

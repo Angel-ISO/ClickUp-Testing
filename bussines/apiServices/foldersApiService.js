@@ -21,7 +21,6 @@ class FoldersApiService extends BaseApiService {
     return this.make_request('DELETE', `/folder/${folder_id}`);
   }
 
-  // Method for testing with custom token (including no token or invalid token)
   async create_folder_with_custom_auth(space_id, folder_data, customToken = null) {
     return this.make_request_with_custom_auth('POST', `/space/${space_id}/folder`, folder_data, customToken);
   }
@@ -32,6 +31,39 @@ class FoldersApiService extends BaseApiService {
 
   async update_folder_with_custom_auth(folder_id, folder_data, customToken = null) {
     return this.make_request_with_custom_auth('PUT', `/folder/${folder_id}`, folder_data, customToken);
+  }
+
+  // Result monad methods - return Result directly without throwing
+  async get_folders_result(space_id) {
+    return this.make_request_result('GET', `/space/${space_id}/folder`);
+  }
+
+  async create_folder_result(space_id, folder_data) {
+    return this.make_request_result('POST', `/space/${space_id}/folder`, folder_data);
+  }
+
+  async get_folder_result(folder_id) {
+    return this.make_request_result('GET', `/folder/${folder_id}`);
+  }
+
+  async update_folder_result(folder_id, folder_data) {
+    return this.make_request_result('PUT', `/folder/${folder_id}`, folder_data);
+  }
+
+  async delete_folder_result(folder_id) {
+    return this.make_request_result('DELETE', `/folder/${folder_id}`);
+  }
+
+  async create_folder_with_custom_auth_result(space_id, folder_data, customToken = null) {
+    return this.make_request_with_custom_auth_result('POST', `/space/${space_id}/folder`, folder_data, customToken);
+  }
+
+  async get_folders_with_custom_auth_result(space_id, customToken = null) {
+    return this.make_request_with_custom_auth_result('GET', `/space/${space_id}/folder`, null, customToken);
+  }
+
+  async update_folder_with_custom_auth_result(folder_id, folder_data, customToken = null) {
+    return this.make_request_with_custom_auth_result('PUT', `/folder/${folder_id}`, folder_data, customToken);
   }
 }
 
