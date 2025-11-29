@@ -2,11 +2,11 @@ name: Continuous Testing
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Every hour at 0 minutes
-    - cron: '5 * * * *'   # Every hour at 5 minutes
-    - cron: '10 * * * *'  # Every hour at 10 minutes
-    - cron: '15 * * * *'  # Every hour at 15 minutes
-    - cron: '20 * * * *'  
+    - cron: '0 0 * * 0'   # Sunday 00:00 UTC
+    - cron: '0 6 * * 0'   # Sunday 06:00 UTC
+    - cron: '0 12 * * 0'  # Sunday 12:00 UTC
+    - cron: '0 18 * * 0'  # Sunday 18:00 UTC
+    - cron: '0 23 * * 0'  # Sunday 23:00 UTC
 
 jobs:
   test:
@@ -25,6 +25,9 @@ jobs:
     - uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: junit-reports-continuous
-        path: reports/junit/junit.xml
-    - run: npm test
+        name: test-reports-sunday
+        path: |
+          reports/junit/junit.xml
+          reports/html/
+          reports/json/
+    - run: npm run test:all-reports
