@@ -1,11 +1,14 @@
 import Logger from '../../core/logger.js';
 import schemas from '../../bussines/schemaValidators/commentSchemas.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
-import commentsService from '../../bussines/apiServices/commentsApiService.js';
+import commentService from '../../bussines/apiServices/commentsApiService.js';
 import {waitForComment} from '../../bussines/utils/waitForComment.js'
-require("dotenv").config();
+import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import 'dotenv/config';
 
-describe("ClickUp Comments API - Test002", () => {
+taggedDescribe(
+    buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.COMMENTS }),
+    "ClickUp Comments API - Test002", () => {
     let commentId;
     let testResources;
 
@@ -16,7 +19,7 @@ describe("ClickUp Comments API - Test002", () => {
             notify_all: false,
         };
 
-        const response = await commentsService.create_comments(
+        const response = await commentService.create_comments(
             testResources.taskId,
             body
         );
@@ -28,19 +31,19 @@ describe("ClickUp Comments API - Test002", () => {
     afterAll(async () => {
         if (commentId) {
             Logger.info('Cleaning up: Deleting test comment', { commentId });
-            await commentsService.delete_comments(commentId)
+            await commentService.delete_comments(commentId)
             Logger.info('Comment deleted successfully', { commentId });
         }
     });
 
-    test("Should update comment correctly", async () => {
+    it("Should update comment correctly", async () => {
         const updateData = {
             comment_text: "Updated comment text for testing",
             notify_all: false,
         };
 
         Logger.info('Updating comment', { commentId, updateData });
-        const updateResponse = await commentsService.update_comments(
+        const updateResponse = await commentService.update_comments(
             commentId,
             updateData
         );
@@ -49,14 +52,14 @@ describe("ClickUp Comments API - Test002", () => {
         Logger.info('Comment updated and verified successfully', { commentId });
     });
 
-    test("Should validate comment (Update) list schema and check comment existence", async () => {
+    it("Should validate comment (Update) list schema and check comment existence", async () => {
         await waitForComment({
-            service: commentsService,
+            service: commentService,
             taskId: testResources.taskId,
             commentId,
             expectedText: "Updated comment text for testing"
         });
-        const commentsResponse = await commentsService.get_comments(
+        const commentsResponse = await commentService.get_comments(
             testResources.taskId
         );
 

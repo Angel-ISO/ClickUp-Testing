@@ -34,4 +34,6 @@ class TasksApiService extends BaseApiService {
   }
 }
 
-export default TasksApiService;
+export default new TasksApiService();
+
+export { TasksApiService };

@@ -1,23 +1,6 @@
 import BaseApiService from "./baseApiService.js";
 
 class CommentsApiService extends BaseApiService {
-  static #instance = null;
-
-  constructor() {
-    if (CommentsApiService.#instance) {
-      return CommentsApiService.#instance;
-    }
-    super();
-    CommentsApiService.#instance = this;
-  }
-
-  static getInstance() {
-    if (!CommentsApiService.#instance) {
-      CommentsApiService.#instance = new CommentsApiService();
-    }
-    return CommentsApiService.#instance;
-  }
-
   async create_comments(task_id, comment_data) {
     return this.make_request('POST', `/task/${task_id}/comment`, comment_data);
   }
@@ -51,6 +34,6 @@ class CommentsApiService extends BaseApiService {
   }
 }
 
+export default new CommentsApiService();
 
-export default CommentsApiService.getInstance();
 export { CommentsApiService };

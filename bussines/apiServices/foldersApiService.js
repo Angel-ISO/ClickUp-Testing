@@ -1,11 +1,9 @@
 import BaseApiService from './baseApiService.js';
 
 class FoldersApiService extends BaseApiService {
-
   async get_folders(space_id) {
     return this.make_request('GET', `/space/${space_id}/folder`);
   }
-
 
   async create_folder(space_id, folder_data) {
     return this.make_request('POST', `/space/${space_id}/folder`, folder_data);
@@ -15,11 +13,9 @@ class FoldersApiService extends BaseApiService {
     return this.make_request('GET', `/folder/${folder_id}`);
   }
 
-
   async update_folder(folder_id, folder_data) {
     return this.make_request('PUT', `/folder/${folder_id}`, folder_data);
   }
-
 
   async delete_folder(folder_id) {
     return this.make_request('DELETE', `/folder/${folder_id}`);
@@ -39,4 +35,6 @@ class FoldersApiService extends BaseApiService {
   }
 }
 
-export default FoldersApiService;
+export default new FoldersApiService();
+
+export { FoldersApiService };

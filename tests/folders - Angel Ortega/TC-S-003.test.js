@@ -1,11 +1,10 @@
 import 'dotenv/config';
-import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
+import foldersService from '../../bussines/apiServices/foldersApiService.js';
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 
-const foldersService = new FoldersApiService();
 
 taggedDescribe(
     buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),

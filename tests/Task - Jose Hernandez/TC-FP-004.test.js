@@ -1,14 +1,10 @@
 import 'dotenv/config';
-import TasksApiService from '../../bussines/apiServices/tasksApiService.js';
-import FoldersApiService from '../../bussines/apiServices/foldersApiService.js';
-import ListsApiService from '../../bussines/apiServices/listsApiService.js';
+import foldersService from '../../bussines/apiServices/foldersApiService.js';
+import listsService from "../../bussines/apiServices/listsApiService.js";
+import tasksService from "../../bussines/apiServices/tasksApiService.js";
 import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
 import taskSchemas from '../../bussines/schemaValidators/taskSchemas.js';
 import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
-
-const tasksService = new TasksApiService();
-const foldersService = new FoldersApiService();
-const listsService = new ListsApiService();
 
 describe('TC-FP-004 - Verify that two or more related tasks can be merged into a single task', () => {
   let folderId;

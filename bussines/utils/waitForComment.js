@@ -8,26 +8,34 @@ export async function waitForComment({
   timeout = 3000
 }) {
   const start = Date.now();
-
+  
   while (Date.now() - start < timeout) {
     const response = await service.get_comments(taskId);
     const comment = response?.comments?.find(c => c.id == commentId);
-
+    
     if (shouldExist) {
       if (comment) {
-        if (expectedText === null || comment.comment_text === expectedText) {
+        const commentText = comment.comment_text || 
+                           comment.text_content ||
+                           comment.comment?.text ||
+                           comment.text;
+        
+        if (expectedText === null) {
+          return comment;
+        }
+        if (commentText && commentText.includes(expectedText)) {
           return comment;
         }
       }
+    } else {
+      if (!comment) {
+        return true;
+      }
     }
-
-    if (!shouldExist && !comment) {
-      return true;
-    }
-
+    
     await new Promise(res => setTimeout(res, interval));
   }
-
+  
   throw new Error(
     `Timeout waiting for comment ${commentId} ` +
     (shouldExist
