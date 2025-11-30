@@ -10,12 +10,23 @@ class ListsApiService extends BaseApiService {
     return this.make_request('POST', `/space/${space_id}/list`, list_data);
   }
 
-  async delete_list(list_id){
+  async delete_list(list_id) {
     return this.make_request('DELETE', `/list/${list_id}`);
   }
 
+  async create_list_in_space_result(space_id, list_data) {
+    return this.make_request_result('POST', `/space/${space_id}/list`, list_data);
+  }
+
+  async create_list_with_custom_auth_result(space_id, list_data, customToken) {
+    return this.make_request_with_custom_auth_result(
+      'POST',
+      `/space/${space_id}/list`,
+      list_data,
+      { Authorization: customToken }
+    );
+  }
 }
 
 export default new ListsApiService();
-
 export { ListsApiService };
