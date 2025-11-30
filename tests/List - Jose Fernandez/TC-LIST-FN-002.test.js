@@ -15,15 +15,15 @@ taggedDescribe(
     });
 
     it('TC-LIST-FN-002-01 - Invalid token', async () => {
-      const fakeToken = 'Bearer invalid_token_for_lab2_qa3';
+      const fakeToken = 'invalid_token_for_lab2_qa3';   
       const body = {
         name: `QA3 list invalid auth - ${Date.now()}`,
       };
 
       const result = await listsService.create_list_with_custom_auth_result(
+        fakeToken,   
         spaceId,
-        body,
-        fakeToken
+        body
       );
 
       expect(result.is_error()).toBe(true);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="1" errors="0" time="11.298">
-  <testsuite name="Setup" errors="0" failures="1" skipped="0" timestamp="2025-11-30T21:50:20" time="8.117" tests="2">
+<testsuites name="jest tests" tests="9" failures="1" errors="0" time="10.291">
+  <testsuite name="Setup" errors="0" failures="1" skipped="0" timestamp="2025-11-30T23:06:14" time="8.274" tests="2">
     <testcase classname="Setup should pass" name="Setup should pass" time="0.006">
     </testcase>
     <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" name="@funcionalidad:lists @negativos TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" time="0.001">
@@ -27,22 +27,22 @@
     at Object.worker (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-runner\build\testWorker.js:497:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T21:50:20" time="8.732" tests="3">
-    <testcase classname="Setup should pass" name="Setup should pass" time="0.006">
+  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T23:06:14" time="9.853" tests="4">
+    <testcase classname="Setup should pass" name="Setup should pass" time="0.007">
     </testcase>
-    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" time="0.443">
+    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" time="1.275">
     </testcase>
-    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" time="0.47">
+    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" time="0.001">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" time="0.821">
     </testcase>
   </testsuite>
-  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T21:50:20" time="10.912" tests="4">
+  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T23:06:14" time="9.905" tests="3">
     <testcase classname="Setup should pass" name="Setup should pass" time="0.006">
     </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" time="1.7">
+    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" time="0.759">
     </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" time="0.002">
-    </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" time="0.892">
+    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" time="0.407">
     </testcase>
   </testsuite>
 </testsuites>
