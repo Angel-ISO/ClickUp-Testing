@@ -1,36 +1,60 @@
-import BaseApiService from './baseApiService.js';
+import BaseApiService from "./baseApiService.js";
 
 class TasksApiService extends BaseApiService {
-
-  async get_tasks(list_id) {
-    return this.make_request('GET', `/list/${list_id}/task`);
+  async getTasks(listId) {
+    return this.makeRequest("GET", `/list/${listId}/task`);
   }
 
-
-  async create_task(list_id, task_data) {
-    return this.make_request('POST', `/list/${list_id}/task`, task_data);
+  async createTask(listId, taskData) {
+    return this.makeRequest("POST", `/list/${listId}/task`, taskData);
   }
 
-  async get_task(task_id) {
-    return this.make_request('GET', `/task/${task_id}`);
+  async getTask(taskId) {
+    return this.makeRequest("GET", `/task/${taskId}`);
   }
 
-
-  async update_task(task_id, task_data) {
-    return this.make_request('PUT', `/task/${task_id}`, task_data);
+  async updateTask(taskId, taskData) {
+    return this.makeRequest("PUT", `/task/${taskId}`, taskData);
   }
 
-
-  async delete_task(task_id) {
-    return this.make_request('DELETE', `/task/${task_id}`);
+  async deleteTask(taskId) {
+    return this.makeRequest("DELETE", `/task/${taskId}`);
   }
 
-  async merge_tasks(task_id, task_data){
-    return this.make_request('POST', `/task/${task_id}/merge`, task_data);
+  async mergeTasks(taskId, taskData) {
+    return this.makeRequest("POST", `/task/${taskId}/merge`, taskData);
   }
 
-   async get_tasks_by_space(space_id) {
-    return this.make_request('GET', `/space/${space_id}/task`);
+  async getTasksBySpace(spaceId) {
+    return this.makeRequest("GET", `/space/${spaceId}/task`);
+  }
+
+  async getTasksResult(listId) {
+    return this.makeRequestResult("GET", `/list/${listId}/task`);
+  }
+
+  async createTaskResult(listId, taskData) {
+    return this.makeRequestResult("POST", `/list/${listId}/task`, taskData);
+  }
+
+  async getTaskResult(taskId) {
+    return this.makeRequestResult("GET", `/task/${taskId}`);
+  }
+
+  async updateTaskResult(taskId, taskData) {
+    return this.makeRequestResult("PUT", `/task/${taskId}`, taskData);
+  }
+
+  async deleteTaskResult(taskId) {
+    return this.makeRequestResult("DELETE", `/task/${taskId}`);
+  }
+
+  async mergeTasksResult(taskId, taskData) {
+    return this.makeRequestResult("POST", `/task/${taskId}/merge`, taskData);
+  }
+
+  async getTasksBySpaceResult(spaceId) {
+    return this.makeRequestResult("GET", `/space/${spaceId}/task`);
   }
 }
 

@@ -19,16 +19,16 @@ taggedDescribe(
       await setupClickUpEnvironment();
       
       // Get Folder ID
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
       folderId = foldersResponse.folders[0].id;
       // Get List ID
-      const listResponse = await listsService.get_lists(folderId);
+      const listResponse = await listsService.getLists(folderId);
       listId = listResponse.lists[0].id;
 
       // Create a task to update
       const uniqueTaskName = `Smoke Test Task - ${Date.now()}`;
       const taskData = { name: uniqueTaskName };
-      const createResponse = await tasksService.create_task(listId, taskData);
+      const createResponse = await tasksService.createTask(listId, taskData);
       createdTaskId = createResponse.id;
       console.log(`Task created for smoke test: ${uniqueTaskName} (ID: ${createdTaskId})`);
     });
@@ -36,7 +36,7 @@ taggedDescribe(
     afterAll(async () => {
       if (createdTaskId) {
         try {
-          await tasksService.delete_task(createdTaskId);
+          await tasksService.deleteTask(createdTaskId);
           console.log(`Task deleted: ${createdTaskId}`);
         } catch (error) {
           console.log(`Error deleting task ${createdTaskId}:`, error.message);
@@ -47,7 +47,7 @@ taggedDescribe(
     it('Smoke - Update Task Name Successfully', async () => {
       const updatedTaskName = `Updated Smoke Task - ${Date.now()}`;
       
-      const updateResponse = await tasksService.update_task(createdTaskId, { name: updatedTaskName });
+      const updateResponse = await tasksService.updateTask(createdTaskId, { name: updatedTaskName });
 
       const validation = BaseSchemaValidator.validate(
         updateResponse,

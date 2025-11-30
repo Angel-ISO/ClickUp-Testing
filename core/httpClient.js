@@ -1,9 +1,9 @@
 import axios from 'axios';
 import result from './result.js';
 
-const create_http_client = (base_url, token) => {
+const createHttpClient = (baseUrl, token) => {
   const client = axios.create({
-    baseURL: base_url,
+    baseURL: baseUrl,
     headers: {
       'Authorization': `Bearer ${token}`,
     },
@@ -47,4 +47,4 @@ const create_http_client = (base_url, token) => {
   };
 };
 
-export default create_http_client;
+export default createHttpClient;

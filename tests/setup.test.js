@@ -1,4 +1,4 @@
-import create_request_manager from '../core/request_manager.js';
+import createRequestManager from '../core/requestManager.js';
 import Logger from '../core/logger.js';
 
 let globalSpaceId = null;
@@ -10,7 +10,7 @@ const setupClickUpEnvironment = async () => {
   }
 
   try {
-    const requestManager = create_request_manager();
+    const requestManager = createRequestManager();
     
     Logger.info('Obteniendo getting teams');
     const teamsResult = await requestManager.get('/team');

@@ -20,7 +20,7 @@ jobs:
         node-version: '18'
         cache: 'npm'
     - run: npm ci
-    - run: npm run lint || true
+    - run: npm run lint
     - run: npm run test:all-reports
     - uses: actions/upload-artifact@v4
       if: always()

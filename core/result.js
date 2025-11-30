@@ -2,24 +2,24 @@ const result = {
   ok: (value) => ({
     success: true,
     value,
-    is_ok: () => true,
-    is_error: () => false,
+    isOk: () => true,
+    isError: () => false,
   }),
 
-  error: (error_msg) => ({
+  error: (errorMsg) => ({
     success: false,
-    error: error_msg,
-    is_ok: () => false,
-    is_error: () => true,
+    error: errorMsg,
+    isOk: () => false,
+    isError: () => true,
   }),
 
-  map: (result_obj, fn) => result_obj.success ? result.ok(fn(result_obj.value)) : result_obj,
+  map: (resultObj, fn) => resultObj.success ? result.ok(fn(resultObj.value)) : resultObj,
 
-  chain: (result_obj, fn) => result_obj.success ? fn(result_obj.value) : result_obj,
+  chain: (resultObj, fn) => resultObj.success ? fn(resultObj.value) : resultObj,
 
-  get_or_else: (result_obj, default_value) => result_obj.success ? result_obj.value : default_value,
+  getOrElse: (resultObj, defaultValue) => resultObj.success ? resultObj.value : defaultValue,
 
-  fold: (result_obj, on_error, on_success) => result_obj.success ? on_success(result_obj.value) : on_error(result_obj.error),
+  fold: (resultObj, onError, onSuccess) => resultObj.success ? onSuccess(resultObj.value) : onError(resultObj.error),
 };
 
 module.exports = result;

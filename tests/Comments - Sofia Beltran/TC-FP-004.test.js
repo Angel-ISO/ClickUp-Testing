@@ -21,7 +21,7 @@ taggedDescribe(
       notify_all: false,
     };
 
-    const response = await commentService.create_comments(
+    const response = await commentService.createComments(
       testResources.taskId,
       body
     );
@@ -33,7 +33,7 @@ taggedDescribe(
   afterAll(async () => {
     if (commentId) {
       Logger.info('Cleaning up parent comment', { commentId });
-      await commentService.delete_comments(commentId);
+      await commentService.deleteComments(commentId);
     }
   });
 
@@ -43,7 +43,7 @@ taggedDescribe(
       notify_all: false,
     };
 
-    const reply = await commentService.create_comments_reply(commentId, body);
+    const reply = await commentService.createCommentsReply(commentId, body);
 
     replyId = reply.id;
 
@@ -70,7 +70,7 @@ taggedDescribe(
       expectedText: "reply comment text for testing"
     });
 
-    const response = await commentService.get_comments_reply(commentId);
+    const response = await commentService.getCommentsReply(commentId);
     const validation = BaseSchemaValidator.validate(
       response,
       schemas.getThreadSchema,

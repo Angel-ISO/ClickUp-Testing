@@ -5,16 +5,16 @@ describe('Result', () => {
     const r = result.ok('value');
     expect(r.success).toBe(true);
     expect(r.value).toBe('value');
-    expect(r.is_ok()).toBe(true);
-    expect(r.is_error()).toBe(false);
+    expect(r.isOk()).toBe(true);
+    expect(r.isError()).toBe(false);
   });
 
   it('error() creates an error result and is_error/is_ok behave', () => {
     const r = result.error('fail');
     expect(r.success).toBe(false);
     expect(r.error).toBe('fail');
-    expect(r.is_error()).toBe(true);
-    expect(r.is_ok()).toBe(false);
+    expect(r.isError()).toBe(true);
+    expect(r.isOk()).toBe(false);
   });
 
   it('map preserves errors and transforms ok values', () => {

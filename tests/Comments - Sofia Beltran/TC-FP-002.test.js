@@ -19,7 +19,7 @@ taggedDescribe(
             notify_all: false,
         };
 
-        const response = await commentService.create_comments(
+        const response = await commentService.createComments(
             testResources.taskId,
             body
         );
@@ -31,7 +31,7 @@ taggedDescribe(
     afterAll(async () => {
         if (commentId) {
             Logger.info('Cleaning up: Deleting test comment', { commentId });
-            await commentService.delete_comments(commentId)
+            await commentService.deleteComments(commentId)
             Logger.info('Comment deleted successfully', { commentId });
         }
     });
@@ -43,7 +43,7 @@ taggedDescribe(
         };
 
         Logger.info('Updating comment', { commentId, updateData });
-        const updateResponse = await commentService.update_comments(
+        const updateResponse = await commentService.updateComments(
             commentId,
             updateData
         );
@@ -59,7 +59,7 @@ taggedDescribe(
             commentId,
             expectedText: "Updated comment text for testing"
         });
-        const commentsResponse = await commentService.get_comments(
+        const commentsResponse = await commentService.getComments(
             testResources.taskId
         );
 

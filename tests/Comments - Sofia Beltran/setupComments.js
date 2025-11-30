@@ -33,7 +33,7 @@ async function createCommentsTestResources(spaceId, teamId) {
   let folderId;
   Logger.info("Getting folders from space", { spaceId });
 
-  const foldersResponse = await foldersService.get_folders(spaceId);
+  const foldersResponse = await foldersService.getFolders(spaceId);
 
   if (foldersResponse.folders.length > 0) {
     folderId = foldersResponse.folders[0].id;
@@ -44,7 +44,7 @@ async function createCommentsTestResources(spaceId, teamId) {
       name: `Comments Test Folder ${Date.now()}`
     };
 
-    const folderResponse = await foldersService.create_folder(spaceId, folderBody);
+    const folderResponse = await foldersService.createFolder(spaceId, folderBody);
 
     folderId = folderResponse.folders.id;
     Logger.info("Created new folder", { folderId });
@@ -56,7 +56,7 @@ async function createCommentsTestResources(spaceId, teamId) {
     name: `Comments Test List ${Date.now()}`
   };
 
-  const listResponse = await listsService.create_list_in_space(spaceId, listBody);
+  const listResponse = await listsService.createListInSpace(spaceId, listBody);
   const listId = listResponse.id;
   Logger.info("Created list", { listId });
 
@@ -67,14 +67,14 @@ async function createCommentsTestResources(spaceId, teamId) {
     description: "Task for testing comments API"
   };
 
-  const taskResponse = await tasksService.create_task(listId, taskBody);
+  const taskResponse = await tasksService.createTask(listId, taskBody);
 
   const taskId = taskResponse.id;
   Logger.info("Created task", { taskId });
 
   // Get Views from the Team (teamId already comes from the global setup)
   Logger.info("Getting team views", { teamId });
-  const viewsResponse = await viewService.get_view(teamId);
+  const viewsResponse = await viewService.getView(teamId);
 
   let viewId = null;
 
@@ -119,13 +119,13 @@ async function cleanupCommentsTestResources() {
   const resources = global.commentsTestResources;
   if (resources.taskId) {
     Logger.info("Deleting task", { taskId: resources.taskId });
-    await tasksService.delete_task(resources.taskId);
+    await tasksService.deleteTask(resources.taskId);
     Logger.info("Deleted task", { taskId: resources.taskId });
   }
 
   if (resources.listId) {
     Logger.info("Deleting list", { listId: resources.listId });
-    await listsService.delete_list(resources.listId)
+    await listsService.deleteList(resources.listId)
     Logger.info("Deleted list", { listId: resources.listId });
   }
 

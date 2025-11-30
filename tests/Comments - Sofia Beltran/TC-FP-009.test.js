@@ -18,11 +18,11 @@ taggedDescribe(
   });
 
   afterAll(async () => {
-    if (commentId) await commentService.delete_comments(commentId);
+    if (commentId) await commentService.deleteComments(commentId);
   });
 
   it("Should create comment with markdown/html formatting", async () => {
-    const created = await commentService.create_comments(
+    const created = await commentService.createComments(
       testResources.taskId,
       { comment_text: MARKDOWN_TEXT, notify_all: false }
     );
@@ -37,7 +37,7 @@ taggedDescribe(
       expectedText: "Bold"
     });
 
-    const list = await commentService.get_comments(testResources.taskId);
+    const list = await commentService.getComments(testResources.taskId);
 
     const validation = BaseSchemaValidator.validate(
       list,

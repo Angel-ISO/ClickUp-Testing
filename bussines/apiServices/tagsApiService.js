@@ -1,30 +1,85 @@
-import BaseApiService from './baseApiService.js';
+import BaseApiService from "./baseApiService.js";
 
 class TagsApiService extends BaseApiService {
-
-  async get_tags(space_id) {
-    return this.make_request('GET', `/space/${space_id}/tag`);
+  async getTags(spaceId) {
+    return this.makeRequest("GET", `/space/${spaceId}/tag`);
   }
 
-  async create_tag(space_id, tag_data) {
-    return this.make_request('POST', `/space/${space_id}/tag`, tag_data);
+  async createTag(spaceId, tagData) {
+    return this.makeRequest("POST", `/space/${spaceId}/tag`, tagData);
   }
 
-  async update_tag(space_id, tag_name, tag_data) {
-    return this.make_request('PUT', `/space/${space_id}/tag/${encodeURIComponent(tag_name)}`, tag_data);
+  async updateTag(spaceId, tagName, tagData) {
+    return this.makeRequest(
+      "PUT",
+      `/space/${spaceId}/tag/${encodeURIComponent(tagName)}`,
+      tagData
+    );
   }
 
-  async delete_tag(space_id, tag_name) {
-    return this.make_request('DELETE', `/space/${space_id}/tag/${encodeURIComponent(tag_name)}`);
+  async deleteTag(spaceId, tagName) {
+    return this.makeRequest(
+      "DELETE",
+      `/space/${spaceId}/tag/${encodeURIComponent(tagName)}`
+    );
   }
 
-  async add_tag_to_task(task_id, tag_name) {
-    return this.make_request('POST', `/task/${task_id}/tag/${encodeURIComponent(tag_name)}`);
+  async addTagToTask(taskId, tagName) {
+    return this.makeRequest(
+      "POST",
+      `/task/${taskId}/tag/${encodeURIComponent(tagName)}`,
+      {}
+    );
   }
 
-  async remove_tag_from_task(task_id, tag_name) {
-    return this.make_request('DELETE', `/task/${task_id}/tag/${encodeURIComponent(tag_name)}`);
+  async removeTagFromTask(taskId, tagName) {
+    return this.makeRequest(
+      "DELETE",
+      `/task/${taskId}/tag/${encodeURIComponent(tagName)}`,
+      {}
+    );
+  }
+
+  async getTagsResult(spaceId) {
+    return this.makeRequestResult("GET", `/space/${spaceId}/tag`);
+  }
+
+  async createTagResult(spaceId, tagData) {
+    return this.makeRequestResult("POST", `/space/${spaceId}/tag`, tagData);
+  }
+
+  async updateTagResult(spaceId, tagName, tagData) {
+    return this.makeRequestResult(
+      "PUT",
+      `/space/${spaceId}/tag/${encodeURIComponent(tagName)}`,
+      tagData
+    );
+  }
+
+  async deleteTagResult(spaceId, tagName) {
+    return this.makeRequestResult(
+      "DELETE",
+      `/space/${spaceId}/tag/${encodeURIComponent(tagName)}`
+    );
+  }
+
+  async addTagToTaskResult(taskId, tagName) {
+    return this.makeRequestResult(
+      "POST",
+      `/task/${taskId}/tag/${encodeURIComponent(tagName)}`,
+      {}
+    );
+  }
+
+  async removeTagFromTaskResult(taskId, tagName) {
+    return this.makeRequestResult(
+      "DELETE",
+      `/task/${taskId}/tag/${encodeURIComponent(tagName)}`,
+      {}
+    );
   }
 }
 
-export default TagsApiService;
+export default new TagsApiService();
+
+export { TagsApiService };

@@ -1,63 +1,71 @@
-import 'dotenv/config';
-import foldersService from '../../bussines/apiServices/foldersApiService.js';
-import BaseSchemaValidator from '../../bussines/schemaValidators/baseSchemaValidator.js';
-import folderSchemas from '../../bussines/schemaValidators/folderSchemas.js';
-import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
-import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
-import result from '../../core/result.js';
-
+import "dotenv/config";
+import foldersService from "../../bussines/apiServices/foldersApiService.js";
+import BaseSchemaValidator from "../../bussines/schemaValidators/baseSchemaValidator.js";
+import folderSchemas from "../../bussines/schemaValidators/folderSchemas.js";
+import { setupClickUpEnvironment, getSpaceId } from "../setup.test.js";
+import {
+  taggedDescribe,
+  buildTags,
+  FUNCIONALIDADES,
+} from "../../bussines/utils/tags.js";
+import result from "../../core/result.js";
 
 taggedDescribe(
-    buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
-    'TC-FP-007 - Verify that user can update folder name successfully',
-    () => {
-        let createdFolderId;
+  buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
+  "TC-FP-007 - Verify that user can update folder name successfully",
+  () => {
+    let createdFolderId;
 
-        beforeAll(async () => {
-            await setupClickUpEnvironment();
-        });
+    beforeAll(async () => {
+      await setupClickUpEnvironment();
+    });
 
-        afterEach(async () => {
-            if (createdFolderId) {
-                const deleteResult = await foldersService.delete_folder_result(createdFolderId);
-                result.fold(
-                    deleteResult,
-                    (error) => console.warn('Cleanup failed:', error),
-                    (value) => console.log(`Folder deleted: ${createdFolderId}`)
-                );
-                createdFolderId = null;
-            }
-        });
+    afterEach(async () => {
+      if (createdFolderId) {
+        const deleteResult = await foldersService.deleteFolderResult(
+          createdFolderId
+        );
+        result.fold(
+          deleteResult,
+          (error) => console.warn("Cleanup failed:", error),
+          () => console.log(`Folder deleted: ${createdFolderId}`)
+        );
+        createdFolderId = null;
+      }
+    });
 
-        it('Update Folder - Valid Name Change', async () => {
-            const originalName = `Original Folder - ${Date.now()}`;
-            const updatedName = `Updated Folder - ${Date.now()}`;
+    it("Update Folder - Valid Name Change", async () => {
+      const originalName = `Original Folder - ${Date.now()}`;
+      const updatedName = `Updated Folder - ${Date.now()}`;
 
-            const createResponse = await foldersService.create_folder(getSpaceId(), {
-                name: originalName
-            });
-            createdFolderId = createResponse.id;
+      const createResponse = await foldersService.createFolder(getSpaceId(), {
+        name: originalName,
+      });
+      createdFolderId = createResponse.id;
 
-            console.log(`Folder created: ${originalName} (ID: ${createdFolderId})`);
+      console.log(`Folder created: ${originalName} (ID: ${createdFolderId})`);
 
-            const updateResponse = await foldersService.update_folder(createdFolderId, {
-                name: updatedName
-            });
+      const updateResponse = await foldersService.updateFolder(
+        createdFolderId,
+        {
+          name: updatedName,
+        }
+      );
 
-            expect(updateResponse).toHaveProperty('id');
-            expect(updateResponse).toHaveProperty('name');
-            expect(updateResponse.id).toBe(createdFolderId);
-            expect(updateResponse.name).toBe(updatedName);
-            expect(updateResponse.name).not.toBe(originalName);
+      expect(updateResponse).toHaveProperty("id");
+      expect(updateResponse).toHaveProperty("name");
+      expect(updateResponse.id).toBe(createdFolderId);
+      expect(updateResponse.name).toBe(updatedName);
+      expect(updateResponse.name).not.toBe(originalName);
 
-            const validation = BaseSchemaValidator.validate(
-                updateResponse,
-                folderSchemas.folderResponseSchema,
-                'Folder Response'
-            );
-            expect(validation.isValid).toBe(true);
+      const validation = BaseSchemaValidator.validate(
+        updateResponse,
+        folderSchemas.folderResponseSchema,
+        "Folder Response"
+      );
+      expect(validation.isValid).toBe(true);
 
-            console.log(`Folder updated successfully: ${updatedName}`);
-        });
-    }
+      console.log(`Folder updated successfully: ${updatedName}`);
+    });
+  }
 );
