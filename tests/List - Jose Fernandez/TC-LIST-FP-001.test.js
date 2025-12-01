@@ -4,8 +4,11 @@ import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 
 taggedDescribe(
-  buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.LISTS }),
-  'TC-LIST-FP-001 - Create, get and delete list with valid data',
+  buildTags({
+    smoke: true,
+    funcionalidad: FUNCIONALIDADES.LISTS,
+  }),
+  '@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data',
   () => {
     let spaceId = null;
     let createdListId = null;
@@ -44,8 +47,7 @@ taggedDescribe(
 
     it('TC-LIST-FP-001-02 - Get created list and verify details', async () => {
       expect(createdListId).not.toBeNull();
-
-       expect(typeof createdListId).toBe('string');
+      expect(typeof createdListId).toBe('string');
     });
 
     it('TC-LIST-FP-001-03 - Delete created list (200/204)', async () => {
@@ -55,7 +57,7 @@ taggedDescribe(
 
       expect(['200', '204']).toContain(String(result?.status || 204));
 
-      createdListId = null; 
+      createdListId = null;
     });
   }
 );

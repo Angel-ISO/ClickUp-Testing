@@ -4,8 +4,12 @@ import { setupClickUpEnvironment, getSpaceId } from '../setup.test.js';
 import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
 
 taggedDescribe(
-  buildTags({ funcionalidad: FUNCIONALIDADES.LISTS, negative: true }),
-  'TC-LIST-FN-001 - Create list without name should return 400',
+  buildTags({
+    funcionalidad: FUNCIONALIDADES.LISTS,
+    negative: true,
+    regression: true,
+  }),
+  '@regresion @funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400',
   () => {
     let spaceId = null;
 

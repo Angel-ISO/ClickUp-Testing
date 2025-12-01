@@ -1,48 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="1" errors="0" time="10.291">
-  <testsuite name="Setup" errors="0" failures="1" skipped="0" timestamp="2025-11-30T23:06:14" time="8.274" tests="2">
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="10.662">
+  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-12-01T01:07:00" time="8.656" tests="2">
     <testcase classname="Setup should pass" name="Setup should pass" time="0.006">
     </testcase>
-    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" name="@funcionalidad:lists @negativos TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" time="0.001">
-      <failure>TypeError: token?.startsWith is not a function
-    at startsWith (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\core\http_client.js:8:31)
-    at Object.request_with_custom_auth (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\core\request_manager.js:20:47)
-    at ListsApiService.request_with_custom_auth [as make_request_with_custom_auth_result] (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\bussines\apiServices\baseApiService.js:39:39)
-    at ListsApiService.make_request_with_custom_auth_result [as create_list_with_custom_auth_result] (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\bussines\apiServices\listsApiService.js:22:17)
-    at Object.create_list_with_custom_auth_result (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\tests\List - Jose Fernandez\TC-LIST-FN-002.test.js:23:41)
-    at Promise.finally.completed (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:1557:28)
-    at new Promise (&lt;anonymous&gt;)
-    at callAsyncCircusFn (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:1497:10)
-    at _callCircusTest (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:1007:40)
-    at processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at _runTest (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:947:3)
-    at C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:849:7
-    at _runTestsForDescribeBlock (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:862:11)
-    at _runTestsForDescribeBlock (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:857:11)
-    at run (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:761:3)
-    at runAndTransformResultsToJestFormat (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\jestAdapterInit.js:1918:21)
-    at jestAdapter (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-circus\build\runner.js:101:19)
-    at runTestInternal (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-runner\build\testWorker.js:275:16)
-    at runTest (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-runner\build\testWorker.js:343:7)
-    at Object.worker (C:\Users\MI PC\Desktop\qa3-lists\ClickUp-Testing\node_modules\jest-runner\build\testWorker.js:497:12)</failure>
+    <testcase classname="@funcionalidad:lists @negativos @funcionalidad:lists @negativos @regresion TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" name="@funcionalidad:lists @negativos @funcionalidad:lists @negativos @regresion TC-LIST-FN-002 - Create list without valid auth should return 401 TC-LIST-FN-002-01 - Invalid token" time="0.011">
     </testcase>
   </testsuite>
-  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T23:06:14" time="9.853" tests="4">
+  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-12-01T01:07:00" time="8.99" tests="3">
     <testcase classname="Setup should pass" name="Setup should pass" time="0.007">
     </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" time="1.275">
+    <testcase classname="@funcionalidad:lists @negativos @regresion @funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" name="@funcionalidad:lists @negativos @regresion @funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" time="0.774">
     </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" time="0.001">
-    </testcase>
-    <testcase classname="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" name="@smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" time="0.821">
+    <testcase classname="@funcionalidad:lists @negativos @regresion @funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" name="@funcionalidad:lists @negativos @regresion @funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" time="0.394">
     </testcase>
   </testsuite>
-  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-11-30T23:06:14" time="9.905" tests="3">
-    <testcase classname="Setup should pass" name="Setup should pass" time="0.006">
+  <testsuite name="Setup" errors="0" failures="0" skipped="0" timestamp="2025-12-01T01:07:00" time="10.242" tests="4">
+    <testcase classname="Setup should pass" name="Setup should pass" time="0.007">
     </testcase>
-    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-01 - Empty body" time="0.759">
+    <testcase classname="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" name="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-01 - Create list with valid data" time="1.189">
     </testcase>
-    <testcase classname="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" name="@funcionalidad:lists @negativos TC-LIST-FN-001 - Create list without name should return 400 TC-LIST-FN-001-02 - Name is empty string" time="0.407">
+    <testcase classname="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" name="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-02 - Get created list and verify details" time="0.002">
+    </testcase>
+    <testcase classname="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" name="@smoke @funcionalidad:lists @smoke @funcionalidad:lists TC-LIST-FP-001 - Create, get and delete list with valid data TC-LIST-FP-001-03 - Delete created list (200/204)" time="0.876">
     </testcase>
   </testsuite>
 </testsuites>
