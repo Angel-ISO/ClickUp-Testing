@@ -19,16 +19,16 @@ taggedDescribe(
     await setupClickUpEnvironment();
     
     // Get Folder ID
-    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    const foldersResponse = await foldersService.getFolders(getSpaceId());
     folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await listsService.get_lists(folderId);
+    const listResponse = await listsService.getLists(folderId);
     listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     if (createdTaskId) {
-      await tasksService.delete_task(createdTaskId);
+      await tasksService.deleteTask(createdTaskId);
       console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
@@ -42,7 +42,7 @@ taggedDescribe(
       priority: 2 // High priority
     };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     originalTaskData = createResponse;
 
@@ -72,7 +72,7 @@ taggedDescribe(
       priority: 1
     };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     const originalName = createResponse.name;
 
@@ -86,7 +86,7 @@ taggedDescribe(
       priority: newPriority
     };
 
-    const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+    const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
     const updateValidation = BaseSchemaValidator.validate(
       updateResponse,
@@ -107,7 +107,7 @@ taggedDescribe(
     console.log(`Multiple fields updated - Description: "${newDescription}", Priority: ${newPriority}`);
 
     // Verify via GET request
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
     // Final verification
     expect(getResponse).toHaveProperty('id', createdTaskId);

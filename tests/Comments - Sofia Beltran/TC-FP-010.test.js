@@ -19,8 +19,8 @@ taggedDescribe(
   });
 
   afterAll(async () => {
-    if (firstCommentId) await commentService.delete_comments(firstCommentId);
-    if (secondCommentId) await commentService.delete_comments(secondCommentId);
+    if (firstCommentId) await commentService.deleteComments(firstCommentId);
+    if (secondCommentId) await commentService.deleteComments(secondCommentId);
 
     Logger.warn("Cleanup failed");
   });
@@ -32,12 +32,12 @@ taggedDescribe(
     };
 
     Logger.info("Creating first comment");
-    const first = await commentService.create_comments(testResources.taskId, body);
+    const first = await commentService.createComments(testResources.taskId, body);
     firstCommentId = String(first.id);
     expect(firstCommentId).toBeDefined();
 
     Logger.info("Creating second (duplicate) comment");
-    const second = await commentService.create_comments(testResources.taskId, body);
+    const second = await commentService.createComments(testResources.taskId, body);
     secondCommentId = String(second.id);
     expect(secondCommentId).toBeDefined();
 
@@ -57,7 +57,7 @@ taggedDescribe(
       expectedText: "Duplicated"
     });
 
-    const list = await commentService.get_comments(testResources.taskId);
+    const list = await commentService.getComments(testResources.taskId);
 
     const validation = BaseSchemaValidator.validate(
       list,

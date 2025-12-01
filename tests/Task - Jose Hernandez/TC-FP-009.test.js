@@ -20,16 +20,16 @@ taggedDescribe(
       await setupClickUpEnvironment();
       
       // Get Folder ID
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
       folderId = foldersResponse.folders[0].id;
       // Get List ID
-      const listResponse = await listsService.get_lists(folderId);
+      const listResponse = await listsService.getLists(folderId);
       listId = listResponse.lists[0].id;
 
       // Create main task
       const mainTaskName = `Main Task for Merge Test - ${Date.now()}`;
       const mainTaskData = { name: mainTaskName };
-      const createResponse = await tasksService.create_task(listId, mainTaskData);
+      const createResponse = await tasksService.createTask(listId, mainTaskData);
       mainTaskId = createResponse.id;
       createdTaskIds.push(mainTaskId);
       console.log(`Main task created: ${mainTaskName} (ID: ${mainTaskId})`);
@@ -38,7 +38,7 @@ taggedDescribe(
     afterAll(async () => {
       for (const taskId of createdTaskIds) {
         try {
-          await tasksService.delete_task(taskId);
+          await tasksService.deleteTask(taskId);
           console.log(`Task deleted: ${taskId}`);
         } catch (error) {
           console.log(`Error deleting task ${taskId}:`, error.message);
@@ -51,7 +51,7 @@ taggedDescribe(
         source_task_ids: []
       };
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;
@@ -87,7 +87,7 @@ taggedDescribe(
         source_task_ids: null
       };
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;
@@ -121,7 +121,7 @@ taggedDescribe(
     it('Merge Tasks - Missing Source Task IDs Field', async () => {
       const mergeData = {};
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;
@@ -157,7 +157,7 @@ taggedDescribe(
         source_task_ids: ["invalid-id-format"]
       };
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;
@@ -193,7 +193,7 @@ taggedDescribe(
         source_task_ids: ["999999999999999999"]
       };
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;
@@ -229,7 +229,7 @@ taggedDescribe(
         source_task_ids: [mainTaskId]
       };
 
-      const result = await tasksService.merge_tasks(mainTaskId, mergeData).catch(e => e);
+      const result = await tasksService.mergeTasks(mainTaskId, mergeData).catch(e => e);
 
       if (result && result.response?.status === 400) {
         const errorResponse = result.response?.data;

@@ -26,7 +26,7 @@ taggedDescribe(
     if (commentId) {
       Logger.info('Cleaning up: Deleting test comment', { commentId });
       try {
-        await commentService.delete_comments(commentId);
+        await commentService.deleteComments(commentId);
         Logger.info('Comment deleted successfully', { commentId });
       } catch (error) {
         Logger.error('Failed to delete comment', { commentId, error: error.message });
@@ -45,7 +45,7 @@ taggedDescribe(
       commentText: body.comment_text
     });
 
-    const createdComment = await commentService.create_comments(
+    const createdComment = await commentService.createComments(
       testResources.taskId,
       body
     );
@@ -76,7 +76,7 @@ taggedDescribe(
       commentId
     });
 
-    const commentsResponse = await commentService.get_comments(testResources.taskId);
+    const commentsResponse = await commentService.getComments(testResources.taskId);
 
     const validation = BaseSchemaValidator.validate(
       commentsResponse,

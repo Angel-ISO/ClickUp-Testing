@@ -1,36 +1,36 @@
 import BaseApiService from "./baseApiService.js";
 
 class CommentsApiService extends BaseApiService {
-  async create_comments(task_id, comment_data) {
-    return this.make_request('POST', `/task/${task_id}/comment`, comment_data);
+  async createComments(taskId, commentData) {
+    return this.makeRequest('POST', `/task/${taskId}/comment`, commentData);
   }
 
-  async get_comments(task_id) {
-    return this.make_request('GET', `/task/${task_id}/comment`);
+  async getComments(taskId) {
+    return this.makeRequest('GET', `/task/${taskId}/comment`);
   }
 
-  async update_comments(comment_id, update_data) {
-    return this.make_request('PUT', `/comment/${comment_id}`, update_data);
+  async updateComments(commentId, updateData) {
+    return this.makeRequest('PUT', `/comment/${commentId}`, updateData);
   }
 
-  async delete_comments(comment_id) {
-    return this.make_request('DELETE', `/comment/${comment_id}`);
+  async deleteComments(commentId) {
+    return this.makeRequest('DELETE', `/comment/${commentId}`);
   }
 
-  async create_comments_reply(comment_id, reply_data) {
-    return this.make_request('POST', `/comment/${comment_id}/reply`, reply_data);
+  async createCommentsReply(commentId, replyData) {
+    return this.makeRequest('POST', `/comment/${commentId}/reply`, replyData);
   }
 
-  async get_comments_reply(comment_id) {
-    return this.make_request('GET', `/comment/${comment_id}/reply`);
+  async getCommentsReply(commentId) {
+    return this.makeRequest('GET', `/comment/${commentId}/reply`);
   }
 
-  async create_comments_chatView(view_id, comment_data) {
-    return this.make_request('POST', `/view/${view_id}/comment`, comment_data);
+  async createCommentsChatView(viewId, commentData) {
+    return this.makeRequest('POST', `/view/${viewId}/comment`, commentData);
   }
 
-  async get_comments_chatView(view_id) {
-    return this.make_request('GET', `/view/${view_id}/comment`);
+  async getCommentsChatView(viewId) {
+    return this.makeRequest('GET', `/view/${viewId}/comment`);
   }
 }
 

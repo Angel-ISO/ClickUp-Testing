@@ -19,16 +19,16 @@ taggedDescribe(
     await setupClickUpEnvironment();
     
     // Get Folder ID
-    const foldersResponse = await foldersService.get_folders(getSpaceId());
+    const foldersResponse = await foldersService.getFolders(getSpaceId());
     folderId = foldersResponse.folders[0].id;
     // Get List ID
-    const listResponse = await listsService.get_lists(folderId);
+    const listResponse = await listsService.getLists(folderId);
     listId = listResponse.lists[0].id;
   });
 
   afterEach(async () => {
     if (createdTaskId) {
-      await tasksService.delete_task(createdTaskId);
+      await tasksService.deleteTask(createdTaskId);
       console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
@@ -38,7 +38,7 @@ taggedDescribe(
     const uniqueTaskName = `Task Test - Update Status - ${Date.now()}`;
     const taskData = { name: uniqueTaskName };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
 
     console.log(`Task created: ${uniqueTaskName} (ID: ${createdTaskId})`);
@@ -68,14 +68,14 @@ taggedDescribe(
     const uniqueTaskName = `Task Test - Status Update - ${Date.now()}`;
     const taskData = { name: uniqueTaskName };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
     const initialStatus = createResponse.status.status;
 
     console.log(`Task created for status update: ${uniqueTaskName} (ID: ${createdTaskId})`);
     const newStatus = "completado"; 
     const updateData = { status: newStatus };
-    const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+    const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
     const updateValidation = BaseSchemaValidator.validate(
       updateResponse,
@@ -94,7 +94,7 @@ taggedDescribe(
     console.log(`Task status updated from "${initialStatus}" to "${newStatus}"`);
 
 
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
 
     const getValidation = BaseSchemaValidator.validate(

@@ -1,14 +1,14 @@
-import create_request_manager from '../../core/request_manager.js';
+import createRequestManager from '../../core/requestManager.js';
 
 class BaseApiService {
   constructor() {
-    this.request_manager = create_request_manager();
+    this.requestManager = createRequestManager();
   }
 
-  async make_request(method, endpoint, data = null) {
-    const result = await this.request_manager[method.toLowerCase()](endpoint, data);
+  async makeRequest(method, endpoint, data = null) {
+    const result = await this.requestManager[method.toLowerCase()](endpoint, data);
 
-    if (result.is_ok()) {
+    if (result.isOk()) {
       return result.value;
     } else {
       if (result.axiosError) {
@@ -18,10 +18,10 @@ class BaseApiService {
     }
   }
 
-  async make_request_with_custom_auth(method, endpoint, data = null, customToken = null) {
-    const result = await this.request_manager.request_with_custom_auth(method.toLowerCase(), endpoint, data, customToken);
+  async makeRequestWithCustomAuth(method, endpoint, data = null, customToken = null) {
+    const result = await this.requestManager.requestWithCustomAuth(method.toLowerCase(), endpoint, data, customToken);
 
-    if (result.is_ok()) {
+    if (result.isOk()) {
       return result.value;
     } else {
       if (result.axiosError) {
@@ -31,12 +31,12 @@ class BaseApiService {
     }
   }
 
-  async make_request_result(method, endpoint, data = null) {
-    return await this.request_manager[method.toLowerCase()](endpoint, data);
+  async makeRequestResult(method, endpoint, data = null) {
+    return await this.requestManager[method.toLowerCase()](endpoint, data);
   }
 
-  async make_request_with_custom_auth_result(method, endpoint, data = null, customToken = null) {
-    return await this.request_manager.request_with_custom_auth(method.toLowerCase(), endpoint, data, customToken);
+  async makeRequestWithCustomAuthResult(method, endpoint, data = null, customToken = null) {
+    return await this.requestManager.requestWithCustomAuth(method.toLowerCase(), endpoint, data, customToken);
   }
 }
 
