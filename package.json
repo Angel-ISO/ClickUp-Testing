@@ -6,9 +6,11 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:lists":"jest \"tests/List - Jose Fernandez\"",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint .",
+    "lint:lists": "eslint \"tests/List - Jose Fernandez\"",
     "lint:fix": "eslint . --fix",
     "test:smoke": "jest --testNamePattern=\"@smoke\"",
     "test:smoke:folders": "jest --testNamePattern=\"@smoke.*@funcionalidad:folders|@funcionalidad:folders.*@smoke\"",

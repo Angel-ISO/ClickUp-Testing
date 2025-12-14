@@ -5,7 +5,7 @@ const createHttpClient = (baseUrl, token) => {
   const client = axios.create({
     baseURL: baseUrl,
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': token?.startsWith('pk_') ? token : `Bearer ${token}`,
     },
   });
 
