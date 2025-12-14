@@ -29,6 +29,10 @@ class CommentsApiService extends BaseApiService {
     return this.makeRequest('POST', `/view/${viewId}/comment`, commentData);
   }
 
+  async createCommentsChatViewResult(viewId, commentData) {
+    return this.makeRequestResult('POST', `/view/${viewId}/comment`, commentData);
+  }
+
   async getCommentsChatView(viewId) {
     return this.makeRequest('GET', `/view/${viewId}/comment`);
   }

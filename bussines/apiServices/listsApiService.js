@@ -10,8 +10,21 @@ class ListsApiService extends BaseApiService {
     return this.makeRequest('POST', `/space/${spaceId}/list`, listData);
   }
 
-  async deleteList(listId){
+  async createListInFolder(folderId, listData) {
+    return this.makeRequest('POST', `/folder/${folderId}/list`, listData);
+  }
+
+  async deleteList(listId) {
     return this.makeRequest('DELETE', `/list/${listId}`);
+  }
+
+  // Result monad methods - return Result directly without throwing
+  async getListsResult(folderId) {
+    return this.makeRequestResult('GET', `/folder/${folderId}/list`);
+  }
+
+  async deleteListResult(listId) {
+    return this.makeRequestResult('DELETE', `/list/${listId}`);
   }
 
 }
