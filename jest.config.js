@@ -1,4 +1,5 @@
 export default {
+  bail: true,
   testEnvironment: 'node',
     reporters: [
     "default",

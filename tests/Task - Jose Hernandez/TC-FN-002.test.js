@@ -19,14 +19,14 @@ taggedDescribe(
       await setupClickUpEnvironment();
       
       // Get Folder ID
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
       folderId = foldersResponse.folders[0].id;
       // Get List ID
-      const listResponse = await listsService.get_lists(folderId);
+      const listResponse = await listsService.getLists(folderId);
       listId = listResponse.lists[0].id;
     });  afterEach(async () => {
     if (createdTaskId) {
-      await tasksService.delete_task(createdTaskId);
+      await tasksService.deleteTask(createdTaskId);
       console.log(`Task deleted: ${createdTaskId}`);
       createdTaskId = null;
     }
@@ -35,7 +35,7 @@ taggedDescribe(
   it('Create Task - Invalid Data (Empty Name)', async () => {
     const taskData = { name: "" };
 
-    const promise = tasksService.create_task(listId, taskData);
+    const promise = tasksService.createTask(listId, taskData);
     const error = await promise.catch(e => e);
 
     expect(error).toBeDefined();
@@ -58,7 +58,7 @@ taggedDescribe(
   it('Create Task - Invalid Data (Null Name)', async () => {
     const taskData = { name: null };
 
-    const promise = tasksService.create_task(listId, taskData);
+    const promise = tasksService.createTask(listId, taskData);
     const error = await promise.catch(e => e);
 
     expect(error).toBeDefined();
@@ -82,7 +82,7 @@ taggedDescribe(
   it('Create Task - Invalid Data (Missing Name)', async () => {
     const taskData = {};
 
-    const promise = tasksService.create_task(listId, taskData);
+    const promise = tasksService.createTask(listId, taskData);
     const error = await promise.catch(e => e);
 
     expect(error).toBeDefined();
@@ -107,7 +107,7 @@ taggedDescribe(
   it('Create Task - Invalid Data (Very Long Name)', async () => {
     const taskData = { name: "a".repeat(1000) };
 
-    const result = await tasksService.create_task(listId, taskData).catch(e => e);
+    const result = await tasksService.createTask(listId, taskData).catch(e => e);
 
     if (result && result.id) {
       const response = result;
@@ -138,12 +138,12 @@ taggedDescribe(
     const uniqueTaskName = `Task Test - Verify - ${Date.now()}`;
     const taskData = { name: uniqueTaskName };
 
-    const createResponse = await tasksService.create_task(listId, taskData);
+    const createResponse = await tasksService.createTask(listId, taskData);
     createdTaskId = createResponse.id;
 
     console.log(`Task created for verification: ${uniqueTaskName} (ID: ${createdTaskId})`);
 
-    const getResponse = await tasksService.get_task(createdTaskId);
+    const getResponse = await tasksService.getTask(createdTaskId);
 
     // Schema validation
     const validation = BaseSchemaValidator.validate(

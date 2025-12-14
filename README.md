@@ -24,20 +24,19 @@
 
 This project is a comprehensive API testing suite for ClickUp, developed as the final project for the Software Quality Engineering course. The goal is to implement automated tests that validate the functionality, reliability, and security of ClickUp's API endpoints, following industry best practices for test automation.
 
-
 ## Test Categories
 
 ### Functional Tests
+
 - **Positive (FP)**: Happy path tests with valid inputs
 - **Negative (FN)**: Invalid inputs and error scenarios
 
 ### Non-Functional Tests
+
 - **Performance (P)**: Response time and load tests
 - **Security (S)**: Authentication, authorization, and security validations
 - **Fuzz (FF)**: Random or unexpected input testing
 - **Reliability (FR)**: Consistency and stability testing
-
-
 
 ## Technologies Used
 
@@ -47,45 +46,52 @@ This project is a comprehensive API testing suite for ClickUp, developed as the 
 - **AJV**: JSON Schema validation
 - **ESLint**: Code linting and formatting
 
-##  Architecture
+## Architecture
 
 The project follows a **3-layer clean architecture**:
 
 ### Core Layer
-- `http_client.js`: HTTP client with Result Monad for functional error handling
-- `request_manager.js`: Singleton request manager
+
+- `httpClient.js`: HTTP client with Result Monad for functional error handling
+- `requestManager.js`: Singleton request manager
 - `result.js`: Functional error handling (no exceptions)
 
 ### Business Logic Layer
+
 - `apiServices/`: Specific API services (Tasks, Folders, Comments, etc.)
 - `schemaValidators/`: JSON Schema validation with AJV
 - `utils/`: Functional helper utilities
 
 ### Tests Layer
+
 - `setup.test.js`: Automatic environment configuration
 - Test suites using the architecture services
 
 ### Key Features
--  **Functional Programming**: Result Monad, no try-catch in business logic
--  **ES6 Modules**: Modern JavaScript with import/export
--  **Schema Validation**: Automatic response validation
--  **Snake Case**: Consistent naming convention
--  **Automatic Setup**: No manual configuration needed
+
+- **Functional Programming**: Result Monad, no try-catch in business logic
+- **ES6 Modules**: Modern JavaScript with import/export
+- **Schema Validation**: Automatic response validation
+- **Snake Case**: Consistent naming convention
+- **Automatic Setup**: No manual configuration needed
 
 ## Setup Instructions
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Angel-ISO/ClickUp-Testing.git
    cd ClickUp-Testing
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Configure environment variables**
+
    ```bash
    cp .env.example .env
    # Edit .env with your ClickUp API token (SPACE_ID is obtained automatically!)
@@ -101,6 +107,7 @@ The project follows a **3-layer clean architecture**:
    ```
 
    The system will:
+
    1. Get your team/workspace ID from `/team`
    2. Get available spaces from `/team/{team_id}/space`
    3. Use the first available space automatically
@@ -111,7 +118,6 @@ The project follows a **3-layer clean architecture**:
    ```bash
    npm test
    ```
-
 
 ## Test Execution
 
@@ -136,17 +142,16 @@ npm test -- "tests/Tags - David Cardona"
 ```
 
 ```bash
-npm test -- "tests/Task - Jose Hernandez" 
+npm test -- "tests/Task - Jose Hernandez"
 ```
 
 ```bash
-npm test -- "tests/Comments - Sofia Beltran" 
+npm test -- "tests/Comments - Sofia Beltran"
 ```
 
 ```bash
-npm test -- "tests/List - Jose Fernandez" 
+npm test -- "tests/List - Jose Fernandez"
 ```
-
 
 ## Definition of Done (DoD)
 
@@ -157,11 +162,7 @@ npm test -- "tests/List - Jose Fernandez"
 - **Documentation**: Changes documented in code and README
 - **Integration**: Builds successfully without breaking functionality
 
-
-
-
-
-##  Tag-Based Test Filtering
+## Tag-Based Test Filtering
 
 The project implements a comprehensive tag system that allows you to run specific subsets of tests based on categories and features.
 
@@ -210,40 +211,57 @@ npm run test:funcionalidad:comments   # All tests for comments
 ### How to Add Tags to Your Tests
 
 ```javascript
-import { taggedDescribe, buildTags, FUNCIONALIDADES } from '../../bussines/utils/tags.js';
+import {
+  taggedDescribe,
+  buildTags,
+  FUNCIONALIDADES,
+} from "../../bussines/utils/tags.js";
 
 taggedDescribe(
   buildTags({ smoke: true, funcionalidad: FUNCIONALIDADES.FOLDERS }),
-  'TC-FP-001 - Create folder with valid name',
+  "TC-FP-001 - Create folder with valid name",
   () => {
-    it('should create folder successfully', async () => {
-    });
+    it("should create folder successfully", async () => {});
   }
 );
 
 taggedDescribe(
   buildTags({ funcionalidad: FUNCIONALIDADES.FOLDERS, negative: true }),
-  'TC-FN-002 - Missing folder name validation',
+  "TC-FN-002 - Missing folder name validation",
   () => {
-    it('should return 400 error', async () => {
-    });
+    it("should return 400 error", async () => {});
   }
 );
 ```
 
 **For detailed documentation**, see [COMMANDS.md](./COMMANDS.md)
 
-
-
 ## Team Conventions
 
-- **Naming**: snake_case for variables/functions, PascalCase for classes
+- **Naming**: camelCase for variables/functions, PascalCase for classes
 - **File Structure**: Tests stored under `/tests/{module}`
 - **Comments**: Each test includes brief description and expected result
 - **Commits**: Use format `feat: add test for folder creation` or `fix: update tag validation`
 - **Linting**: ESLint for code style enforcement
 - **Test Naming**: `TC-{TYPE}-{NUMBER} - {Description}`
 - **Architecture**: 3-layer clean architecture with functional programming
+
+### ESLint Configuration Decisions
+
+The project uses ESLint to enforce consistent code style and naming conventions. Key decisions include:
+
+- **camelCase Enforcement**: Variables, function names, and object properties must follow camelCase convention throughout the codebase (e.g., `getTags`, `createTag`, `tagData`).
+
+- **Schema Exceptions**: API schema validators (files in `bussines/schemaValidators/**/*Schemas.js`) allow snake_case for property names to match ClickUp's API response format (e.g., `tag_fg`, `tag_bg`, `project_id`, `date_created`).
+
+- **Test File Relaxations**: Test files have relaxed camelCase rules (warnings instead of errors) and allow additional prefixes like `TC_` for test case identifiers.
+
+- **Allowed Prefixes**: Certain prefixes are permitted for special cases:
+  - `UNSAFE_`: For potentially unsafe operations
+  - `CLICKUP_`: For ClickUp-specific constants
+  - `TC_`: For test case naming in test files
+
+This configuration balances code consistency with the practical need to work with external API formats that use snake_case.
 
 ## Hooks Implementation
 
@@ -267,9 +285,8 @@ This ensures tests are isolated and don't interfere with each other.
 MIT License - see LICENSE file for details.
 
 ```bash
-npm test -- "tests/List - Jose Fernandez" 
+npm test -- "tests/List - Jose Fernandez"
 ```
-
 
 ## Definition of Done (DoD)
 

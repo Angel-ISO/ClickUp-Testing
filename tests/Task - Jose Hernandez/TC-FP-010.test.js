@@ -19,10 +19,10 @@ taggedDescribe(
       await setupClickUpEnvironment();
       
       // Get Folder ID
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
       folderId = foldersResponse.folders[0].id;
       // Get List ID
-      const listResponse = await listsService.get_lists(folderId);
+      const listResponse = await listsService.getLists(folderId);
       listId = listResponse.lists[0].id;
 
       // Create a task to update
@@ -32,7 +32,7 @@ taggedDescribe(
         description: "Initial description",
         priority: 1
       };
-      const createResponse = await tasksService.create_task(listId, taskData);
+      const createResponse = await tasksService.createTask(listId, taskData);
       createdTaskId = createResponse.id;
       console.log(`Task created for multi-field update: ${uniqueTaskName} (ID: ${createdTaskId})`);
     });
@@ -51,7 +51,7 @@ taggedDescribe(
     it('Update Task - Modify Priority Field', async () => {
       const updateData = { priority: 2 };
       
-      const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+      const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
       const validation = BaseSchemaValidator.validate(
         updateResponse,
@@ -73,7 +73,7 @@ taggedDescribe(
       const updatedDescription = `Updated description - ${Date.now()} - This is a longer description with more details`;
       const updateData = { description: updatedDescription };
       
-      const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+      const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
       expect(updateResponse).toHaveProperty('id', createdTaskId);
       expect(updateResponse).toHaveProperty('description', updatedDescription);
@@ -96,7 +96,7 @@ taggedDescribe(
         priority: 3
       };
       
-      const updateResponse = await tasksService.update_task(createdTaskId, updateData);
+      const updateResponse = await tasksService.updateTask(createdTaskId, updateData);
 
       expect(updateResponse).toHaveProperty('id', createdTaskId);
       expect(updateResponse).toHaveProperty('name', updatedName);

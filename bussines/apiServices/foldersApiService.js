@@ -1,69 +1,69 @@
 import BaseApiService from './baseApiService.js';
 
 class FoldersApiService extends BaseApiService {
-  async get_folders(space_id) {
-    return this.make_request('GET', `/space/${space_id}/folder`);
+  async getFolders(spaceId) {
+    return this.makeRequest('GET', `/space/${spaceId}/folder`);
   }
 
-  async create_folder(space_id, folder_data) {
-    return this.make_request('POST', `/space/${space_id}/folder`, folder_data);
+  async createFolder(spaceId, folderData) {
+    return this.makeRequest('POST', `/space/${spaceId}/folder`, folderData);
   }
 
-  async get_folder(folder_id) {
-    return this.make_request('GET', `/folder/${folder_id}`);
+  async getFolder(folderId) {
+    return this.makeRequest('GET', `/folder/${folderId}`);
   }
 
-  async update_folder(folder_id, folder_data) {
-    return this.make_request('PUT', `/folder/${folder_id}`, folder_data);
+  async updateFolder(folderId, folderData) {
+    return this.makeRequest('PUT', `/folder/${folderId}`, folderData);
   }
 
-  async delete_folder(folder_id) {
-    return this.make_request('DELETE', `/folder/${folder_id}`);
+  async deleteFolder(folderId) {
+    return this.makeRequest('DELETE', `/folder/${folderId}`);
   }
 
-  async create_folder_with_custom_auth(space_id, folder_data, customToken = null) {
-    return this.make_request_with_custom_auth('POST', `/space/${space_id}/folder`, folder_data, customToken);
+  async createFolderWithCustomAuth(spaceId, folderData, customToken = null) {
+    return this.makeRequestWithCustomAuth('POST', `/space/${spaceId}/folder`, folderData, customToken);
   }
 
-  async get_folders_with_custom_auth(space_id, customToken = null) {
-    return this.make_request_with_custom_auth('GET', `/space/${space_id}/folder`, null, customToken);
+  async getFoldersWithCustomAuth(spaceId, customToken = null) {
+    return this.makeRequestWithCustomAuth('GET', `/space/${spaceId}/folder`, null, customToken);
   }
 
-  async update_folder_with_custom_auth(folder_id, folder_data, customToken = null) {
-    return this.make_request_with_custom_auth('PUT', `/folder/${folder_id}`, folder_data, customToken);
+  async updateFolderWithCustomAuth(folderId, folderData, customToken = null) {
+    return this.makeRequestWithCustomAuth('PUT', `/folder/${folderId}`, folderData, customToken);
   }
 
   // Result monad methods - return Result directly without throwing
-  async get_folders_result(space_id) {
-    return this.make_request_result('GET', `/space/${space_id}/folder`);
+  async getFoldersResult(spaceId) {
+    return this.makeRequestResult('GET', `/space/${spaceId}/folder`);
   }
 
-  async create_folder_result(space_id, folder_data) {
-    return this.make_request_result('POST', `/space/${space_id}/folder`, folder_data);
+  async createFolderResult(spaceId, folderData) {
+    return this.makeRequestResult('POST', `/space/${spaceId}/folder`, folderData);
   }
 
-  async get_folder_result(folder_id) {
-    return this.make_request_result('GET', `/folder/${folder_id}`);
+  async getFolderResult(folderId) {
+    return this.makeRequestResult('GET', `/folder/${folderId}`);
   }
 
-  async update_folder_result(folder_id, folder_data) {
-    return this.make_request_result('PUT', `/folder/${folder_id}`, folder_data);
+  async updateFolderResult(folderId, folderData) {
+    return this.makeRequestResult('PUT', `/folder/${folderId}`, folderData);
   }
 
-  async delete_folder_result(folder_id) {
-    return this.make_request_result('DELETE', `/folder/${folder_id}`);
+  async deleteFolderResult(folderId) {
+    return this.makeRequestResult('DELETE', `/folder/${folderId}`);
   }
 
-  async create_folder_with_custom_auth_result(space_id, folder_data, customToken = null) {
-    return this.make_request_with_custom_auth_result('POST', `/space/${space_id}/folder`, folder_data, customToken);
+  async createFolderWithCustomAuthResult(spaceId, folderData, customToken = null) {
+    return this.makeRequestWithCustomAuthResult('POST', `/space/${spaceId}/folder`, folderData, customToken);
   }
 
-  async get_folders_with_custom_auth_result(space_id, customToken = null) {
-    return this.make_request_with_custom_auth_result('GET', `/space/${space_id}/folder`, null, customToken);
+  async getFoldersWithCustomAuthResult(spaceId, customToken = null) {
+    return this.makeRequestWithCustomAuthResult('GET', `/space/${spaceId}/folder`, null, customToken);
   }
 
-  async update_folder_with_custom_auth_result(folder_id, folder_data, customToken = null) {
-    return this.make_request_with_custom_auth_result('PUT', `/folder/${folder_id}`, folder_data, customToken);
+  async updateFolderWithCustomAuthResult(folderId, folderData, customToken = null) {
+    return this.makeRequestWithCustomAuthResult('PUT', `/folder/${folderId}`, folderData, customToken);
   }
 }
 

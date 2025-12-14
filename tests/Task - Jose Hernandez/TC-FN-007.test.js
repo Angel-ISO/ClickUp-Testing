@@ -20,16 +20,16 @@ taggedDescribe(
       await setupClickUpEnvironment();
       
       // Get Folder ID
-      const foldersResponse = await foldersService.get_folders(getSpaceId());
+      const foldersResponse = await foldersService.getFolders(getSpaceId());
       folderId = foldersResponse.folders[0].id;
 
-      const listResponse = await listsService.get_lists(folderId);
+      const listResponse = await listsService.getLists(folderId);
       listId = listResponse.lists[0].id;
 
       // Create a task to update
       const uniqueTaskName = `Task for Name Length Test - ${Date.now()}`;
       const taskData = { name: uniqueTaskName };
-      const createResponse = await tasksService.create_task(listId, taskData);
+      const createResponse = await tasksService.createTask(listId, taskData);
       createdTaskId = createResponse.id;
       console.log(`Task created for name length test: ${uniqueTaskName} (ID: ${createdTaskId})`);
     });
@@ -37,7 +37,7 @@ taggedDescribe(
     afterAll(async () => {
       if (createdTaskId) {
         try {
-          await tasksService.delete_task(createdTaskId);
+          await tasksService.deleteTask(createdTaskId);
           console.log(`Task deleted: ${createdTaskId}`);
         } catch (error) {
           console.log(`Error deleting task ${createdTaskId}:`, error.message);
@@ -47,7 +47,7 @@ taggedDescribe(
 
     it('Update Task - Extremely Long Name (2000 characters)', async () => {
       const veryLongName = 'a'.repeat(2000);
-      const result = await tasksService.update_task(createdTaskId, { name: veryLongName }).catch(e => e);
+      const result = await tasksService.updateTask(createdTaskId, { name: veryLongName }).catch(e => e);
 
       if (result && result.id) {
         const success = result;
@@ -79,7 +79,7 @@ taggedDescribe(
 
     it('Update Task - Name Exceeding Limit (1500 characters)', async () => {
       const exceedingName = 'b'.repeat(1500);
-      const result = await tasksService.update_task(createdTaskId, { name: exceedingName }).catch(e => e);
+      const result = await tasksService.updateTask(createdTaskId, { name: exceedingName }).catch(e => e);
 
       if (result && result.id) {
         const success = result;

@@ -22,31 +22,67 @@ export default [
         require: "readonly",
         module: "readonly",
         exports: "readonly",
+        expect: "readonly",
       },
     },
     rules: {
       "no-unused-vars": "warn",
       "no-useless-escape": "error",
-      "id-match": [
+      camelcase: [
         "error",
-        "^([a-z][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]*|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$",
         {
-          properties: false,
-          classFields: false,
+          properties: "always",
           ignoreDestructuring: false,
-          onlyDeclarations: true
-        }
+          ignoreImports: false,
+          ignoreGlobals: false,
+          allow: ["^UNSAFE_", "^CLICKUP_"],
+        },
+      ],
+      "no-irregular-whitespace": [
+        "error",
+        {
+          skipStrings: true,
+          skipComments: true,
+          skipRegExps: true,
+          skipTemplates: true,
+        },
       ],
     },
   },
   {
-    files: ["tests/**/*.js", "jest.setup.js"],
+    files: ["bussines/schemaValidators/**/*Schemas.js"],
+    rules: {
+      camelcase: "off",
+      "id-match": [
+        "error",
+        "^([a-z][a-zA-Z0-9_]*|[A-Z][a-zA-Z0-9]*)$",
+        {
+          properties: true,
+          classFields: false,
+          ignoreDestructuring: true,
+          onlyDeclarations: true,
+        },
+      ],
+    },
+  },
+  {
+    files: ["bussines/utils/tags.js"],
+    languageOptions: {
+      globals: {
+        describe: "readonly",
+        it: "readonly",
+      },
+    },
+    rules: {
+      "no-undef": "off",
+    },
+  },
+  {
+    files: ["**/tests/**/*.js", "jest.setup.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
       globals: {
-        process: "readonly",
-        console: "readonly",
         describe: "readonly",
         it: "readonly",
         test: "readonly",
@@ -56,6 +92,8 @@ export default [
         beforeAll: "readonly",
         afterAll: "readonly",
         fail: "readonly",
+        process: "readonly",
+        console: "readonly",
         setTimeout: "readonly",
         Buffer: "readonly",
         require: "readonly",
@@ -65,17 +103,24 @@ export default [
     },
     rules: {
       "no-unused-vars": "warn",
-      "no-undef": "off", 
+      "no-undef": "off",
       "no-empty": "off",
-      "id-match": [
-        "error",
-        "^([a-z][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]*|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$",
+      camelcase: [
+        "warn",
         {
-          properties: false,
-          classFields: false,
-          ignoreDestructuring: false,
-          onlyDeclarations: true
-        }
+          properties: "never",
+          ignoreDestructuring: true,
+          allow: ["^UNSAFE_", "^CLICKUP_", "^TC_"],
+        },
+      ],
+      "no-irregular-whitespace": [
+        "error",
+        {
+          skipStrings: true,
+          skipComments: true,
+          skipRegExps: true,
+          skipTemplates: true,
+        },
       ],
     },
   },

@@ -1,10 +1,10 @@
-import create_request_manager from '../request_manager.js';
+import createRequestManager from '../requestManager.js';
 import Logger from '../logger.js';
 
 describe('Singletons', () => {
   it('request manager is a singleton', () => {
-    const m1 = create_request_manager();
-    const m2 = create_request_manager();
+    const m1 = createRequestManager();
+    const m2 = createRequestManager();
     expect(m1).toBe(m2);
   });
 

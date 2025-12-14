@@ -25,7 +25,7 @@ taggedDescribe(
     if (chatCommentId) {
       try {
         Logger.info('Cleaning up chat comment', { chatCommentId });
-        await commentService.delete_comments(chatCommentId);
+        await commentService.deleteComments(chatCommentId);
       } catch (error) {
         Logger.warn('Failed to clean up chat comment', { 
           chatCommentId, 
@@ -41,7 +41,7 @@ taggedDescribe(
       notify_all: false
     };
 
-    const response = await commentService.create_comments_chatView(viewId, body);
+    const response = await commentService.createCommentsChatView(viewId, body);
     expect(response).toBeDefined();
     chatCommentId = response.id || response.data?.id;
     Logger.info('Chat comment created successfully', { 
@@ -69,7 +69,7 @@ taggedDescribe(
       shouldExist: true,
     });
 
-    const commentsResponse = await commentService.get_comments_chatView(viewId);
+    const commentsResponse = await commentService.getCommentsChatView(viewId);
     
     const validation = BaseSchemaValidator.validate(
       commentsResponse,

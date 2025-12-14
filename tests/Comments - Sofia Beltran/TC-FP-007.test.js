@@ -18,7 +18,7 @@ taggedDescribe(
   });
 
   afterAll(async () => {
-    if (commentId) await commentService.delete_comments(commentId);
+    if (commentId) await commentService.deleteComments(commentId);
   });
 
   test("Should create and retrieve a very large comment", async () => {
@@ -27,7 +27,7 @@ taggedDescribe(
       notify_all: false
     };
 
-    const created = await commentService.create_comments(testResources.taskId, body);
+    const created = await commentService.createComments(testResources.taskId, body);
     commentId = created.id;
 
     expect(commentId).toBeDefined();
@@ -39,7 +39,7 @@ taggedDescribe(
       expectedText: "AAAA"
     });
 
-    const commentsResponse = await commentService.get_comments(testResources.taskId);
+    const commentsResponse = await commentService.getComments(testResources.taskId);
     const validation = BaseSchemaValidator.validate(
       commentsResponse,
       schemas.commentListSchema,

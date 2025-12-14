@@ -14,7 +14,7 @@ taggedDescribe(
 
   beforeAll(async () => {
     testResources = global.commentsTestResources;
-    const created = await commentService.create_comments(
+    const created = await commentService.createComments(
       testResources.taskId,
       { comment_text: "Original Text", notify_all: false }
     );
@@ -22,13 +22,13 @@ taggedDescribe(
   });
 
   afterAll(async () => {
-    if (commentId) await commentService.delete_comments(commentId);
+    if (commentId) await commentService.deleteComments(commentId);
   });
 
   test("Should update only the comment_text field using a partial body", async () => {
     const newText = "Updated via partial body";
     
-    await commentService.update_comments(commentId, {
+    await commentService.updateComments(commentId, {
       comment_text: newText
     });
 
@@ -39,7 +39,7 @@ taggedDescribe(
       expectedText: "Updated"
     });
 
-    const list = await commentService.get_comments(testResources.taskId);
+    const list = await commentService.getComments(testResources.taskId);
     
     const validation = BaseSchemaValidator.validate(
       list,
