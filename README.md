@@ -327,3 +327,4 @@ This ensures tests are isolated and don't interfere with each other.
 ## License
 
 MIT License - see LICENSE file for details.
+
